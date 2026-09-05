@@ -8,6 +8,7 @@ import Reports from "./pages/Reports";
 import Search from "./pages/Search";
 import Sources from "./pages/Sources";
 import ShellAtlas from "./pages/ShellAtlas";
+import GonkaVerification from "./pages/GonkaVerification";
 import { CRITICAL_COUNT } from "./lib/demoCases";
 
 // Masthead shell — shared glass tokens keep the investigation desk calm and legible.
@@ -125,6 +126,7 @@ export default function App() {
         <NavLink to="/upload" style={navLinkStyle}>Upload</NavLink>
         <NavLink to="/reports" style={navLinkStyle}>Reports</NavLink>
         <NavLink to="/sources" style={navLinkStyle}>Sources</NavLink>
+        <NavLink to="/gonka-verification" style={navLinkStyle}>Gonka Verification</NavLink>
         {/* Demo grouping — visually separated so judges can find the
             curated case views without confusing them with the analyst
             workspace pages above. */}
@@ -169,6 +171,7 @@ export default function App() {
               of real companies in shell-like clusters, so the same audit
               gate as /analyse applies. */}
           <Route path="/shells" element={<ShellAtlas />} />
+          <Route path="/gonka-verification" element={<GonkaVerification />} />
           <Route path="*" element={<p>Not found</p>} />
         </Routes>
       </main>

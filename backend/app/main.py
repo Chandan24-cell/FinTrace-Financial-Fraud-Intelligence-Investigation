@@ -8,6 +8,7 @@ from backend.app import __version__
 from backend.app.analytics_cache import get_status as _cache_status
 from backend.app.api.analyse import router as analyse_router
 from backend.app.api.companies import router as companies_router
+from backend.app.api.gonka import router as gonka_router
 from backend.app.api.narrative import router as narrative_router
 from backend.app.api.report import router as report_router
 from backend.app.api.shells import router as shells_router
@@ -60,6 +61,7 @@ def create_app() -> FastAPI:
     app.include_router(auth_router)
     app.include_router(analyse_router)
     app.include_router(companies_router)
+    app.include_router(gonka_router)
     app.include_router(narrative_router)
     app.include_router(upload_router)
     app.include_router(report_router)

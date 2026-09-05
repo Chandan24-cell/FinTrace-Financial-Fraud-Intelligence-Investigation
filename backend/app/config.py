@@ -47,6 +47,10 @@ class Settings(BaseSettings):
     mistral_base_url: str = "https://api.mistral.ai/v1"
     mistral_timeout_sec: float = 20.0
 
+    gonka_api_key: str = ""
+    gonka_api_base_url: str = "https://api.gonkarouter.io"
+    gonka_model: str = "deepseek-ai/DeepSeek-V4-Flash-0731"
+    gonka_timeout_sec: float = 45.0
 
     mca21_api_key: str = "PLACEHOLDER_MCA21_KEY"
     cersai_api_key: str = "PLACEHOLDER_CERSAI_KEY"

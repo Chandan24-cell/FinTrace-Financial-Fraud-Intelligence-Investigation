@@ -77,6 +77,18 @@ Indian banks reported **₹33,148 crore in loan-related bank fraud in FY25 — a
 - ✅ **Calibrated P(fraud) with 90% conformal prediction intervals.** Honest about uncertainty.
 - ✅ **Graph evidence provenance.** Every finding cites specific numbers from a specific data row in the graph.
 
+## Gonka Integration
+
+VeriLens provides optional AI-assisted financial claim verification through GonkaRouter. Verification requests are sent through the existing FastAPI backend; the Gonka API key remains server-side and is never exposed to the browser. The response ID from GonkaRouter is displayed as the **Gonka Request ID**.
+
+The configured model is `deepseek-ai/DeepSeek-V4-Flash-0731`.
+
+```text
+Browser → VeriLens frontend → FastAPI → GonkaRouter → Gonka model → FastAPI → VeriLens
+```
+
+To configure locally, copy `.env.example` to `.env.local` and set `GONKA_API_KEY` to your private key. Keep the key out of frontend environment variables, source code, and commits. The verification page is available at `/gonka-verification` and uses `POST /gonka/verify` through the existing backend.
+
 ---
 
 ## Deliverables

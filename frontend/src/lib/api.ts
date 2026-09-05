@@ -70,6 +70,17 @@ export interface UploadAck {
   extra: Record<string, unknown>;
 }
 
+export interface GonkaVerificationResult {
+  truth_score: number;
+  verdict: string;
+  reasoning: string;
+  evidence: string[];
+  confidence: number;
+  caveats: string[];
+  gonka_request_id: string;
+  status: string;
+}
+
 // PRD §10 + Phase-C data.gov.in bulk — a paginated row from /companies.
 // Used by Search.tsx to render the "recently loaded" panel of real
 // MCA-registered companies seeded from the data.gov.in CSV.
@@ -243,6 +254,13 @@ export const api = {
   },
   sources: () => getJson<SourceInventory>("/sources"),
   trending: () => getJson<TrendingFeed>("/trending"),
+  gonkaVerify: (text: string) =>
+    postJson<GonkaVerificationResult>("/gonka/verify", { text }),
+  gonkaModels: () => getJson<{
+    configured_model: string;
+    available: boolean;
+    models: Array<Record<string, unknown>>;
+  }>("/gonka/models"),
 };
 
 // Backs the Dashboard "Today's findings" panel + the masthead stats

@@ -115,3 +115,29 @@ describe("api.uploadFinancials", () => {
     expect((init as RequestInit).body).toBeInstanceOf(FormData);
   });
 });
+
+describe("api.gonkaVerify", () => {
+  it("POSTs the claim and returns the structured verification", async () => {
+    const stub = vi.fn().mockResolvedValue(mockJsonResponse(200, {
+      truth_score: 87,
+      verdict: "Likely Supported",
+      reasoning: "The claim is supported by the supplied figures.",
+      evidence: ["Supplied figure"],
+      confidence: 0.87,
+      caveats: ["No source document provided."],
+      gonka_request_id: "chatcmpl-real-123",
+      status: "Verified through GonkaRouter",
+    }));
+    globalThis.fetch = stub as unknown as typeof fetch;
+    const result = await api.gonkaVerify("Revenue was INR 500 crore.");
+    expect(stub.mock.calls[0][0]).toBe("/api/gonka/verify");
+    expect(JSON.parse((stub.mock.calls[0][1] as RequestInit).body as string)).toEqual({ text: "Revenue was INR 500 crore." });
+    expect(result.truth_score).toBe(87);
+    expect(result.gonka_request_id).toBe("chatcmpl-real-123");
+  });
+
+  it("throws a typed error when Gonka fails", async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue(mockJsonResponse(502, { detail: "failed" })) as unknown as typeof fetch;
+    await expect(api.gonkaVerify("A claim.")).rejects.toThrow(/502/);
+  });
+});
