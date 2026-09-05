@@ -1,0 +1,55 @@
+{
+  "seed": 20,
+  "synthetic_count": 500,
+  "benchmark_vs_baseline": {
+    "full_stack_auc": 0.9952085181898846,
+    "full_stack_f1": 0.9855072463768116,
+    "baseline_beneish_only_auc": 0.6781721384205855,
+    "baseline_beneish_only_f1": 0.2781456953642384,
+    "auc_delta": 0.3170363797692991,
+    "f1_delta": 0.7073615510125733
+  },
+  "conformal_alpha_sweep": {
+    "alpha_0.05": {
+      "alpha": 0.05,
+      "nominal_coverage": 0.95,
+      "empirical_coverage": 1.0,
+      "median_interval_width": 0.0,
+      "ok": true
+    },
+    "alpha_0.10": {
+      "alpha": 0.1,
+      "nominal_coverage": 0.9,
+      "empirical_coverage": 1.0,
+      "median_interval_width": 0.0,
+      "ok": true
+    },
+    "alpha_0.20": {
+      "alpha": 0.2,
+      "nominal_coverage": 0.8,
+      "empirical_coverage": 1.0,
+      "median_interval_width": 0.0,
+      "ok": true
+    }
+  },
+  "ilfs_temporal_stress": {
+    "ok": true,
+    "fs_years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "fired_count": 1,
+    "signals": [
+      {
+        "signal_type": "TEMPORAL_POLICY_CHANGE_POST_BAD_YEAR",
+        "severity": "CRITICAL",
+        "score": 40.0,
+        "evidence": "Audit-opinion flags changed between FY2016 and FY2017 \u2014 going_concern: False\u2192True, adverse: False\u2192False. Sudden flag flips often track restated accounts or new \u2026"
+      }
+    ]
+  },
+  "pass": true
+}

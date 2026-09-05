@@ -1,0 +1,533 @@
+[
+  {
+    "case_number": "C.P. (IB) 3334/MB/2018",
+    "cin": "U45201MH2005PTC155294",
+    "petition_type": "CIRP",
+    "filing_date": "2018-10-01",
+    "status": "admitted",
+    "amount_claimed": 910000000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 1245/MB/2019",
+    "cin": "U27101MH2010PTC215432",
+    "petition_type": "CIRP",
+    "filing_date": "2019-03-14",
+    "status": "admitted",
+    "amount_claimed": 12400000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. 88/MB/2024",
+    "cin": "U45203MH2020PTC315678",
+    "petition_type": "winding_up",
+    "filing_date": "2024-06-18",
+    "status": "filed",
+    "amount_claimed": 18000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 4258/MB/2019",
+    "cin": "L65910MH1984PLC032662",
+    "petition_type": "CIRP",
+    "filing_date": "2019-11-29",
+    "status": "admitted",
+    "amount_claimed": 870310000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 100/MB/2017",
+    "cin": "L65910MH1984PLC032662",
+    "petition_type": "CIRP",
+    "filing_date": "2017-01-01",
+    "status": "admitted",
+    "amount_claimed": 46244389603.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 114/BLR/2019",
+    "cin": "U27101MH2010PTC215432",
+    "petition_type": "CIRP",
+    "filing_date": "2019-07-15",
+    "status": "admitted",
+    "amount_claimed": 44623280702.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. (IB) 121/CHE/2020",
+    "cin": "U27109MH2018PTC312456",
+    "petition_type": "CIRP",
+    "filing_date": "2020-10-22",
+    "status": "admitted",
+    "amount_claimed": 4191280581.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. (IB) 128/KOL/2021",
+    "cin": "U29304MH2019PTC287654",
+    "petition_type": "CIRP",
+    "filing_date": "2021-01-02",
+    "status": "filed",
+    "amount_claimed": 29607480936.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "C.P. (IB) 135/AHM/2022",
+    "cin": "U45201MH2005PTC155294",
+    "petition_type": "CIRP",
+    "filing_date": "2022-04-09",
+    "status": "filed",
+    "amount_claimed": 21196014201.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P. (IB) 142/MB/2023",
+    "cin": "U45203MH2020PTC315678",
+    "petition_type": "CIRP",
+    "filing_date": "2023-07-16",
+    "status": "in_progress",
+    "amount_claimed": 26511449186.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 149/DEL/2024",
+    "cin": "U46101MH2017PTC289123",
+    "petition_type": "CIRP",
+    "filing_date": "2024-10-23",
+    "status": "disposed",
+    "amount_claimed": 6528192518.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "C.P. (IB) 156/BLR/2017",
+    "cin": "U46190MH2019PTC295432",
+    "petition_type": "CIRP",
+    "filing_date": "2017-01-03",
+    "status": "withdrawn",
+    "amount_claimed": 9611977920.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. (IB) 163/CHE/2018",
+    "cin": "U49120MH2020PTC301234",
+    "petition_type": "CIRP",
+    "filing_date": "2018-04-10",
+    "status": "admitted",
+    "amount_claimed": 22237010090.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. (IB) 170/KOL/2019",
+    "cin": "U62013MH2016PTC267890",
+    "petition_type": "CIRP",
+    "filing_date": "2019-07-17",
+    "status": "admitted",
+    "amount_claimed": 11063643070.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "C.P. (IB) 177/AHM/2020",
+    "cin": "U17120MH2014PTC256789",
+    "petition_type": "CIRP",
+    "filing_date": "2020-10-24",
+    "status": "admitted",
+    "amount_claimed": 22759822448.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P. (IB) 184/MB/2021",
+    "cin": "U24239MH2015PTC261222",
+    "petition_type": "CIRP",
+    "filing_date": "2021-01-04",
+    "status": "admitted",
+    "amount_claimed": 1252976870.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 191/DEL/2022",
+    "cin": "U28930MH2016PTC272333",
+    "petition_type": "CIRP",
+    "filing_date": "2022-04-11",
+    "status": "filed",
+    "amount_claimed": 4302417703.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "C.P. (IB) 198/BLR/2023",
+    "cin": "U31200MH2017PTC284001",
+    "petition_type": "CIRP",
+    "filing_date": "2023-07-18",
+    "status": "filed",
+    "amount_claimed": 35504759889.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. (IB) 205/CHE/2024",
+    "cin": "U35112MH2017PTC285112",
+    "petition_type": "CIRP",
+    "filing_date": "2024-10-25",
+    "status": "in_progress",
+    "amount_claimed": 21071099355.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. (IB) 212/KOL/2017",
+    "cin": "U40108MH2018PTC290444",
+    "petition_type": "CIRP",
+    "filing_date": "2017-01-05",
+    "status": "disposed",
+    "amount_claimed": 25639006711.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "C.P. (IB) 219/AHM/2018",
+    "cin": "U50202MH2018PTC291555",
+    "petition_type": "CIRP",
+    "filing_date": "2018-04-12",
+    "status": "withdrawn",
+    "amount_claimed": 36714440803.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P. (IB) 226/MB/2019",
+    "cin": "U51909MH2019PTC295601",
+    "petition_type": "CIRP",
+    "filing_date": "2019-07-19",
+    "status": "admitted",
+    "amount_claimed": 17959433044.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 233/DEL/2020",
+    "cin": "U64203MH2019PTC296712",
+    "petition_type": "CIRP",
+    "filing_date": "2020-10-26",
+    "status": "admitted",
+    "amount_claimed": 2891863165.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "C.P. (IB) 240/BLR/2021",
+    "cin": "U72200MH2020PTC301888",
+    "petition_type": "CIRP",
+    "filing_date": "2021-01-06",
+    "status": "admitted",
+    "amount_claimed": 39158371273.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. (IB) 247/CHE/2022",
+    "cin": "U74999MH2020PTC302345",
+    "petition_type": "CIRP",
+    "filing_date": "2022-04-13",
+    "status": "admitted",
+    "amount_claimed": 29462337286.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. (IB) 254/KOL/2023",
+    "cin": "U85100MH2021PTC306777",
+    "petition_type": "CIRP",
+    "filing_date": "2023-07-20",
+    "status": "filed",
+    "amount_claimed": 32900766814.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "C.P. (IB) 261/AHM/2024",
+    "cin": "U93000MH2021PTC307888",
+    "petition_type": "CIRP",
+    "filing_date": "2024-10-27",
+    "status": "filed",
+    "amount_claimed": 31055257885.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P. (IB) 268/MB/2017",
+    "cin": "U15490DL2012PTC247001",
+    "petition_type": "CIRP",
+    "filing_date": "2017-01-07",
+    "status": "in_progress",
+    "amount_claimed": 48537200351.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 275/DEL/2018",
+    "cin": "U22210DL2013PTC251002",
+    "petition_type": "CIRP",
+    "filing_date": "2018-04-14",
+    "status": "disposed",
+    "amount_claimed": 18149184036.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "C.P. (IB) 282/BLR/2019",
+    "cin": "U29299DL2014PTC257003",
+    "petition_type": "CIRP",
+    "filing_date": "2019-07-21",
+    "status": "withdrawn",
+    "amount_claimed": 37992933813.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. (IB) 289/CHE/2020",
+    "cin": "U33121DL2015PTC263004",
+    "petition_type": "CIRP",
+    "filing_date": "2020-10-01",
+    "status": "admitted",
+    "amount_claimed": 18443660481.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. (IB) 296/KOL/2021",
+    "cin": "U36100DL2016PTC269005",
+    "petition_type": "CIRP",
+    "filing_date": "2021-01-08",
+    "status": "admitted",
+    "amount_claimed": 28608758358.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "C.P. (IB) 303/AHM/2022",
+    "cin": "U41001DL2016PTC270006",
+    "petition_type": "CIRP",
+    "filing_date": "2022-04-15",
+    "status": "admitted",
+    "amount_claimed": 33031697481.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P. (IB) 310/MB/2023",
+    "cin": "U45400DL2017PTC281007",
+    "petition_type": "CIRP",
+    "filing_date": "2023-07-22",
+    "status": "admitted",
+    "amount_claimed": 15729839665.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. (IB) 317/DEL/2024",
+    "cin": "U52320DL2018PTC288008",
+    "petition_type": "CIRP",
+    "filing_date": "2024-10-02",
+    "status": "filed",
+    "amount_claimed": 4300520174.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "C.P. 324/BLR/2017",
+    "cin": "U60100DL2019PTC294009",
+    "petition_type": "winding_up",
+    "filing_date": "2017-01-09",
+    "status": "filed",
+    "amount_claimed": 23711210139.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. 331/CHE/2018",
+    "cin": "U66120KA2014PTC256111",
+    "petition_type": "winding_up",
+    "filing_date": "2018-04-16",
+    "status": "in_progress",
+    "amount_claimed": 35899931478.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. 338/KOL/2019",
+    "cin": "U70109KA2015PTC262112",
+    "petition_type": "winding_up",
+    "filing_date": "2019-07-23",
+    "status": "disposed",
+    "amount_claimed": 29536625751.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "C.P. 345/AHM/2020",
+    "cin": "U74140KA2016PTC270113",
+    "petition_type": "winding_up",
+    "filing_date": "2020-10-03",
+    "status": "withdrawn",
+    "amount_claimed": 22380866190.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P. 352/MB/2021",
+    "cin": "U85320KA2017PTC282114",
+    "petition_type": "winding_up",
+    "filing_date": "2021-01-10",
+    "status": "admitted",
+    "amount_claimed": 32124287601.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. 359/DEL/2022",
+    "cin": "U93090KA2018PTC289115",
+    "petition_type": "winding_up",
+    "filing_date": "2022-04-17",
+    "status": "admitted",
+    "amount_claimed": 9113730361.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "O.A. 366/BLR/2023",
+    "cin": "U23209TN2014PTC256221",
+    "petition_type": "DRT",
+    "filing_date": "2023-07-24",
+    "status": "in_progress",
+    "amount_claimed": 8939319433.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "O.A. 373/CHE/2024",
+    "cin": "U27310TN2015PTC262222",
+    "petition_type": "DRT",
+    "filing_date": "2024-10-04",
+    "status": "in_progress",
+    "amount_claimed": 16180766259.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "O.A. 380/KOL/2017",
+    "cin": "U28910TN2016PTC270223",
+    "petition_type": "DRT",
+    "filing_date": "2017-01-11",
+    "status": "in_progress",
+    "amount_claimed": 40796436531.0,
+    "bench": "NCLT Kolkata"
+  },
+  {
+    "case_number": "O.A. 387/AHM/2018",
+    "cin": "U31300TN2017PTC282224",
+    "petition_type": "DRT",
+    "filing_date": "2018-04-18",
+    "status": "in_progress",
+    "amount_claimed": 9792458522.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "O.A. 394/MB/2019",
+    "cin": "U35990TN2018PTC289225",
+    "petition_type": "DRT",
+    "filing_date": "2019-07-25",
+    "status": "in_progress",
+    "amount_claimed": 5728345747.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P. 401/DEL/2020",
+    "cin": "U45200TN2019PTC295226",
+    "petition_type": "other",
+    "filing_date": "2020-10-05",
+    "status": "disposed",
+    "amount_claimed": 4943730837.0,
+    "bench": "NCLT Delhi"
+  },
+  {
+    "case_number": "C.P. 408/BLR/2021",
+    "cin": "U51100TN2020PTC301227",
+    "petition_type": "other",
+    "filing_date": "2021-01-12",
+    "status": "withdrawn",
+    "amount_claimed": 1961074483.0,
+    "bench": "NCLT Bengaluru"
+  },
+  {
+    "case_number": "C.P. 415/CHE/2022",
+    "cin": "U72100TN2021PTC307228",
+    "petition_type": "other",
+    "filing_date": "2022-04-19",
+    "status": "admitted",
+    "amount_claimed": 13789089608.0,
+    "bench": "NCLT Chennai"
+  },
+  {
+    "case_number": "C.P. (IB) 5258/MB/2025",
+    "cin": "U28999MH2024PTC320000",
+    "petition_type": "CIRP",
+    "filing_date": "2025-06-15",
+    "status": "admitted",
+    "amount_claimed": 250000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P.(IB)/21/AHM/2017",
+    "cin": "U74899DL2001PTC108944",
+    "petition_type": "CIRP",
+    "filing_date": "2017-02-01",
+    "status": "admitted",
+    "amount_claimed": 228420000000.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P.(IB)/201/ND/2017",
+    "cin": "L45200GJ1988PLC011533",
+    "petition_type": "CIRP",
+    "filing_date": "2017-05-09",
+    "status": "admitted",
+    "amount_claimed": 562000000000.0,
+    "bench": "NCLT New Delhi"
+  },
+  {
+    "case_number": "C.P.(IB)/2205/MB/2019",
+    "cin": "L99999MH1992PLC066213",
+    "petition_type": "CIRP",
+    "filing_date": "2019-06-10",
+    "status": "admitted",
+    "amount_claimed": 85000000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P.(IB)/105/HDB/2017",
+    "cin": "L45203AP1993PLC014991",
+    "petition_type": "CIRP",
+    "filing_date": "2017-06-26",
+    "status": "admitted",
+    "amount_claimed": 450000000000.0,
+    "bench": "NCLT Hyderabad"
+  },
+  {
+    "case_number": "C.P.(IB)/2943/MB/2018",
+    "cin": "L22219MH1985PLC036572",
+    "petition_type": "CIRP",
+    "filing_date": "2018-06-01",
+    "status": "admitted",
+    "amount_claimed": 401000000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "C.P.(IB)/3281/AHM/2018",
+    "cin": "U24232GJ1995PLC025935",
+    "petition_type": "CIRP",
+    "filing_date": "2018-08-05",
+    "status": "admitted",
+    "amount_claimed": 14500000000.0,
+    "bench": "NCLT Ahmedabad"
+  },
+  {
+    "case_number": "C.P.(IB)/2083/MB/2019",
+    "cin": "L23209UP1989PLC020525",
+    "petition_type": "CIRP",
+    "filing_date": "2019-05-15",
+    "status": "admitted",
+    "amount_claimed": 470000000000.0,
+    "bench": "NCLT Mumbai"
+  },
+  {
+    "case_number": "O.A./SBI/2016/KFA",
+    "cin": "L74110WB1933PLC008002",
+    "petition_type": "DRT",
+    "filing_date": "2016-04-01",
+    "status": "in_progress",
+    "amount_claimed": 90000000000.0,
+    "bench": "DRT Bengaluru"
+  },
+  {
+    "case_number": "C.P.(IB)/4192/MB/2018",
+    "cin": "L99999GJ1995PLC026167",
+    "petition_type": "CIRP",
+    "filing_date": "2018-07-02",
+    "status": "admitted",
+    "amount_claimed": 73800000000.0,
+    "bench": "NCLT Mumbai"
+  }
+]

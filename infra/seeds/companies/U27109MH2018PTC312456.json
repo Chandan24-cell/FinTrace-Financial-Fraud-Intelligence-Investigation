@@ -1,0 +1,84 @@
+{
+  "company": {
+    "cin": "U27109MH2018PTC312456",
+    "name": "ABC Steel Trading Pvt Ltd",
+    "incorporation_date": "2018-03-08",
+    "nic_code": 27109,
+    "state": "MH",
+    "gstin": "27AABCB1234C1Z9",
+    "employee_count_reported": 18,
+    "registered_address": "Shop 12, Steel Market, Kalbadevi, Mumbai",
+    "auditor_din": "01122334"
+  },
+  "directors": [
+    {
+      "din": "01122334",
+      "name": "Ramesh Joshi",
+      "designation": "director",
+      "appointment_date": "2018-03-08",
+      "is_disqualified": false,
+      "num_directorships": 2
+    },
+    {
+      "din": "01122335",
+      "name": "Priya Joshi",
+      "designation": "director",
+      "appointment_date": "2018-03-08",
+      "is_disqualified": false,
+      "num_directorships": 1
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U27109MH2018PTC312456",
+      "year": 2022,
+      "revenue": 48200000.0,
+      "cost_of_materials": 39600000.0,
+      "employee_cost": 1800000.0,
+      "finance_costs": 980000.0,
+      "depreciation": 220000.0,
+      "other_expenses": 1850000.0,
+      "pbt": 3750000.0,
+      "tax": 940000.0,
+      "pat": 2810000.0,
+      "total_assets": 22400000.0,
+      "fixed_assets": 1800000.0,
+      "current_assets": 19200000.0,
+      "cash_and_equivalents": 4100000.0,
+      "receivables": 8800000.0,
+      "long_term_borrowings": 4200000.0,
+      "short_term_borrowings": 6800000.0,
+      "cf_operating": 2980000.0,
+      "auditor_name": "K Sharma & Co",
+      "auditor_type": "partnership",
+      "notes_word_count": 2100
+    },
+    {
+      "cin": "U27109MH2018PTC312456",
+      "year": 2023,
+      "revenue": 56400000.0,
+      "cost_of_materials": 46200000.0,
+      "employee_cost": 2100000.0,
+      "finance_costs": 1240000.0,
+      "depreciation": 280000.0,
+      "other_expenses": 2150000.0,
+      "pbt": 4430000.0,
+      "tax": 1110000.0,
+      "pat": 3320000.0,
+      "total_assets": 26800000.0,
+      "fixed_assets": 2400000.0,
+      "current_assets": 22600000.0,
+      "cash_and_equivalents": 4900000.0,
+      "receivables": 10100000.0,
+      "long_term_borrowings": 4800000.0,
+      "short_term_borrowings": 7800000.0,
+      "cf_operating": 3540000.0,
+      "auditor_name": "K Sharma & Co",
+      "auditor_type": "partnership",
+      "notes_word_count": 2300
+    }
+  ],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

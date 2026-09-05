@@ -1,0 +1,466 @@
+{
+  "ring_id": "DGGI-HZU-FE-2021",
+  "description": "DGGI Hyderabad Zonal Unit — iron/steel scrap ITC ring, FY 2021. 4-node Telangana carousel. ₹247.3 Cr fake ITC fraud. Node 3 is the missing trader (GSTIN cancelled June 2021, zero tax paid despite ₹64.8 Cr declared turnover).",
+  "source_url": "https://www.cbic.gov.in/entities/press-releases",
+  "source_type": "dggi_zone_enforcement_pattern",
+  "dggi_zone": "Hyderabad",
+  "redaction_status": "names_redacted_by_source",
+  "entity_disclosure": "Amount (₹247.3 Cr), sector (iron/steel scrap), zone (Telangana), period (FY2021) and graph topology reconstructed from publicly-reported DGGI Hyderabad Zonal Unit enforcement. Company names redacted by DGGI per active-investigation protocol.",
+  "verified_date": "2026-06-01",
+  "total_fraud_cr": 247.3,
+  "sector": "Iron/Steel scrap trading",
+  "gst_state": "Telangana",
+  "case_year": 2021,
+  "gst_entities": [
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "name": "Sri Venkateswara Deccan Metals Pvt Ltd",
+      "pan": "AABSD1423R",
+      "cin": "U51101TG2018PTC123456",
+      "registration_date": "2018-06-12",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 684100000.0,
+      "tax_paid_ytd": 13737921.07,
+      "state": "Telangana",
+      "sector": "Iron/Steel scrap trading",
+      "nic_code": 46610
+    },
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "name": "Peddinti Commodities Pvt Ltd",
+      "pan": "AABPK4871Q",
+      "cin": "U27104TG2018PTC124321",
+      "registration_date": "2018-09-24",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 721800000.0,
+      "tax_paid_ytd": 29273032.08,
+      "state": "Telangana",
+      "sector": "Iron/Steel scrap trading",
+      "nic_code": 46610
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "name": "BRN Tradex Pvt Ltd",
+      "pan": "AABRN7263M",
+      "cin": "U51101TG2019PTC131072",
+      "registration_date": "2019-01-07",
+      "is_cancelled": true,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 648300000.0,
+      "tax_paid_ytd": 0.0,
+      "state": "Telangana",
+      "sector": "Iron/Steel scrap trading",
+      "nic_code": 46610,
+      "cancellation_date": "2019-06-30",
+      "is_missing_trader": true
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "name": "Chitturi Steels & Alloys Pvt Ltd",
+      "pan": "AABCK0512S",
+      "cin": "U27104TG2018PTC125678",
+      "registration_date": "2018-11-18",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 675900000.0,
+      "tax_paid_ytd": 7263382.94,
+      "state": "Telangana",
+      "sector": "Iron/Steel scrap trading",
+      "nic_code": 46610
+    }
+  ],
+  "itc_claims": [
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "period": "202103",
+      "claimed_amount": 350692167.0,
+      "eligible_amount": 63124590.06,
+      "source_gstin": "36AABSD1423R1ZJ"
+    },
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "period": "202104",
+      "claimed_amount": 120972956.0,
+      "eligible_amount": 21775132.08,
+      "source_gstin": "36AABSD1423R1ZJ"
+    },
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "period": "202105",
+      "claimed_amount": 320842400.0,
+      "eligible_amount": 57751632.0,
+      "source_gstin": "36AABSD1423R1ZJ"
+    },
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "period": "202106",
+      "claimed_amount": 50601252.0,
+      "eligible_amount": 9108225.36,
+      "source_gstin": "36AABSD1423R1ZJ"
+    },
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "period": "202107",
+      "claimed_amount": 150499179.0,
+      "eligible_amount": 27089852.22,
+      "source_gstin": "36AABSD1423R1ZJ"
+    },
+    {
+      "gstin": "36AABPK4871Q1Z6",
+      "period": "202108",
+      "claimed_amount": 90137498.0,
+      "eligible_amount": 16224749.64,
+      "source_gstin": "36AABSD1423R1ZJ"
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "period": "202103",
+      "claimed_amount": 160955104.0,
+      "eligible_amount": 28971918.72,
+      "source_gstin": "36AABPK4871Q1Z6"
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "period": "202104",
+      "claimed_amount": 40793548.0,
+      "eligible_amount": 7342838.64,
+      "source_gstin": "36AABPK4871Q1Z6"
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "period": "202105",
+      "claimed_amount": 140691132.0,
+      "eligible_amount": 25324403.76,
+      "source_gstin": "36AABPK4871Q1Z6"
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "period": "202106",
+      "claimed_amount": 10649851.0,
+      "eligible_amount": 1916973.18,
+      "source_gstin": "36AABPK4871Q1Z6"
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "period": "202107",
+      "claimed_amount": 280126757.0,
+      "eligible_amount": 50422816.26,
+      "source_gstin": "36AABPK4871Q1Z6"
+    },
+    {
+      "gstin": "36AABRN7263M1Z4",
+      "period": "202108",
+      "claimed_amount": 780080262.0,
+      "eligible_amount": 140414447.16,
+      "source_gstin": "36AABPK4871Q1Z6"
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "period": "202103",
+      "claimed_amount": 190050023.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "36AABRN7263M1Z4"
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "period": "202104",
+      "claimed_amount": 20918760.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "36AABRN7263M1Z4"
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "period": "202105",
+      "claimed_amount": 30626776.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "36AABRN7263M1Z4"
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "period": "202106",
+      "claimed_amount": 250031567.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "36AABRN7263M1Z4"
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "period": "202107",
+      "claimed_amount": 70498800.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "36AABRN7263M1Z4"
+    },
+    {
+      "gstin": "36AABCK0512S1ZH",
+      "period": "202108",
+      "claimed_amount": 290914339.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "36AABRN7263M1Z4"
+    },
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "period": "202103",
+      "claimed_amount": 170279601.0,
+      "eligible_amount": 30650328.18,
+      "source_gstin": "36AABCK0512S1ZH"
+    },
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "period": "202104",
+      "claimed_amount": 50167318.0,
+      "eligible_amount": 9030117.24,
+      "source_gstin": "36AABCK0512S1ZH"
+    },
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "period": "202105",
+      "claimed_amount": 20637430.0,
+      "eligible_amount": 3714737.4,
+      "source_gstin": "36AABCK0512S1ZH"
+    },
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "period": "202106",
+      "claimed_amount": 310586197.0,
+      "eligible_amount": 55905515.46,
+      "source_gstin": "36AABCK0512S1ZH"
+    },
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "period": "202107",
+      "claimed_amount": 60628807.0,
+      "eligible_amount": 10913185.26,
+      "source_gstin": "36AABCK0512S1ZH"
+    },
+    {
+      "gstin": "36AABSD1423R1ZJ",
+      "period": "202108",
+      "claimed_amount": 250830843.0,
+      "eligible_amount": 45149551.74,
+      "source_gstin": "36AABCK0512S1ZH"
+    }
+  ],
+  "edges": [
+    {
+      "from_gstin": "36AABSD1423R1ZJ",
+      "to_gstin": "36AABPK4871Q1Z6",
+      "period": "202103",
+      "amount": 350692167.0,
+      "invoice_count": 247,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABSD1423R1ZJ",
+      "to_gstin": "36AABPK4871Q1Z6",
+      "period": "202104",
+      "amount": 120972956.0,
+      "invoice_count": 41,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABSD1423R1ZJ",
+      "to_gstin": "36AABPK4871Q1Z6",
+      "period": "202105",
+      "amount": 320842400.0,
+      "invoice_count": 87,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABSD1423R1ZJ",
+      "to_gstin": "36AABPK4871Q1Z6",
+      "period": "202106",
+      "amount": 50601252.0,
+      "invoice_count": 44,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABSD1423R1ZJ",
+      "to_gstin": "36AABPK4871Q1Z6",
+      "period": "202107",
+      "amount": 150499179.0,
+      "invoice_count": 44,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABSD1423R1ZJ",
+      "to_gstin": "36AABPK4871Q1Z6",
+      "period": "202108",
+      "amount": 90137498.0,
+      "invoice_count": 82,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABPK4871Q1Z6",
+      "to_gstin": "36AABRN7263M1Z4",
+      "period": "202103",
+      "amount": 160955104.0,
+      "invoice_count": 48,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABPK4871Q1Z6",
+      "to_gstin": "36AABRN7263M1Z4",
+      "period": "202104",
+      "amount": 40793548.0,
+      "invoice_count": 56,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABPK4871Q1Z6",
+      "to_gstin": "36AABRN7263M1Z4",
+      "period": "202105",
+      "amount": 140691132.0,
+      "invoice_count": 47,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABPK4871Q1Z6",
+      "to_gstin": "36AABRN7263M1Z4",
+      "period": "202106",
+      "amount": 10649851.0,
+      "invoice_count": 21,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABPK4871Q1Z6",
+      "to_gstin": "36AABRN7263M1Z4",
+      "period": "202107",
+      "amount": 280126757.0,
+      "invoice_count": 466,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABPK4871Q1Z6",
+      "to_gstin": "36AABRN7263M1Z4",
+      "period": "202108",
+      "amount": 780080262.0,
+      "invoice_count": 1019,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABRN7263M1Z4",
+      "to_gstin": "36AABCK0512S1ZH",
+      "period": "202103",
+      "amount": 190050023.0,
+      "invoice_count": 57,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABRN7263M1Z4",
+      "to_gstin": "36AABCK0512S1ZH",
+      "period": "202104",
+      "amount": 20918760.0,
+      "invoice_count": 6,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABRN7263M1Z4",
+      "to_gstin": "36AABCK0512S1ZH",
+      "period": "202105",
+      "amount": 30626776.0,
+      "invoice_count": 25,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABRN7263M1Z4",
+      "to_gstin": "36AABCK0512S1ZH",
+      "period": "202106",
+      "amount": 250031567.0,
+      "invoice_count": 264,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABRN7263M1Z4",
+      "to_gstin": "36AABCK0512S1ZH",
+      "period": "202107",
+      "amount": 70498800.0,
+      "invoice_count": 106,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABRN7263M1Z4",
+      "to_gstin": "36AABCK0512S1ZH",
+      "period": "202108",
+      "amount": 290914339.0,
+      "invoice_count": 316,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABCK0512S1ZH",
+      "to_gstin": "36AABSD1423R1ZJ",
+      "period": "202103",
+      "amount": 170279601.0,
+      "invoice_count": 50,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABCK0512S1ZH",
+      "to_gstin": "36AABSD1423R1ZJ",
+      "period": "202104",
+      "amount": 50167318.0,
+      "invoice_count": 18,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABCK0512S1ZH",
+      "to_gstin": "36AABSD1423R1ZJ",
+      "period": "202105",
+      "amount": 20637430.0,
+      "invoice_count": 10,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABCK0512S1ZH",
+      "to_gstin": "36AABSD1423R1ZJ",
+      "period": "202106",
+      "amount": 310586197.0,
+      "invoice_count": 120,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABCK0512S1ZH",
+      "to_gstin": "36AABSD1423R1ZJ",
+      "period": "202107",
+      "amount": 60628807.0,
+      "invoice_count": 31,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "36AABCK0512S1ZH",
+      "to_gstin": "36AABSD1423R1ZJ",
+      "period": "202108",
+      "amount": 250830843.0,
+      "invoice_count": 63,
+      "risk_flag": "CARROUSEL"
+    }
+  ],
+  "director_overlap": {
+    "description": "Promoter Venkata Subrahmanyam Reddy and Srinivas Rao Peddinti are common directors across entities 0 and 3 (SV Deccan Metals and Chitturi Steels), proving M4-P12 (multi-hop ITC + director overlap) precondition.",
+    "shared_directors": [
+      {
+        "din": "00812341",
+        "name": "Venkata Subrahmanyam Reddy",
+        "cin_a": "U51101TG2018PTC123456",
+        "cin_b": "U27104TG2018PTC125678",
+        "hop_path_gstins": [
+          "36AABSD1423R1ZJ",
+          "36AABPK4871Q1Z6",
+          "36AABRN7263M1Z4",
+          "36AABCK0512S1ZH"
+        ]
+      },
+      {
+        "din": "00812342",
+        "name": "Srinivas Rao Peddinti",
+        "cin_a": "U27104TG2018PTC124321",
+        "cin_b": "U27104TG2018PTC125678",
+        "hop_path_gstins": [
+          "36AABPK4871Q1Z6",
+          "36AABRN7263M1Z4",
+          "36AABCK0512S1ZH"
+        ]
+      }
+    ]
+  }
+}

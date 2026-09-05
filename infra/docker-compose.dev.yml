@@ -1,0 +1,31 @@
+# Local development Neo4j matching the Railway production target.
+# Image: neo4j:5-community with GDS plugin auto-installed via NEO4J_PLUGINS.
+# Used by: scripts/seed_neo4j.py, backend pytest integration suite.
+# PRD §11.2: Railway hosts neo4j:5-community with GDS — this compose mirrors that for dev.
+
+services:
+  neo4j:
+    image: neo4j:5.20-community
+    container_name: sentinel-g-neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"   # HTTP / Neo4j Browser
+      - "7687:7687"   # Bolt
+    environment:
+      NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD:-sentinel_dev_pwd}"
+      NEO4J_PLUGINS: '["graph-data-science"]'
+      NEO4J_dbms_security_procedures_unrestricted: "gds.*,apoc.*"
+      NEO4J_dbms_security_procedures_allowlist: "gds.*,apoc.*"
+      NEO4J_server_memory_heap_initial__size: "1G"
+      NEO4J_server_memory_heap_max__size: "2G"
+      NEO4J_server_memory_pagecache_size: "1G"
+    volumes:
+      - ./.neo4j-data:/data
+      - ./.neo4j-logs:/logs
+      - ./.neo4j-plugins:/plugins
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 24
+      start_period: 120s

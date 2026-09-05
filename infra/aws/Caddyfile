@@ -1,0 +1,34 @@
+# Caddy reverse-proxy for the Sentinel-G FastAPI backend on AWS Lightsail.
+# {$DOMAIN} is interpolated from docker-compose.yml's `environment:` block,
+# which reads it from .env. Caddy auto-issues + auto-renews a Let's Encrypt
+# cert against this domain.
+#
+# Default DOMAIN value uses sslip.io — a free wildcard DNS service that
+# resolves `<ip>.sslip.io` to the literal IP. Once you set up real DNS,
+# replace DOMAIN in .env with your apex (e.g. api.sentinel-g.example.com)
+# and Caddy reissues a new cert on the next reload.
+
+{$DOMAIN} {
+	encode gzip zstd
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	# CORS is handled by FastAPI's CORSMiddleware (Day 24) — env-driven via
+	# CORS_ALLOWED_ORIGINS in .env. Caddy just passes the request through.
+	reverse_proxy sentinel-g-api:8000 {
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+
+	log {
+		output stdout
+		format console
+		level INFO
+	}
+}

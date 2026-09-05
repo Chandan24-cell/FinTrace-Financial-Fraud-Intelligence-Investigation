@@ -1,0 +1,70 @@
+# Build the FastAPI image and publish to GHCR.
+#
+# Why this exists: PRD §10 Day-28 target deploy is Oracle Cloud Free Tier
+# VM.Standard.E2.1.Micro (1 GB RAM). That box cannot `docker build` the
+# image locally — torch + lightgbm wheel installs spike RAM well above
+# 1 GB. So GitHub Actions builds the amd64 image and publishes it to
+# ghcr.io. The VM only ever runs `docker pull` + `docker run`.
+#
+# The package is set to public visibility once after the first publish
+# (via GitHub → Packages → Settings → Change visibility → Public). This
+# lets the VM pull without GHCR auth — simpler operator path.
+
+name: Publish FastAPI image to GHCR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "ml/**"
+      - "pyproject.toml"
+      - "backend/Dockerfile"
+      - ".github/workflows/docker-publish.yml"
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata (tags + labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,prefix=sha-,format=short
+
+      - name: Build + push (amd64)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: backend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Cache layers between runs — the FastAPI image is heavy.
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

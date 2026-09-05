@@ -1,0 +1,24 @@
+{
+    "company":  {
+                    "cin":  "U51100MH2021PTC320106",
+                    "name":  "Zephyr Kommerce Pvt Ltd",
+                    "incorporation_date":  "2026-04-15",
+                    "nic_code":  51100,
+                    "state":  "MH",
+                    "gstin":  "27AABZK1473H1ZZ",
+                    "employee_count_reported":  3,
+                    "registered_address":  "Redacted DGGI Mumbai carousel entity address",
+                    "auditor_din":  null
+                },
+    "directors":  [
+
+                  ],
+    "financials":  [
+
+                   ],
+    "charges":  [
+
+                ],
+    "has_gst_upload":  true,
+    "has_bank_upload":  false
+}

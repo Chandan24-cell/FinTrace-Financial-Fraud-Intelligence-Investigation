@@ -1,0 +1,91 @@
+# Weekly auto-refresh of public-record fraud data.
+#
+# Runs Monday 03:00 UTC (08:30 IST) — after CBIC's typical end-of-week
+# publication batch. The job invokes each scraper, writes the refreshed
+# JSONs to a branch, and opens a PR with the diff. A human merges weekly
+# (or you can configure auto-merge in repo settings).
+#
+# Sources currently wired:
+#   - DGGI press release archive (cbic.gov.in) → infra/seeds/itc_carousel/dggi_*.json
+#
+# To add another source: drop a scraper script under scripts/refresh_*.py
+# that writes JSON under infra/seeds/ or data/labels/, and append it to
+# the "Run scrapers" step. The PR diff is reviewed before merge.
+#
+# Failure mode: government sites change HTML every ~6 months. When that
+# happens the scraper job fails, GitHub emails the repo owner, and you
+# fix the parser. No silent staleness — the /sources page on the live
+# deploy will keep showing the previous last_refreshed timestamp, so
+# anyone can see the freshness ageing.
+
+name: Refresh public-record fraud data
+
+on:
+  schedule:
+    # Mon 03:00 UTC — adjust to your operator's timezone if needed.
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        run: |
+          uv venv
+          uv pip install -r pyproject.toml
+
+      - name: Run scrapers
+        id: refresh
+        run: |
+          set -euo pipefail
+          mkdir -p infra/seeds/itc_carousel
+          uv run python -m scripts.refresh_dggi_press 2>&1 | tee /tmp/dggi.log
+          echo "scraper_exit=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Detect diff
+        id: diff
+        run: |
+          if git diff --quiet -- infra/seeds data/labels; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open PR with refreshed data
+        if: steps.diff.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: data-refresh/${{ github.run_id }}
+          commit-message: |
+            data: weekly public-record refresh (${{ github.run_id }})
+
+            Sources updated this run — see PR diff for details. Re-runs of
+            this workflow that produce identical content do not open new
+            PRs (idempotent on the source side).
+          title: "Weekly data refresh — ${{ github.run_id }}"
+          body: |
+            Automated public-record refresh from CBIC / RBI / NCLT / SFIO
+            scrapers. Review the diff before merging. If the scraper
+            shape looks wrong, the source site likely changed HTML — see
+            `backend/app/ingest/dggi_press.py` for the parser.
+          labels: data-refresh
+          add-paths: |
+            infra/seeds/
+            data/labels/

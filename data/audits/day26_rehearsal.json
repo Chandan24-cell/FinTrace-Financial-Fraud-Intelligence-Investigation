@@ -1,0 +1,49 @@
+{
+  "phases": [
+    {
+      "phase": "01_company_search_dashboard",
+      "elapsed_sec": 0.014456200005952269,
+      "ok": true,
+      "status_code": 200
+    },
+    {
+      "phase": "03_graph_provenance",
+      "elapsed_sec": 0.0057853000034810975,
+      "ok": true,
+      "status_code": 200
+    },
+    {
+      "phase": "05_itc_carousel",
+      "elapsed_sec": 0.008062599998083897,
+      "ok": true,
+      "status_code": 200
+    },
+    {
+      "phase": "06_evergreening",
+      "elapsed_sec": 0.007435999999870546,
+      "ok": true,
+      "status_code": 200
+    },
+    {
+      "phase": "07_report_export",
+      "elapsed_sec": 0.06772930000443012,
+      "ok": true,
+      "status_code": 200
+    }
+  ],
+  "total_elapsed_sec": 0.10348850000445964,
+  "total_budget_sec": 180.0,
+  "ilfs_headline": {
+    "fraud_risk_score": 75.0,
+    "risk_band": "CRITICAL",
+    "data_confidence": 92,
+    "evidence_signal_count": 18
+  },
+  "ilfs_provenance_signal_count": 18,
+  "report_meta": {
+    "bytes": 6047,
+    "report_id": "99d2f009-700c-4829-ab29-dc2555b85a2e",
+    "generated_at": "2026-05-15T01:45:29+00:00"
+  },
+  "pass": true
+}

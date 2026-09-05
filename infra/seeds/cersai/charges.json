@@ -1,0 +1,50 @@
+[
+  {
+    "cin": "U27101MH2010PTC215432",
+    "charge_id": "AMTEK-CHG-002",
+    "lender_name": "Punjab National Bank",
+    "bank_branch_ifsc": "PUNB0123400",
+    "amount": 320000000.0,
+    "creation_date": "2017-11-18",
+    "satisfaction_date": "2018-04-22",
+    "charge_type": "hypothecation"
+  },
+  {
+    "cin": "U27101MH2010PTC215432",
+    "charge_id": "AMTEK-CHG-003",
+    "lender_name": "Bank of Baroda",
+    "bank_branch_ifsc": "BARB0VJBRSL",
+    "amount": 410000000.0,
+    "creation_date": "2018-05-09",
+    "charge_type": "floating"
+  },
+  {
+    "cin": "U46190MH2019PTC295432",
+    "charge_id": "EFG-CHG-001",
+    "lender_name": "Yes Bank",
+    "bank_branch_ifsc": "YESB0000200",
+    "amount": 4800000.0,
+    "creation_date": "2022-07-01",
+    "satisfaction_date": "2022-12-20",
+    "charge_type": "hypothecation"
+  },
+  {
+    "cin": "U46190MH2019PTC295432",
+    "charge_id": "EFG-CHG-002",
+    "lender_name": "Yes Bank",
+    "bank_branch_ifsc": "YESB0000200",
+    "amount": 5200000.0,
+    "creation_date": "2023-02-14",
+    "satisfaction_date": "2023-07-28",
+    "charge_type": "hypothecation"
+  },
+  {
+    "cin": "U46190MH2019PTC295432",
+    "charge_id": "EFG-CHG-003",
+    "lender_name": "Yes Bank",
+    "bank_branch_ifsc": "YESB0000200",
+    "amount": 6100000.0,
+    "creation_date": "2023-09-18",
+    "charge_type": "hypothecation"
+  }
+]

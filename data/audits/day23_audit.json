@@ -1,0 +1,163 @@
+{
+  "today": "2026-05-15",
+  "wilful_defaulters": {
+    "ok": true,
+    "declaration_count": 10,
+    "unique_cins": 10,
+    "cins_detected": 10,
+    "per_cin": {
+      "L65910MH1984PLC032662": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U27101MH2010PTC215432": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U27109MH2018PTC312456": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U29304MH2019PTC287654": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U45201MH2005PTC155294": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U45203MH2020PTC315678": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U46101MH2017PTC289123": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U46190MH2019PTC295432": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U49120MH2020PTC301234": {
+        "score": 75.0,
+        "fired_count": 1
+      },
+      "U62013MH2016PTC267890": {
+        "score": 75.0,
+        "fired_count": 1
+      }
+    }
+  },
+  "nclt_production_run": {
+    "ok": true,
+    "proceeding_count": 50,
+    "parsed_ok": 50,
+    "petition_breakdown": {
+      "CIRP": 35,
+      "winding_up": 7,
+      "DRT": 5,
+      "other": 3
+    },
+    "unique_benches": [
+      "NCLT Ahmedabad",
+      "NCLT Bengaluru",
+      "NCLT Chennai",
+      "NCLT Delhi",
+      "NCLT Kolkata",
+      "NCLT Mumbai"
+    ]
+  },
+  "itc_patterns": {
+    "ok": true,
+    "P08_carousel_ring": {
+      "ok": true,
+      "edges": 7
+    },
+    "P09_missing_trader": {
+      "ok": true,
+      "hits": [
+        "27SYNAB0001A1Z5",
+        "27SYNAB0002B1Z3",
+        "27SYNAB0003C1Z1",
+        "27SYNAB0004D1Z9",
+        "27SYNAB0005E1Z7",
+        "27SYNAB0006F1Z5",
+        "27SYNAB0007G1Z3"
+      ]
+    },
+    "P10_cancelled_gstin": {
+      "ok": true,
+      "edges_to_cancelled": 1,
+      "cancelled_gstins": [
+        "27SYNAB0004D1Z9"
+      ]
+    },
+    "P11_new_gstin_high_itc": {
+      "ok": true,
+      "hits": [
+        {
+          "gstin": "27SYNAB0006F1Z5",
+          "age_days": 14,
+          "ratio": 0.31875
+        }
+      ]
+    },
+    "P12_multi_hop_director": {
+      "ok": true,
+      "shared_directors": 1
+    }
+  },
+  "dhfl_evergreening": {
+    "ok": true,
+    "P13_round_trip_repayment": {
+      "ok": true,
+      "hits": [
+        {
+          "funding_loan_id": "SUNBLINK-LOAN-1",
+          "funded_repayment_loan_id": "DHFL-CHG-A-2018",
+          "days_between": 7,
+          "amount_overlap_pct": 98.0
+        },
+        {
+          "funding_loan_id": "GALAXY-LOAN-1",
+          "funded_repayment_loan_id": "DHFL-CHG-B-2018",
+          "days_between": 15,
+          "amount_overlap_pct": 96.5
+        }
+      ]
+    },
+    "P14_serial_short_term_charge": {
+      "ok": true,
+      "cycles": [
+        {
+          "charge_id": "DHFL-CHG-A-2018",
+          "days": 145
+        },
+        {
+          "charge_id": "DHFL-CHG-B-2018",
+          "days": 130
+        },
+        {
+          "charge_id": "DHFL-CHG-C-2019",
+          "days": 131
+        }
+      ],
+      "min_required": 3
+    },
+    "P15_shell_conduit_borrower": {
+      "ok": true,
+      "shells": [
+        {
+          "cin": "U70200MH2017PTC308912",
+          "employee_count_reported": 2
+        },
+        {
+          "cin": "U70109MH2018PTC309111",
+          "employee_count_reported": 2
+        }
+      ]
+    },
+    "p13_and_p14_and_p15_simultaneous": true
+  },
+  "pass": true
+}

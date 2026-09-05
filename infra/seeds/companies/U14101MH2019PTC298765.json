@@ -1,0 +1,76 @@
+{
+  "company": {
+    "cin": "U14101MH2019PTC298765",
+    "name": "XYZ Garments Pvt Ltd",
+    "incorporation_date": "2019-05-22",
+    "nic_code": 14101,
+    "state": "MH",
+    "gstin": "27XYZAB5678D2Z1",
+    "employee_count_reported": 42,
+    "registered_address": "Plot 8, Bhiwandi Industrial Zone, Thane",
+    "auditor_din": "02233445"
+  },
+  "directors": [
+    {
+      "din": "02233445",
+      "name": "Sunita Mehta",
+      "designation": "managing director",
+      "appointment_date": "2019-05-22",
+      "is_disqualified": false,
+      "num_directorships": 3
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U14101MH2019PTC298765",
+      "year": 2022,
+      "revenue": 82400000.0,
+      "cost_of_materials": 58100000.0,
+      "employee_cost": 9200000.0,
+      "finance_costs": 1800000.0,
+      "depreciation": 620000.0,
+      "other_expenses": 3400000.0,
+      "pbt": 9280000.0,
+      "tax": 2320000.0,
+      "pat": 6960000.0,
+      "total_assets": 41200000.0,
+      "fixed_assets": 8400000.0,
+      "current_assets": 30100000.0,
+      "cash_and_equivalents": 6200000.0,
+      "receivables": 14800000.0,
+      "long_term_borrowings": 5800000.0,
+      "short_term_borrowings": 9100000.0,
+      "cf_operating": 7400000.0,
+      "auditor_name": "Patel & Patel CA",
+      "auditor_type": "partnership",
+      "notes_word_count": 2800
+    },
+    {
+      "cin": "U14101MH2019PTC298765",
+      "year": 2023,
+      "revenue": 96800000.0,
+      "cost_of_materials": 68200000.0,
+      "employee_cost": 10800000.0,
+      "finance_costs": 2100000.0,
+      "depreciation": 740000.0,
+      "other_expenses": 3900000.0,
+      "pbt": 11060000.0,
+      "tax": 2770000.0,
+      "pat": 8290000.0,
+      "total_assets": 48800000.0,
+      "fixed_assets": 9700000.0,
+      "current_assets": 35800000.0,
+      "cash_and_equivalents": 8100000.0,
+      "receivables": 17400000.0,
+      "long_term_borrowings": 6400000.0,
+      "short_term_borrowings": 10400000.0,
+      "cf_operating": 8900000.0,
+      "auditor_name": "Patel & Patel CA",
+      "auditor_type": "partnership",
+      "notes_word_count": 2900
+    }
+  ],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

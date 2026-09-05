@@ -1,0 +1,103 @@
+[
+  {
+    "gstin": "27AAACI4567A1Z5",
+    "pan": "AAACI4567A",
+    "cin": "U45201MH2005PTC155294",
+    "registration_date": "2005-07-15",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 92400000000.0,
+    "tax_paid_ytd": 8800000000.0
+  },
+  {
+    "gstin": "27AAACA7890B1Z2",
+    "pan": "AAACA7890B",
+    "cin": "U27101MH2010PTC215432",
+    "registration_date": "2010-05-04",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 1480000000.0,
+    "tax_paid_ytd": 168000000.0
+  },
+  {
+    "gstin": "27AABCB1234C1Z9",
+    "pan": "AABCB1234C",
+    "cin": "U27109MH2018PTC312456",
+    "registration_date": "2018-04-12",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 56400000.0,
+    "tax_paid_ytd": 6120000.0
+  },
+  {
+    "gstin": "27XYZAB5678D2Z1",
+    "pan": "XYZAB5678D",
+    "cin": "U14101MH2019PTC298765",
+    "registration_date": "2019-06-20",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 96800000.0,
+    "tax_paid_ytd": 11400000.0
+  },
+  {
+    "gstin": "27PQRLG2345E1Z8",
+    "pan": "PQRLG2345E",
+    "cin": "U49120MH2020PTC301234",
+    "registration_date": "2020-09-08",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 38700000.0,
+    "tax_paid_ytd": 4280000.0
+  },
+  {
+    "gstin": "27LMNFD3456F1Z4",
+    "pan": "LMNFD3456F",
+    "cin": "U46101MH2017PTC289123",
+    "registration_date": "2017-12-15",
+    "is_cancelled": false,
+    "taxpayer_type": "composition",
+    "aggregate_turnover": 24800000.0,
+    "tax_paid_ytd": 248000.0
+  },
+  {
+    "gstin": "27RSTSW4567G1Z7",
+    "pan": "RSTSW4567G",
+    "cin": "U62013MH2016PTC267890",
+    "registration_date": "2016-10-22",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 78200000.0,
+    "tax_paid_ytd": 8400000.0
+  },
+  {
+    "gstin": "27UVWCN5678H2Z3",
+    "pan": "UVWCN5678H",
+    "cin": "U45203MH2020PTC315678",
+    "registration_date": "2020-02-04",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 0.0,
+    "tax_paid_ytd": 0.0
+  },
+  {
+    "gstin": "27EFGTR6789I1Z6",
+    "pan": "EFGTR6789I",
+    "cin": "U46190MH2019PTC295432",
+    "registration_date": "2019-08-30",
+    "cancellation_date": "2024-01-15",
+    "is_cancelled": true,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 18400000.0,
+    "tax_paid_ytd": 124000.0
+  },
+  {
+    "gstin": "27HIJAP7890J1Z2",
+    "pan": "HIJAP7890J",
+    "cin": "U29304MH2019PTC287654",
+    "registration_date": "2019-03-05",
+    "is_cancelled": false,
+    "taxpayer_type": "regular",
+    "aggregate_turnover": 91200000.0,
+    "tax_paid_ytd": 10940000.0
+  }
+]

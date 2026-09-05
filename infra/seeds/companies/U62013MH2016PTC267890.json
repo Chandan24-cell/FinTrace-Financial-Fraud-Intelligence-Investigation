@@ -1,0 +1,59 @@
+{
+  "company": {
+    "cin": "U62013MH2016PTC267890",
+    "name": "RST Software Services Pvt Ltd",
+    "incorporation_date": "2016-09-04",
+    "nic_code": 62013,
+    "state": "MH",
+    "gstin": "27RSTSW4567G1Z7",
+    "employee_count_reported": 34,
+    "registered_address": "TechZone Building, Hinjewadi Phase 2, Pune",
+    "auditor_din": "05566778"
+  },
+  "directors": [
+    {
+      "din": "05566778",
+      "name": "Anjali Rao",
+      "designation": "director",
+      "appointment_date": "2016-09-04",
+      "is_disqualified": false,
+      "num_directorships": 2
+    },
+    {
+      "din": "05566779",
+      "name": "Karthik Iyer",
+      "designation": "director",
+      "appointment_date": "2016-09-04",
+      "is_disqualified": false,
+      "num_directorships": 1
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U62013MH2016PTC267890",
+      "year": 2023,
+      "revenue": 78200000.0,
+      "cost_of_materials": 8400000.0,
+      "employee_cost": 52800000.0,
+      "finance_costs": 420000.0,
+      "depreciation": 1800000.0,
+      "other_expenses": 4900000.0,
+      "pbt": 9880000.0,
+      "tax": 2470000.0,
+      "pat": 7410000.0,
+      "total_assets": 38400000.0,
+      "fixed_assets": 6200000.0,
+      "current_assets": 30800000.0,
+      "cash_and_equivalents": 14800000.0,
+      "receivables": 11200000.0,
+      "long_term_borrowings": 0.0,
+      "short_term_borrowings": 1800000.0,
+      "auditor_name": "Iyer Consulting",
+      "auditor_type": "llp",
+      "notes_word_count": 3200
+    }
+  ],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

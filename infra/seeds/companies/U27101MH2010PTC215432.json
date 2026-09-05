@@ -1,0 +1,108 @@
+{
+  "company": {
+    "cin": "U27101MH2010PTC215432",
+    "name": "Amtek Auto Components Pvt Ltd",
+    "incorporation_date": "2010-04-12",
+    "nic_code": 27101,
+    "state": "MH",
+    "gstin": "27AAACA7890B1Z2",
+    "employee_count_reported": 187,
+    "registered_address": "Plot 14, MIDC Industrial Estate, Pune",
+    "auditor_din": "00554433"
+  },
+  "directors": [
+    {
+      "din": "00554433",
+      "name": "Arvind Dham",
+      "dob": "1964-02-12",
+      "designation": "managing director",
+      "appointment_date": "2010-04-12",
+      "is_disqualified": false,
+      "num_directorships": 23
+    },
+    {
+      "din": "00667788",
+      "name": "Romi Kumar",
+      "designation": "director",
+      "appointment_date": "2011-09-10",
+      "is_disqualified": false,
+      "num_directorships": 8
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U27101MH2010PTC215432",
+      "year": 2017,
+      "revenue": 1240000000.0,
+      "cost_of_materials": 891000000.0,
+      "employee_cost": 87000000.0,
+      "finance_costs": 142000000.0,
+      "depreciation": 58000000.0,
+      "other_expenses": 54000000.0,
+      "pbt": 8000000.0,
+      "tax": 2400000.0,
+      "pat": 5600000.0,
+      "total_assets": 3140000000.0,
+      "fixed_assets": 1820000000.0,
+      "cwip": 312000000.0,
+      "current_assets": 781000000.0,
+      "cash_and_equivalents": 41000000.0,
+      "receivables": 487000000.0,
+      "long_term_borrowings": 1740000000.0,
+      "short_term_borrowings": 412000000.0,
+      "cf_operating": -28000000.0,
+      "cf_investing": -187000000.0,
+      "cf_financing": 198000000.0,
+      "audit_opinion_text": "In our opinion, the financial statements give a true and fair view subject to emphasis of matter noted below.",
+      "auditor_name": "S Mehta & Associates",
+      "auditor_din": "00554433",
+      "auditor_type": "sole_proprietor",
+      "emphasis_count": 2,
+      "notes_word_count": 4200
+    },
+    {
+      "cin": "U27101MH2010PTC215432",
+      "year": 2018,
+      "revenue": 1480000000.0,
+      "cost_of_materials": 1098000000.0,
+      "employee_cost": 92000000.0,
+      "finance_costs": 178000000.0,
+      "depreciation": 62000000.0,
+      "other_expenses": 51000000.0,
+      "pbt": -1000000.0,
+      "tax": 0.0,
+      "pat": -1000000.0,
+      "total_assets": 3520000000.0,
+      "fixed_assets": 2010000000.0,
+      "cwip": 398000000.0,
+      "current_assets": 821000000.0,
+      "cash_and_equivalents": 22000000.0,
+      "receivables": 612000000.0,
+      "long_term_borrowings": 2010000000.0,
+      "short_term_borrowings": 521000000.0,
+      "cf_operating": -67000000.0,
+      "cf_investing": -201000000.0,
+      "cf_financing": 248000000.0,
+      "audit_opinion_text": "Material uncertainty exists regarding the ability to continue as a going concern.",
+      "auditor_name": "S Mehta & Associates",
+      "auditor_din": "00554433",
+      "auditor_type": "sole_proprietor",
+      "emphasis_count": 4,
+      "going_concern_flag": true,
+      "notes_word_count": 3100
+    }
+  ],
+  "charges": [
+    {
+      "cin": "U27101MH2010PTC215432",
+      "charge_id": "AMTEK-CHG-001",
+      "lender_name": "ICICI Bank",
+      "bank_branch_ifsc": "ICIC0000147",
+      "amount": 850000000.0,
+      "creation_date": "2017-06-04",
+      "charge_type": "hypothecation"
+    }
+  ],
+  "has_gst_upload": true,
+  "has_bank_upload": false
+}

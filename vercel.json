@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "echo deferred",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://13.126.114.27.sslip.io/$1" },
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ]
+}

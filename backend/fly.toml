@@ -1,0 +1,41 @@
+# Fly.io deployment for Sentinel-G FastAPI backend.
+# Edit the `app` name to whatever you reserve in `fly launch`.
+
+app = "sentinel-g-api"
+primary_region = "bom"   # Mumbai — closest to Indian SME data sources
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  APP_ENV = "prod"
+  BACKEND_PORT = "8000"
+  LOG_LEVEL = "INFO"
+  TIMEZONE = "Asia/Kolkata"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+
+# Secrets to set:
+#   flyctl secrets set NEO4J_URI=... NEO4J_USER=... NEO4J_PASSWORD=... \
+#     JWT_SECRET=... MISTRAL_API_KEY=...

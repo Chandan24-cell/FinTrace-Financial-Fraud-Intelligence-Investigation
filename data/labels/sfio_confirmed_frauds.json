@@ -1,0 +1,156 @@
+[
+  {
+    "cin": "U45201MH2005PTC155294",
+    "company_name": "IL&FS Infrastructure Leasing & Financial Services Limited",
+    "fraud_type": "SME_LOAN",
+    "label": 1,
+    "discovered_year": 2018,
+    "primary_source": "SFIO Investigation Report (2019)",
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/SFIOReport_IL&FS_2019.pdf",
+    "loss_estimate_inr": 910000000000.0,
+    "notes": "Inflated trade receivables from group SPVs; off-balance sheet liabilities; auditor disclaimer FY18."
+  },
+  {
+    "cin": "U27101MH2010PTC215432",
+    "company_name": "Amtek Auto Components Pvt Ltd",
+    "fraud_type": "SME_LOAN",
+    "label": 1,
+    "discovered_year": 2019,
+    "primary_source": "SFIO + NCLT Mumbai CIRP",
+    "source_url": "https://nclt.gov.in/case-status?cin=U27101MH2010PTC215432",
+    "loss_estimate_inr": 12400000000.0,
+    "notes": "Going concern FY18; CIRP admitted 2019-03; wilful defaulter declared by ICICI."
+  },
+  {
+    "cin": "L65910MH1984PLC032662",
+    "company_name": "Dewan Housing Finance Limited (DHFL)",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2019,
+    "primary_source": "SFIO + RBI Audit (Cobrapost 2019)",
+    "source_url": "https://nclt.gov.in/orders/CP-IB-4258-MB-2019",
+    "loss_estimate_inr": 312000000000.0,
+    "notes": "Round-tripped ~₹14,046 cr through shell SPVs to mask NPAs; CIRP admitted Nov 2019; bank loan evergreening canonical case."
+  },
+  {
+    "cin": "U24232GJ1995PLC025935",
+    "company_name": "Sterling Biotech Limited",
+    "fraud_type": "SME_LOAN",
+    "label": 1,
+    "discovered_year": 2017,
+    "primary_source": "SFIO + CBI charge-sheet",
+    "source_url": "https://www.cbi.gov.in/press-releases/sterling-biotech-2017",
+    "loss_estimate_inr": 14500000000.0,
+    "notes": "Promoter siphoned funds via shell intermediaries; multiple wilful defaulter declarations."
+  },
+  {
+    "cin": "L99999GJ1995PLC026167",
+    "company_name": "Gitanjali Gems Limited (PNB scam co-accused)",
+    "fraud_type": "SME_LOAN",
+    "label": 1,
+    "discovered_year": 2018,
+    "primary_source": "SFIO + ED + CBI",
+    "source_url": "https://www.cbi.gov.in/press-releases/pnb-fraud-2018",
+    "loss_estimate_inr": 73800000000.0,
+    "notes": "Mehul Choksi LoU scam at Punjab National Bank; fictitious diamond imports."
+  },
+  {
+    "cin": "L45200GJ1988PLC011533",
+    "company_name": "Bhushan Steel Limited",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2017,
+    "primary_source": "SFIO + NCLT (Tata Steel acquisition)",
+    "source_url": "https://nclt.gov.in/orders/bhushan-steel-2017",
+    "loss_estimate_inr": 562000000000.0,
+    "notes": "Inflated raw-material purchases via 156 shell companies; CIRP 2017-07."
+  },
+  {
+    "cin": "L23209UP1989PLC020525",
+    "company_name": "Reliance Communications Limited",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2019,
+    "primary_source": "NCLT + SBI fraud declaration",
+    "source_url": "https://nclt.gov.in/orders/reliance-communications-2019",
+    "loss_estimate_inr": 470000000000.0,
+    "notes": "Funds diverted via group entities; SBI flagged account as fraud in 2020."
+  },
+  {
+    "cin": "U99999MH1996PLC163336",
+    "company_name": "Punjab National Bank Nirav Modi shell (Solar Exports etc)",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2018,
+    "primary_source": "CBI charge-sheet RC2192018A0008",
+    "source_url": "https://www.cbi.gov.in/press-releases/pnb-fraud-2018",
+    "loss_estimate_inr": 140000000000.0,
+    "notes": "Fraudulent LoUs issued via PNB Brady House branch."
+  },
+  {
+    "cin": "L99999MH1992PLC066213",
+    "company_name": "Jet Airways (India) Limited",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2019,
+    "primary_source": "NCLT CIRP + ED investigation (Naresh Goyal)",
+    "source_url": "https://nclt.gov.in/orders/jet-airways-2019",
+    "loss_estimate_inr": 850000000000.0,
+    "notes": "₹8,500 cr default to SBI-led consortium; CIRP admitted 2019-06-20; promoter Naresh Goyal arrested 2023 by ED for ₹538 cr Canara Bank fraud."
+  },
+  {
+    "cin": "L21300MH1996PLC102369",
+    "company_name": "Housing Development and Infrastructure Limited (HDIL)",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2019,
+    "primary_source": "RBI / EOW Mumbai (PMC Bank collapse)",
+    "source_url": "https://www.cbi.gov.in/press-releases/pmc-hdil-2019",
+    "loss_estimate_inr": 65000000000.0,
+    "notes": "PMC Bank collapse — 73% of bank's loan book to HDIL group via 21,049 fictitious accounts. Wadhawan brothers arrested. ₹6,500 cr loss to depositors."
+  },
+  {
+    "cin": "L45203AP1993PLC014991",
+    "company_name": "Lanco Infratech Limited",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2017,
+    "primary_source": "NCLT Hyderabad CIRP + IDBI fraud declaration",
+    "source_url": "https://nclt.gov.in/orders/lanco-infratech-2017",
+    "loss_estimate_inr": 450000000000.0,
+    "notes": "₹45,000 cr default across IDBI consortium; CIRP admitted Aug 2017; liquidation ordered 2018-11."
+  },
+  {
+    "cin": "L22219MH1985PLC036572",
+    "company_name": "Videocon Industries Limited",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2018,
+    "primary_source": "ICICI-Videocon quid-pro-quo CBI case",
+    "source_url": "https://www.cbi.gov.in/press-releases/videocon-icici-2018",
+    "loss_estimate_inr": 401000000000.0,
+    "notes": "ICICI Bank approved Rs.3,250 cr loan with quid pro quo to Chanda Kochhar's NuPower."
+  },
+  {
+    "cin": "U74899DL2001PTC108944",
+    "company_name": "ABG Shipyard Limited",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2019,
+    "primary_source": "CBI FIR (largest-ever bank fraud charge-sheet, ₹22,842 cr)",
+    "source_url": "https://www.cbi.gov.in/press-releases/abg-shipyard-2022",
+    "loss_estimate_inr": 228420000000.0,
+    "notes": "28-bank consortium fraud; round-tripping via foreign subsidiaries."
+  },
+  {
+    "cin": "L74110WB1933PLC008002",
+    "company_name": "Kingfisher Airlines Limited (Vijay Mallya / United Breweries)",
+    "fraud_type": "BANK_EVERGREENING",
+    "label": 1,
+    "discovered_year": 2016,
+    "primary_source": "SBI fraud declaration + CBI ECIR/05/HIU/2015",
+    "source_url": "https://www.cbi.gov.in/press-releases/kingfisher-mallya-2016",
+    "loss_estimate_inr": 90000000000.0,
+    "notes": "₹9,000 cr loan default; promoter declared fugitive economic offender 2019."
+  }
+]

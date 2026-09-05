@@ -1,0 +1,82 @@
+{
+  "company": {
+    "cin": "U49120MH2020PTC301234",
+    "name": "PQR Logistics Pvt Ltd",
+    "incorporation_date": "2020-08-15",
+    "nic_code": 49120,
+    "state": "MH",
+    "gstin": "27PQRLG2345E1Z8",
+    "employee_count_reported": 28,
+    "registered_address": "Transport Nagar, Vashi, Navi Mumbai",
+    "auditor_din": "03344556"
+  },
+  "directors": [
+    {
+      "din": "03344556",
+      "name": "Ajay Kulkarni",
+      "designation": "director",
+      "appointment_date": "2020-08-15",
+      "is_disqualified": false,
+      "num_directorships": 1
+    },
+    {
+      "din": "03344557",
+      "name": "Vishal Pawar",
+      "designation": "director",
+      "appointment_date": "2020-08-15",
+      "is_disqualified": false,
+      "num_directorships": 1
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U49120MH2020PTC301234",
+      "year": 2022,
+      "revenue": 32400000.0,
+      "cost_of_materials": 18900000.0,
+      "employee_cost": 6200000.0,
+      "finance_costs": 880000.0,
+      "depreciation": 1100000.0,
+      "other_expenses": 2800000.0,
+      "pbt": 2520000.0,
+      "tax": 630000.0,
+      "pat": 1890000.0,
+      "total_assets": 28400000.0,
+      "fixed_assets": 14200000.0,
+      "current_assets": 12100000.0,
+      "cash_and_equivalents": 3200000.0,
+      "receivables": 5800000.0,
+      "long_term_borrowings": 11400000.0,
+      "short_term_borrowings": 2900000.0,
+      "auditor_name": "M&K Auditors",
+      "auditor_type": "partnership",
+      "notes_word_count": 1850
+    },
+    {
+      "cin": "U49120MH2020PTC301234",
+      "year": 2023,
+      "revenue": 38700000.0,
+      "cost_of_materials": 22600000.0,
+      "employee_cost": 7100000.0,
+      "finance_costs": 1020000.0,
+      "depreciation": 1240000.0,
+      "other_expenses": 3100000.0,
+      "pbt": 3640000.0,
+      "tax": 910000.0,
+      "pat": 2730000.0,
+      "total_assets": 32100000.0,
+      "fixed_assets": 15800000.0,
+      "current_assets": 14200000.0,
+      "cash_and_equivalents": 3900000.0,
+      "receivables": 6900000.0,
+      "long_term_borrowings": 11800000.0,
+      "short_term_borrowings": 3400000.0,
+      "auditor_name": "M&K Auditors",
+      "auditor_type": "partnership",
+      "notes_word_count": 1920
+    }
+  ],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

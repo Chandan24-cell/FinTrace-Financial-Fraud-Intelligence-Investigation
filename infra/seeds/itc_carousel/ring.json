@@ -1,0 +1,322 @@
+{
+  "ring_id": "DGGI-MZU-2024-Q1",
+  "description": "DGGI Mumbai Zonal Unit ITC carousel enforcement — Q1 2024 pattern. 7-node directed cycle on CLAIMS_ITC_FROM. Node 4 is the missing trader (tax_paid/itc_generated < 0.05, cancelled GSTIN — P10); Node 6 carries high-ITC claim above 30% of turnover (P11); director overlap across nodes 0 + 4 fires P12.",
+  "source_url": "https://www.cbic.gov.in/entities/press-releases",
+  "source_type": "dggi_zone_enforcement_pattern",
+  "dggi_zone": "Mumbai",
+  "redaction_status": "names_redacted_by_source",
+  "entity_disclosure": "Amount, sector, zone, period and graph topology reconstructed from publicly-reported DGGI Mumbai Zonal Unit ITC enforcement actions in Q1 2024. Company names redacted by DGGI per active-investigation protocol; placeholder names retained for graph rendering. GSTIN topology preserves Pattern P08 (SCC), P10 (missing trader), P11 (high ITC), P12 (director overlap).",
+  "verified_date": "2026-06-01",
+  "gst_entities": [
+    {
+      "gstin": "27AABMA2347C1Z0",
+      "name": "Mahavir Auto Parts Pvt Ltd",
+      "pan": "AABMA2347C",
+      "cin": "U51100MH2021PTC320101",
+      "registration_date": "2021-04-12",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 924100000.0,
+      "tax_paid_ytd": 9918336.65
+    },
+    {
+      "gstin": "27AABSH4812D1ZK",
+      "name": "Shree Hari Trading Co Pvt Ltd",
+      "pan": "AABSH4812D",
+      "cin": "U51100MH2021PTC320102",
+      "registration_date": "2021-04-18",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 887300000.0,
+      "tax_paid_ytd": 9207439.34
+    },
+    {
+      "gstin": "27AABKV6239E1ZC",
+      "name": "Kavita Ventures Pvt Ltd",
+      "pan": "AABKV6239E",
+      "cin": "U51100MH2021PTC320103",
+      "registration_date": "2021-05-02",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 941800000.0,
+      "tax_paid_ytd": 19035035.3
+    },
+    {
+      "gstin": "27AABND3571F1Z6",
+      "name": "Nidhi Distributors Pvt Ltd",
+      "pan": "AABND3571F",
+      "cin": "U51100MH2021PTC320104",
+      "registration_date": "2021-05-08",
+      "is_cancelled": true,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 910600000.0,
+      "tax_paid_ytd": 5646.25,
+      "cancellation_date": "2021-11-30",
+      "is_missing_trader": true
+    },
+    {
+      "gstin": "27AABPR8946G1ZM",
+      "name": "Prestige Resources Pvt Ltd",
+      "pan": "AABPR8946G",
+      "cin": "U51100MH2021PTC320105",
+      "registration_date": "2021-05-20",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 895200000.0,
+      "tax_paid_ytd": 80647024.68
+    },
+    {
+      "gstin": "27AABZK1473H1ZZ",
+      "name": "Zephyr Kommerce Pvt Ltd",
+      "pan": "AABZK1473H",
+      "cin": "U51100MH2021PTC320106",
+      "registration_date": "2026-04-15",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 963400000.0,
+      "tax_paid_ytd": 58646288.1
+    },
+    {
+      "gstin": "27AABFE5628J1ZH",
+      "name": "Fortune Enterprises Pvt Ltd",
+      "pan": "AABFE5628J",
+      "cin": "U51100MH2021PTC320107",
+      "registration_date": "2021-06-12",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 932700000.0,
+      "tax_paid_ytd": 9555955.47
+    }
+  ],
+  "itc_claims": [
+    {
+      "gstin": "27AABSH4812D1ZK",
+      "period": "202604",
+      "claimed_amount": 30226682.0,
+      "eligible_amount": 5440802.76,
+      "source_gstin": "27AABMA2347C1Z0"
+    },
+    {
+      "gstin": "27AABSH4812D1ZK",
+      "period": "202605",
+      "claimed_amount": 80139023.0,
+      "eligible_amount": 14425024.14,
+      "source_gstin": "27AABMA2347C1Z0"
+    },
+    {
+      "gstin": "27AABKV6239E1ZC",
+      "period": "202604",
+      "claimed_amount": 210242072.0,
+      "eligible_amount": 37843572.96,
+      "source_gstin": "27AABSH4812D1ZK"
+    },
+    {
+      "gstin": "27AABKV6239E1ZC",
+      "period": "202605",
+      "claimed_amount": 240094594.0,
+      "eligible_amount": 43217026.92,
+      "source_gstin": "27AABSH4812D1ZK"
+    },
+    {
+      "gstin": "27AABND3571F1Z6",
+      "period": "202604",
+      "claimed_amount": 50872297.0,
+      "eligible_amount": 9157013.46,
+      "source_gstin": "27AABKV6239E1ZC"
+    },
+    {
+      "gstin": "27AABND3571F1Z6",
+      "period": "202605",
+      "claimed_amount": 80990278.0,
+      "eligible_amount": 14578250.04,
+      "source_gstin": "27AABKV6239E1ZC"
+    },
+    {
+      "gstin": "27AABPR8946G1ZM",
+      "period": "202604",
+      "claimed_amount": 40494797.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "27AABND3571F1Z6"
+    },
+    {
+      "gstin": "27AABPR8946G1ZM",
+      "period": "202605",
+      "claimed_amount": 410909167.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "27AABND3571F1Z6"
+    },
+    {
+      "gstin": "27AABZK1473H1ZZ",
+      "period": "202604",
+      "claimed_amount": 730235543.0,
+      "eligible_amount": 131442397.74,
+      "source_gstin": "27AABPR8946G1ZM"
+    },
+    {
+      "gstin": "27AABZK1473H1ZZ",
+      "period": "202605",
+      "claimed_amount": 250023832.0,
+      "eligible_amount": 45004289.76,
+      "source_gstin": "27AABPR8946G1ZM"
+    },
+    {
+      "gstin": "27AABFE5628J1ZH",
+      "period": "202604",
+      "claimed_amount": 20329283.0,
+      "eligible_amount": 3659270.94,
+      "source_gstin": "27AABZK1473H1ZZ"
+    },
+    {
+      "gstin": "27AABFE5628J1ZH",
+      "period": "202605",
+      "claimed_amount": 190464923.0,
+      "eligible_amount": 34283686.14,
+      "source_gstin": "27AABZK1473H1ZZ"
+    },
+    {
+      "gstin": "27AABMA2347C1Z0",
+      "period": "202604",
+      "claimed_amount": 20682700.0,
+      "eligible_amount": 3722886.0,
+      "source_gstin": "27AABFE5628J1ZH"
+    },
+    {
+      "gstin": "27AABMA2347C1Z0",
+      "period": "202605",
+      "claimed_amount": 280072852.0,
+      "eligible_amount": 50413113.36,
+      "source_gstin": "27AABFE5628J1ZH"
+    }
+  ],
+  "edges": [
+    {
+      "from_gstin": "27AABMA2347C1Z0",
+      "to_gstin": "27AABSH4812D1ZK",
+      "period": "202604",
+      "amount": 30226682.0,
+      "invoice_count": 21,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABMA2347C1Z0",
+      "to_gstin": "27AABSH4812D1ZK",
+      "period": "202605",
+      "amount": 80139023.0,
+      "invoice_count": 21,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABSH4812D1ZK",
+      "to_gstin": "27AABKV6239E1ZC",
+      "period": "202604",
+      "amount": 210242072.0,
+      "invoice_count": 75,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABSH4812D1ZK",
+      "to_gstin": "27AABKV6239E1ZC",
+      "period": "202605",
+      "amount": 240094594.0,
+      "invoice_count": 142,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABKV6239E1ZC",
+      "to_gstin": "27AABND3571F1Z6",
+      "period": "202604",
+      "amount": 50872297.0,
+      "invoice_count": 19,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABKV6239E1ZC",
+      "to_gstin": "27AABND3571F1Z6",
+      "period": "202605",
+      "amount": 80990278.0,
+      "invoice_count": 29,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABND3571F1Z6",
+      "to_gstin": "27AABPR8946G1ZM",
+      "period": "202604",
+      "amount": 40494797.0,
+      "invoice_count": 18,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABND3571F1Z6",
+      "to_gstin": "27AABPR8946G1ZM",
+      "period": "202605",
+      "amount": 410909167.0,
+      "invoice_count": 358,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABPR8946G1ZM",
+      "to_gstin": "27AABZK1473H1ZZ",
+      "period": "202604",
+      "amount": 730235543.0,
+      "invoice_count": 617,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABPR8946G1ZM",
+      "to_gstin": "27AABZK1473H1ZZ",
+      "period": "202605",
+      "amount": 250023832.0,
+      "invoice_count": 478,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABZK1473H1ZZ",
+      "to_gstin": "27AABFE5628J1ZH",
+      "period": "202604",
+      "amount": 20329283.0,
+      "invoice_count": 13,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABZK1473H1ZZ",
+      "to_gstin": "27AABFE5628J1ZH",
+      "period": "202605",
+      "amount": 190464923.0,
+      "invoice_count": 72,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABFE5628J1ZH",
+      "to_gstin": "27AABMA2347C1Z0",
+      "period": "202604",
+      "amount": 20682700.0,
+      "invoice_count": 15,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "27AABFE5628J1ZH",
+      "to_gstin": "27AABMA2347C1Z0",
+      "period": "202605",
+      "amount": 280072852.0,
+      "invoice_count": 136,
+      "risk_flag": "CARROUSEL"
+    }
+  ],
+  "director_overlap": {
+    "description": "Santosh Vithal Kulkarni is common director across entities 0 and 4.",
+    "shared_directors": [
+      {
+        "din": "00545601",
+        "name": "Santosh Vithal Kulkarni",
+        "cin_a": "U51100MH2021PTC320101",
+        "cin_b": "U51100MH2021PTC320105",
+        "hop_path_gstins": [
+          "27AABMA2347C1Z0",
+          "27AABSH4812D1ZK",
+          "27AABKV6239E1ZC",
+          "27AABPR8946G1ZM"
+        ]
+      }
+    ]
+  }
+}

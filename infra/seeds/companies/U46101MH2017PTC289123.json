@@ -1,0 +1,51 @@
+{
+  "company": {
+    "cin": "U46101MH2017PTC289123",
+    "name": "LMN Wholesale Foods Pvt Ltd",
+    "incorporation_date": "2017-11-30",
+    "nic_code": 46101,
+    "state": "MH",
+    "gstin": "27LMNFD3456F1Z4",
+    "employee_count_reported": 16,
+    "registered_address": "Crawford Market, Mumbai",
+    "auditor_din": "04455667"
+  },
+  "directors": [
+    {
+      "din": "04455667",
+      "name": "Mohammed Khan",
+      "designation": "managing director",
+      "appointment_date": "2017-11-30",
+      "is_disqualified": false,
+      "num_directorships": 2
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U46101MH2017PTC289123",
+      "year": 2023,
+      "revenue": 24800000.0,
+      "cost_of_materials": 19200000.0,
+      "employee_cost": 2400000.0,
+      "finance_costs": 520000.0,
+      "depreciation": 180000.0,
+      "other_expenses": 1100000.0,
+      "pbt": 1400000.0,
+      "tax": 350000.0,
+      "pat": 1050000.0,
+      "total_assets": 14600000.0,
+      "fixed_assets": 2200000.0,
+      "current_assets": 11800000.0,
+      "cash_and_equivalents": 2400000.0,
+      "receivables": 5800000.0,
+      "long_term_borrowings": 2400000.0,
+      "short_term_borrowings": 3800000.0,
+      "auditor_name": "Ahmed & Co",
+      "auditor_type": "sole_proprietor",
+      "notes_word_count": 1400
+    }
+  ],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

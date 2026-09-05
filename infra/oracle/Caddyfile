@@ -1,0 +1,32 @@
+# Caddy reverse-proxy for the Sentinel-G FastAPI backend.
+# {$DOMAIN} is interpolated from docker-compose.yml's `environment:` block,
+# which reads it from .env. Caddy auto-issues + auto-renews a Let's Encrypt
+# cert against this domain — make sure your DuckDNS A record points at the
+# VM's public IP before `docker compose up -d` runs for the first time.
+
+{$DOMAIN} {
+	encode gzip zstd
+
+	# Security headers — minimal set sufficient for the demo. Frontend itself
+	# sits on Vercel under its own headers.
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	# CORS is handled by FastAPI's CORSMiddleware (Day 24) — env-driven via
+	# CORS_ALLOWED_ORIGINS in .env. Caddy just passes the request through.
+	reverse_proxy sentinel-g-api:8000 {
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+
+	log {
+		output stdout
+		format console
+		level INFO
+	}
+}

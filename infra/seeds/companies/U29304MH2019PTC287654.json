@@ -1,0 +1,117 @@
+{
+  "company": {
+    "cin": "U29304MH2019PTC287654",
+    "name": "HIJ Auto Parts Pvt Ltd",
+    "incorporation_date": "2019-02-11",
+    "nic_code": 29304,
+    "state": "MH",
+    "gstin": "27HIJAP7890J1Z2",
+    "employee_count_reported": 56,
+    "registered_address": "Industrial Estate, Chakan, Pune",
+    "auditor_din": "08899001"
+  },
+  "directors": [
+    {
+      "din": "08899001",
+      "name": "Rohit Sharma",
+      "designation": "managing director",
+      "appointment_date": "2019-02-11",
+      "is_disqualified": false,
+      "num_directorships": 2
+    },
+    {
+      "din": "08899002",
+      "name": "Neha Sharma",
+      "designation": "director",
+      "appointment_date": "2019-02-11",
+      "is_disqualified": false,
+      "num_directorships": 1
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U29304MH2019PTC287654",
+      "year": 2021,
+      "revenue": 64200000.0,
+      "cost_of_materials": 41800000.0,
+      "employee_cost": 11400000.0,
+      "finance_costs": 1600000.0,
+      "depreciation": 980000.0,
+      "other_expenses": 2900000.0,
+      "pbt": 5520000.0,
+      "tax": 1380000.0,
+      "pat": 4140000.0,
+      "total_assets": 38400000.0,
+      "fixed_assets": 14200000.0,
+      "current_assets": 22800000.0,
+      "cash_and_equivalents": 4100000.0,
+      "receivables": 11200000.0,
+      "long_term_borrowings": 8800000.0,
+      "short_term_borrowings": 4200000.0,
+      "auditor_name": "Sharma & Associates",
+      "auditor_type": "partnership",
+      "notes_word_count": 2600
+    },
+    {
+      "cin": "U29304MH2019PTC287654",
+      "year": 2022,
+      "revenue": 78800000.0,
+      "cost_of_materials": 51100000.0,
+      "employee_cost": 13800000.0,
+      "finance_costs": 1820000.0,
+      "depreciation": 1140000.0,
+      "other_expenses": 3400000.0,
+      "pbt": 7540000.0,
+      "tax": 1890000.0,
+      "pat": 5650000.0,
+      "total_assets": 46200000.0,
+      "fixed_assets": 16800000.0,
+      "current_assets": 27800000.0,
+      "cash_and_equivalents": 5800000.0,
+      "receivables": 13400000.0,
+      "long_term_borrowings": 9400000.0,
+      "short_term_borrowings": 4900000.0,
+      "auditor_name": "Sharma & Associates",
+      "auditor_type": "partnership",
+      "notes_word_count": 2700
+    },
+    {
+      "cin": "U29304MH2019PTC287654",
+      "year": 2023,
+      "revenue": 91200000.0,
+      "cost_of_materials": 58900000.0,
+      "employee_cost": 15600000.0,
+      "finance_costs": 1980000.0,
+      "depreciation": 1310000.0,
+      "other_expenses": 3900000.0,
+      "pbt": 9510000.0,
+      "tax": 2380000.0,
+      "pat": 7130000.0,
+      "total_assets": 54800000.0,
+      "fixed_assets": 19400000.0,
+      "current_assets": 32600000.0,
+      "cash_and_equivalents": 7200000.0,
+      "receivables": 15800000.0,
+      "long_term_borrowings": 10100000.0,
+      "short_term_borrowings": 5400000.0,
+      "auditor_name": "Sharma & Associates",
+      "auditor_type": "partnership",
+      "notes_word_count": 2850,
+      "pdf_creation_software": "Microsoft Word",
+      "pdf_metadata_anomaly": true
+    }
+  ],
+  "charges": [
+    {
+      "cin": "U29304MH2019PTC287654",
+      "charge_id": "HIJ-CHG-001",
+      "lender_name": "HDFC Bank",
+      "bank_branch_ifsc": "HDFC0000412",
+      "amount": 15000000.0,
+      "creation_date": "2021-03-22",
+      "charge_type": "hypothecation"
+    }
+  ],
+  "has_gst_upload": true,
+  "has_bank_upload": true
+}

@@ -1,0 +1,26 @@
+{
+  "company": {
+    "cin": "U45203MH2020PTC315678",
+    "name": "UVW Construction Pvt Ltd",
+    "incorporation_date": "2020-01-18",
+    "nic_code": 45203,
+    "state": "MH",
+    "gstin": "27UVWCN5678H2Z3",
+    "employee_count_reported": 9,
+    "registered_address": "Shop 4, Worli, Mumbai"
+  },
+  "directors": [
+    {
+      "din": "06677889",
+      "name": "Vikram Singh",
+      "designation": "director",
+      "appointment_date": "2020-01-18",
+      "is_disqualified": false,
+      "num_directorships": 4
+    }
+  ],
+  "financials": [],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

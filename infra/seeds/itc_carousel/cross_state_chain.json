@@ -1,0 +1,483 @@
+{
+  "ring_id": "DGGI-MULTI-CHEM-2022",
+  "description": "Coordinated DGGI Ahmedabad/Jaipur/Lucknow Zonal Units — chemical trading ITC ring, FY 2022. 5-node carousel across Gujarat → Rajasthan → Uttar Pradesh. ₹156.4 Cr fake ITC fraud. Node 2 is the missing trader (GSTIN cancelled August 2020 after 6 months, zero returns filed).",
+  "source_url": "https://www.cbic.gov.in/entities/press-releases",
+  "source_type": "dggi_zone_enforcement_pattern",
+  "dggi_zone": "Ahmedabad,Jaipur,Lucknow",
+  "redaction_status": "names_redacted_by_source",
+  "entity_disclosure": "Amount (₹156.4 Cr), sector (chemical trading), zones (Gujarat/Rajasthan/UP), period (FY2022) and graph topology reconstructed from publicly-reported coordinated DGGI multi-zone enforcement. Company names redacted by DGGI per active-investigation protocol.",
+  "verified_date": "2026-06-01",
+  "total_fraud_cr": 156.4,
+  "sector": "Chemical trading",
+  "gst_state": "Gujarat/Rajasthan/Uttar Pradesh",
+  "case_year": 2022,
+  "gst_entities": [
+    {
+      "gstin": "24AABGJ4127D1Z7",
+      "name": "Gujarat Chemical Traders Pvt Ltd",
+      "pan": "AABGJ4127D",
+      "cin": "U24290GJ2019PTC201234",
+      "registration_date": "2019-08-12",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 432000000.0,
+      "tax_paid_ytd": 4600717.92,
+      "state": "Gujarat",
+      "sector": "Chemical trading",
+      "nic_code": 46590
+    },
+    {
+      "gstin": "24AABRC6382E1Z6",
+      "name": "Rajasthan Chemex Pvt Ltd",
+      "pan": "AABRC6382E",
+      "cin": "U24290GJ2020PTC212345",
+      "registration_date": "2020-02-25",
+      "is_cancelled": true,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 417000000.0,
+      "tax_paid_ytd": 0.0,
+      "state": "Gujarat",
+      "sector": "Chemical trading",
+      "nic_code": 46590,
+      "cancellation_date": "2020-08-31",
+      "is_missing_trader": true
+    },
+    {
+      "gstin": "08AABSR8451F1Z2",
+      "name": "Shri Ram Chemical Trading Pvt Ltd",
+      "pan": "AABSR8451F",
+      "cin": "U51101RJ2020PTC078901",
+      "registration_date": "2020-07-14",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 398000000.0,
+      "tax_paid_ytd": 12263862.15,
+      "state": "Rajasthan",
+      "sector": "Chemical trading",
+      "nic_code": 46590
+    },
+    {
+      "gstin": "09AABUK3729G1Z6",
+      "name": "UP Kiran Chemicals Pvt Ltd",
+      "pan": "AABUK3729G",
+      "cin": "U24290UP2021PTC056789",
+      "registration_date": "2021-01-20",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 446000000.0,
+      "tax_paid_ytd": 31404411.19,
+      "state": "Uttar Pradesh",
+      "sector": "Chemical trading",
+      "nic_code": 46590
+    },
+    {
+      "gstin": "09AABPV5163H1Z6",
+      "name": "Prayagraj Vyapar Pvt Ltd",
+      "pan": "AABPV5163H",
+      "cin": "U24290UP2021PTC057890",
+      "registration_date": "2021-03-08",
+      "is_cancelled": false,
+      "taxpayer_type": "regular",
+      "aggregate_turnover": 421000000.0,
+      "tax_paid_ytd": 17041259.89,
+      "state": "Uttar Pradesh",
+      "sector": "Chemical trading",
+      "nic_code": 46590
+    }
+  ],
+  "itc_claims": [
+    {
+      "gstin": "24AABRC6382E1Z6",
+      "period": "202206",
+      "claimed_amount": 150410358.0,
+      "eligible_amount": 18049242.96,
+      "source_gstin": "24AABGJ4127D1Z7"
+    },
+    {
+      "gstin": "24AABRC6382E1Z6",
+      "period": "202207",
+      "claimed_amount": 10279965.0,
+      "eligible_amount": 1233595.8,
+      "source_gstin": "24AABGJ4127D1Z7"
+    },
+    {
+      "gstin": "24AABRC6382E1Z6",
+      "period": "202208",
+      "claimed_amount": 60975830.0,
+      "eligible_amount": 7317099.6,
+      "source_gstin": "24AABGJ4127D1Z7"
+    },
+    {
+      "gstin": "24AABRC6382E1Z6",
+      "period": "202209",
+      "claimed_amount": 280650217.0,
+      "eligible_amount": 33678026.04,
+      "source_gstin": "24AABGJ4127D1Z7"
+    },
+    {
+      "gstin": "24AABRC6382E1Z6",
+      "period": "202210",
+      "claimed_amount": 40607626.0,
+      "eligible_amount": 4872915.12,
+      "source_gstin": "24AABGJ4127D1Z7"
+    },
+    {
+      "gstin": "08AABSR8451F1Z2",
+      "period": "202206",
+      "claimed_amount": 660907716.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "24AABRC6382E1Z6"
+    },
+    {
+      "gstin": "08AABSR8451F1Z2",
+      "period": "202207",
+      "claimed_amount": 30992274.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "24AABRC6382E1Z6"
+    },
+    {
+      "gstin": "08AABSR8451F1Z2",
+      "period": "202208",
+      "claimed_amount": 40690472.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "24AABRC6382E1Z6"
+    },
+    {
+      "gstin": "08AABSR8451F1Z2",
+      "period": "202209",
+      "claimed_amount": 520955995.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "24AABRC6382E1Z6"
+    },
+    {
+      "gstin": "08AABSR8451F1Z2",
+      "period": "202210",
+      "claimed_amount": 50564597.0,
+      "eligible_amount": 0.0,
+      "source_gstin": "24AABRC6382E1Z6"
+    },
+    {
+      "gstin": "09AABUK3729G1Z6",
+      "period": "202206",
+      "claimed_amount": 590917552.0,
+      "eligible_amount": 70910106.24,
+      "source_gstin": "08AABSR8451F1Z2"
+    },
+    {
+      "gstin": "09AABUK3729G1Z6",
+      "period": "202207",
+      "claimed_amount": 860082595.0,
+      "eligible_amount": 103209911.4,
+      "source_gstin": "08AABSR8451F1Z2"
+    },
+    {
+      "gstin": "09AABUK3729G1Z6",
+      "period": "202208",
+      "claimed_amount": 450425824.0,
+      "eligible_amount": 54051098.88,
+      "source_gstin": "08AABSR8451F1Z2"
+    },
+    {
+      "gstin": "09AABUK3729G1Z6",
+      "period": "202209",
+      "claimed_amount": 860010254.0,
+      "eligible_amount": 103201230.48,
+      "source_gstin": "08AABSR8451F1Z2"
+    },
+    {
+      "gstin": "09AABUK3729G1Z6",
+      "period": "202210",
+      "claimed_amount": 190044918.0,
+      "eligible_amount": 22805390.16,
+      "source_gstin": "08AABSR8451F1Z2"
+    },
+    {
+      "gstin": "09AABPV5163H1Z6",
+      "period": "202206",
+      "claimed_amount": 780918688.0,
+      "eligible_amount": 93710242.56,
+      "source_gstin": "09AABUK3729G1Z6"
+    },
+    {
+      "gstin": "09AABPV5163H1Z6",
+      "period": "202207",
+      "claimed_amount": 40801504.0,
+      "eligible_amount": 4896180.48,
+      "source_gstin": "09AABUK3729G1Z6"
+    },
+    {
+      "gstin": "09AABPV5163H1Z6",
+      "period": "202208",
+      "claimed_amount": 180215502.0,
+      "eligible_amount": 21625860.24,
+      "source_gstin": "09AABUK3729G1Z6"
+    },
+    {
+      "gstin": "09AABPV5163H1Z6",
+      "period": "202209",
+      "claimed_amount": 10205336.0,
+      "eligible_amount": 1224640.32,
+      "source_gstin": "09AABUK3729G1Z6"
+    },
+    {
+      "gstin": "09AABPV5163H1Z6",
+      "period": "202210",
+      "claimed_amount": 10405966.0,
+      "eligible_amount": 1248715.92,
+      "source_gstin": "09AABUK3729G1Z6"
+    },
+    {
+      "gstin": "24AABGJ4127D1Z7",
+      "period": "202206",
+      "claimed_amount": 180532173.0,
+      "eligible_amount": 21663860.76,
+      "source_gstin": "09AABPV5163H1Z6"
+    },
+    {
+      "gstin": "24AABGJ4127D1Z7",
+      "period": "202207",
+      "claimed_amount": 20968281.0,
+      "eligible_amount": 2516193.72,
+      "source_gstin": "09AABPV5163H1Z6"
+    },
+    {
+      "gstin": "24AABGJ4127D1Z7",
+      "period": "202208",
+      "claimed_amount": 100645911.0,
+      "eligible_amount": 12077509.32,
+      "source_gstin": "09AABPV5163H1Z6"
+    },
+    {
+      "gstin": "24AABGJ4127D1Z7",
+      "period": "202209",
+      "claimed_amount": 230117960.0,
+      "eligible_amount": 27614155.2,
+      "source_gstin": "09AABPV5163H1Z6"
+    },
+    {
+      "gstin": "24AABGJ4127D1Z7",
+      "period": "202210",
+      "claimed_amount": 550360238.0,
+      "eligible_amount": 66043228.56,
+      "source_gstin": "09AABPV5163H1Z6"
+    }
+  ],
+  "edges": [
+    {
+      "from_gstin": "24AABGJ4127D1Z7",
+      "to_gstin": "24AABRC6382E1Z6",
+      "period": "202206",
+      "amount": 150410358.0,
+      "invoice_count": 44,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABGJ4127D1Z7",
+      "to_gstin": "24AABRC6382E1Z6",
+      "period": "202207",
+      "amount": 10279965.0,
+      "invoice_count": 9,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABGJ4127D1Z7",
+      "to_gstin": "24AABRC6382E1Z6",
+      "period": "202208",
+      "amount": 60975830.0,
+      "invoice_count": 21,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABGJ4127D1Z7",
+      "to_gstin": "24AABRC6382E1Z6",
+      "period": "202209",
+      "amount": 280650217.0,
+      "invoice_count": 143,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABGJ4127D1Z7",
+      "to_gstin": "24AABRC6382E1Z6",
+      "period": "202210",
+      "amount": 40607626.0,
+      "invoice_count": 23,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABRC6382E1Z6",
+      "to_gstin": "08AABSR8451F1Z2",
+      "period": "202206",
+      "amount": 660907716.0,
+      "invoice_count": 255,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABRC6382E1Z6",
+      "to_gstin": "08AABSR8451F1Z2",
+      "period": "202207",
+      "amount": 30992274.0,
+      "invoice_count": 13,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABRC6382E1Z6",
+      "to_gstin": "08AABSR8451F1Z2",
+      "period": "202208",
+      "amount": 40690472.0,
+      "invoice_count": 16,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABRC6382E1Z6",
+      "to_gstin": "08AABSR8451F1Z2",
+      "period": "202209",
+      "amount": 520955995.0,
+      "invoice_count": 301,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "24AABRC6382E1Z6",
+      "to_gstin": "08AABSR8451F1Z2",
+      "period": "202210",
+      "amount": 50564597.0,
+      "invoice_count": 16,
+      "risk_flag": "CARROUSEL"
+    },
+    {
+      "from_gstin": "08AABSR8451F1Z2",
+      "to_gstin": "09AABUK3729G1Z6",
+      "period": "202206",
+      "amount": 590917552.0,
+      "invoice_count": 154,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "08AABSR8451F1Z2",
+      "to_gstin": "09AABUK3729G1Z6",
+      "period": "202207",
+      "amount": 860082595.0,
+      "invoice_count": 518,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "08AABSR8451F1Z2",
+      "to_gstin": "09AABUK3729G1Z6",
+      "period": "202208",
+      "amount": 450425824.0,
+      "invoice_count": 750,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "08AABSR8451F1Z2",
+      "to_gstin": "09AABUK3729G1Z6",
+      "period": "202209",
+      "amount": 860010254.0,
+      "invoice_count": 384,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "08AABSR8451F1Z2",
+      "to_gstin": "09AABUK3729G1Z6",
+      "period": "202210",
+      "amount": 190044918.0,
+      "invoice_count": 88,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABUK3729G1Z6",
+      "to_gstin": "09AABPV5163H1Z6",
+      "period": "202206",
+      "amount": 780918688.0,
+      "invoice_count": 474,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABUK3729G1Z6",
+      "to_gstin": "09AABPV5163H1Z6",
+      "period": "202207",
+      "amount": 40801504.0,
+      "invoice_count": 13,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABUK3729G1Z6",
+      "to_gstin": "09AABPV5163H1Z6",
+      "period": "202208",
+      "amount": 180215502.0,
+      "invoice_count": 48,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABUK3729G1Z6",
+      "to_gstin": "09AABPV5163H1Z6",
+      "period": "202209",
+      "amount": 10205336.0,
+      "invoice_count": 7,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABUK3729G1Z6",
+      "to_gstin": "09AABPV5163H1Z6",
+      "period": "202210",
+      "amount": 10405966.0,
+      "invoice_count": 5,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABPV5163H1Z6",
+      "to_gstin": "24AABGJ4127D1Z7",
+      "period": "202206",
+      "amount": 180532173.0,
+      "invoice_count": 54,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABPV5163H1Z6",
+      "to_gstin": "24AABGJ4127D1Z7",
+      "period": "202207",
+      "amount": 20968281.0,
+      "invoice_count": 6,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABPV5163H1Z6",
+      "to_gstin": "24AABGJ4127D1Z7",
+      "period": "202208",
+      "amount": 100645911.0,
+      "invoice_count": 49,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABPV5163H1Z6",
+      "to_gstin": "24AABGJ4127D1Z7",
+      "period": "202209",
+      "amount": 230117960.0,
+      "invoice_count": 105,
+      "risk_flag": "SUSPECT"
+    },
+    {
+      "from_gstin": "09AABPV5163H1Z6",
+      "to_gstin": "24AABGJ4127D1Z7",
+      "period": "202210",
+      "amount": 550360238.0,
+      "invoice_count": 406,
+      "risk_flag": "SUSPECT"
+    }
+  ],
+  "director_overlap": {
+    "description": "Jignesh Hasmukhlal Shah is director in entities 0 and 2.",
+    "shared_directors": [
+      {
+        "din": "00634501",
+        "name": "Jignesh Hasmukhlal Shah",
+        "cin_a": "U24290GJ2019PTC201234",
+        "cin_b": "U51101RJ2020PTC078901",
+        "hop_path_gstins": [
+          "24AABGJ4127D1Z7",
+          "24AABRC6382E1Z6",
+          "08AABSR8451F1Z2"
+        ]
+      }
+    ]
+  }
+}

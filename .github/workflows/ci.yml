@@ -1,0 +1,126 @@
+# CI — every push and every PR runs the same verification I run by hand:
+#   pytest backend/tests ml/tests
+#   cd frontend && npm run build
+#   python scripts/scan_secrets.py
+#
+# Why this exists (Stream 6.6 of the production-grade closure plan): the
+# session log shows me running these three commands constantly to verify
+# new work; lifting them into CI means future PRs can't merge with a red
+# bar and the production-grade bar holds without manual discipline.
+#
+# Notes on scope vs cost:
+#   - The full pytest run on this repo is ~50s locally but the cold-start
+#     install of torch + lightgbm + pyg adds ~3-5 minutes on CI even with
+#     a primed uv cache. Acceptable — we're not running on every push,
+#     only on PRs and main.
+#   - We avoid running the 4 Neo4j-live tests by relying on their existing
+#     `@pytest.mark.skipif(NEO4J_LIVE_NOT_REACHABLE)` guards. CI never
+#     stands up a Neo4j container.
+#   - The frontend typecheck (`tsc --noEmit`) catches schema drift that
+#     `npm run build` would also surface, but explicit typecheck makes
+#     the failure message much clearer.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel an in-flight run when a newer commit lands on the same PR/branch
+# — saves CI minutes without losing signal.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend + ML pytest
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: pip install --quiet "uv>=0.4"
+
+      - name: Cache uv environment
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/uv
+            .venv
+          key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+          restore-keys: |
+            uv-${{ runner.os }}-
+
+      - name: Sync deps
+        # `--extra dev` pulls in pytest + pytest-asyncio (declared under
+        # [project.optional-dependencies].dev in pyproject.toml). Without
+        # it, `uv run pytest` fails with "No such file or directory".
+        run: uv sync --frozen --extra dev
+
+      - name: pytest backend/tests + ml/tests
+        env:
+          # CI never stands up Neo4j; the live-driver tests will skip themselves.
+          NEO4J_PASSWORD: ci-unused
+          # Pin the prod-tree JWT secret to a real 32-byte value so the
+          # `app_env=prod` boot guard in backend/app/main.py would still
+          # pass if anything imports `create_app()` during collection.
+          JWT_SECRET: "ci-test-secret-not-for-production-use-32b"
+        run: uv run pytest backend/tests ml/tests -q --tb=line
+
+  frontend:
+    name: Frontend build + typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # scripts/scan_secrets.py walks the tree — fetch enough history
+        # to scan whatever's about to merge, but no deeper.
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run scan_secrets.py
+        run: python scripts/scan_secrets.py

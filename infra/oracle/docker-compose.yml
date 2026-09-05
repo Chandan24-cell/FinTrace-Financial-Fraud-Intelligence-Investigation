@@ -1,0 +1,52 @@
+# Sentinel-G FastAPI + Caddy reverse-proxy for Oracle Cloud Free Tier.
+# Target VM: VM.Standard.E2.1.Micro (1/8 OCPU, 1 GB RAM, x86_64).
+# See docs/DEPLOY_ORACLE.md for the operator walkthrough.
+#
+# The image is built off-VM by .github/workflows/docker-publish.yml and
+# published to ghcr.io/melvindenish/sme_fraud_detection. The 1 GB VM only
+# runs docker pull + docker run — never compiles wheels.
+#
+# To switch to Ampere later: replace `image:` with
+#   build: { context: ../.., dockerfile: backend/Dockerfile }
+# (24 GB RAM compiles in seconds; GHCR workflow becomes optional.)
+
+services:
+  sentinel-g-api:
+    image: ghcr.io/melvindenish/sme_fraud_detection:latest
+    container_name: sentinel-g-api
+    restart: unless-stopped
+    env_file: .env
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+    # Hard memory cap so a runaway request can't OOM the whole VM.
+    mem_limit: 800m
+    mem_reservation: 500m
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: sentinel-g-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"   # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      DOMAIN: ${DOMAIN}
+    depends_on:
+      sentinel-g-api:
+        condition: service_healthy
+    mem_limit: 64m
+
+volumes:
+  caddy_data:
+  caddy_config:

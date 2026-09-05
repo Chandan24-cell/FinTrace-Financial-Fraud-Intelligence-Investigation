@@ -1,0 +1,93 @@
+# Sentinel-G full stack for AWS Lightsail (4 GB plan).
+# Caddy + FastAPI + Neo4j 5.20-community + GDS all on one VM.
+# See docs/DEPLOY_AWS_LIGHTSAIL.md for the operator walkthrough.
+#
+# Differs from infra/oracle/docker-compose.yml in three ways:
+#   1. Neo4j is co-located (Oracle uses Railway's managed Neo4j).
+#   2. mem_limit on FastAPI is 1g (Oracle is 800m — we have 4× the RAM).
+#   3. Neo4j is on an internal compose network only; never exposed publicly.
+#      The Lightsail firewall opens only 80/443 (HTTP + HTTPS), not 7687.
+
+services:
+  neo4j:
+    image: neo4j:5.20-community
+    container_name: sentinel-g-neo4j
+    restart: unless-stopped
+    # No `ports:` block — bolt + http stay internal to the compose network.
+    # FastAPI reaches it via the DNS name `neo4j` on the default network.
+    environment:
+      NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD}"
+      NEO4J_PLUGINS: '["graph-data-science"]'
+      NEO4J_dbms_security_procedures_unrestricted: "gds.*,apoc.*"
+      NEO4J_dbms_security_procedures_allowlist: "gds.*,apoc.*"
+      # Heap + pagecache tuned for the 4 GB Lightsail box. Total Neo4j RAM
+      # target = 1.7 GB, leaving ~2.3 GB for FastAPI + ML + OS.
+      NEO4J_server_memory_heap_initial__size: "768m"
+      NEO4J_server_memory_heap_max__size: "1200m"
+      NEO4J_server_memory_pagecache_size: "512m"
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_plugins:/plugins
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    mem_limit: 2g
+    mem_reservation: 1500m
+
+  sentinel-g-api:
+    image: ghcr.io/melvindenish/sme_fraud_detection:latest
+    container_name: sentinel-g-api
+    restart: unless-stopped
+    env_file: .env
+    expose:
+      - "8000"
+    # data/raw is large + region-specific (191k TN companies, 75 MB) so it
+    # lives on the host instead of inside the image. Bootstrap downloads it
+    # from the v1-data GitHub Release into $REPO_DIR/data/raw before
+    # `docker compose up`. Mounting it read-only here survives container
+    # recreates without re-running docker cp.
+    volumes:
+      - ../../data/raw:/app/data/raw:ro
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    healthcheck:
+      # python-slim image has no wget/curl — use stdlib urllib.
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)\""]
+      interval: 30s
+      timeout: 5s
+      retries: 6
+      start_period: 60s
+    # 1g OOM-killed seed_data_gov_in.py (uvicorn 465 MB + seed import 635 MB > 1 GB).
+    mem_limit: 1500m
+    mem_reservation: 900m
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: sentinel-g-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"   # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      DOMAIN: ${DOMAIN}
+    depends_on:
+      sentinel-g-api:
+        condition: service_healthy
+    mem_limit: 128m
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_plugins:
+  caddy_data:
+  caddy_config:

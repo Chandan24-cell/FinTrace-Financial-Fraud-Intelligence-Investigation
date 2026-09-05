@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "label": "env_example_placeholder_only",
+      "ok": true,
+      "leaked_lines": []
+    },
+    {
+      "label": "secret_scan",
+      "ok": true,
+      "rc": 0,
+      "elapsed_sec": 0.2247575829969719,
+      "tail": []
+    },
+    {
+      "label": "seed_dry_run",
+      "ok": true,
+      "rc": 0,
+      "elapsed_sec": 0.24271866600611247,
+      "tail": [
+        "  elapsed_seconds          0.00",
+        "  prd_budget_seconds       60",
+        "================================================================",
+        "2026-09-05 12:11:27,164 INFO seed | Fixture assembly took 0.00 s"
+      ],
+      "under_60s_budget": true
+    }
+  ],
+  "ok": true
+}

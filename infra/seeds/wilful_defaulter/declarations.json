@@ -1,0 +1,162 @@
+[
+  {
+    "cin": "U45201MH2005PTC155294",
+    "din": "00009876",
+    "bank_name": "State Bank of India",
+    "amount": 28500000000.0,
+    "declared_date": "2018-09-10",
+    "source": "RBI"
+  },
+  {
+    "cin": "U27101MH2010PTC215432",
+    "din": "00554433",
+    "bank_name": "ICICI Bank",
+    "amount": 850000000.0,
+    "declared_date": "2019-02-22",
+    "source": "CIBIL"
+  },
+  {
+    "cin": "L65910MH1984PLC032662",
+    "din": "00028528",
+    "bank_name": "Union Bank of India",
+    "amount": 29390000000.0,
+    "declared_date": "2020-06-09",
+    "source": "RBI"
+  },
+  {
+    "cin": "U29304MH2019PTC287654",
+    "din": "07788990",
+    "bank_name": "State Bank of India",
+    "amount": 73620000.0,
+    "declared_date": "2023-12-04",
+    "source": "RBI"
+  },
+  {
+    "cin": "U27109MH2018PTC312456",
+    "din": "01122334",
+    "bank_name": "Punjab National Bank",
+    "amount": 12700000000.0,
+    "declared_date": "2019-08-14",
+    "source": "RBI"
+  },
+  {
+    "cin": "U45203MH2020PTC315678",
+    "din": "02233445",
+    "bank_name": "Bank of Baroda",
+    "amount": 1450000000.0,
+    "declared_date": "2022-11-03",
+    "source": "CIBIL"
+  },
+  {
+    "cin": "U46101MH2017PTC289123",
+    "din": "03344556",
+    "bank_name": "Canara Bank",
+    "amount": 7400000000.0,
+    "declared_date": "2021-04-29",
+    "source": "RBI"
+  },
+  {
+    "cin": "U46190MH2019PTC295432",
+    "din": "04455667",
+    "bank_name": "Indian Overseas Bank",
+    "amount": 2380000000.0,
+    "declared_date": "2022-01-20",
+    "source": "SUIT_FILED"
+  },
+  {
+    "cin": "U49120MH2020PTC301234",
+    "din": "05566778",
+    "bank_name": "Central Bank of India",
+    "amount": 9150000000.0,
+    "declared_date": "2023-03-08",
+    "source": "RBI"
+  },
+  {
+    "cin": "U62013MH2016PTC267890",
+    "din": "06677889",
+    "bank_name": "IDBI Bank",
+    "amount": 5230000000.0,
+    "declared_date": "2023-09-12",
+    "source": "CIBIL"
+  },
+  {
+    "cin": "U74899DL2001PTC108944",
+    "din": "00015261",
+    "bank_name": "ICICI Bank Limited",
+    "amount": 70890000000.0,
+    "declared_date": "2019-02-14",
+    "source": "RBI"
+  },
+  {
+    "cin": "L45200GJ1988PLC011533",
+    "din": "00306695",
+    "bank_name": "State Bank of India",
+    "amount": 120000000000.0,
+    "declared_date": "2018-08-22",
+    "source": "RBI"
+  },
+  {
+    "cin": "L99999MH1992PLC066213",
+    "din": "00056559",
+    "bank_name": "State Bank of India",
+    "amount": 32000000000.0,
+    "declared_date": "2020-03-18",
+    "source": "RBI"
+  },
+  {
+    "cin": "L74110WB1933PLC008002",
+    "din": "00166093",
+    "bank_name": "State Bank of India",
+    "amount": 42000000000.0,
+    "declared_date": "2016-09-20",
+    "source": "RBI"
+  },
+  {
+    "cin": "L45203AP1993PLC014991",
+    "din": "00106635",
+    "bank_name": "IDBI Bank Limited",
+    "amount": 124000000000.0,
+    "declared_date": "2017-12-01",
+    "source": "RBI"
+  },
+  {
+    "cin": "L22219MH1985PLC036572",
+    "din": "00012084",
+    "bank_name": "ICICI Bank Limited",
+    "amount": 32500000000.0,
+    "declared_date": "2021-04-08",
+    "source": "CBI"
+  },
+  {
+    "cin": "U24232GJ1995PLC025935",
+    "din": "00027244",
+    "bank_name": "State Bank of India",
+    "amount": 42000000000.0,
+    "declared_date": "2018-02-10",
+    "source": "RBI"
+  },
+  {
+    "cin": "L23209UP1989PLC020525",
+    "din": "00004878",
+    "bank_name": "State Bank of India",
+    "amount": 82000000000.0,
+    "declared_date": "2020-06-15",
+    "source": "RBI"
+  },
+  {
+    "cin": "U99999MH1996PLC163336",
+    "din": "00004567",
+    "bank_name": "Punjab National Bank",
+    "amount": 48920000000.0,
+    "declared_date": "2018-03-15",
+    "source": "CBI"
+  },
+  {
+    "cin": "L99999GJ1995PLC026167",
+    "din": "00007789",
+    "bank_name": "Punjab National Bank",
+    "amount": 48920000000.0,
+    "declared_date": "2018-04-02",
+    "source": "CBI"
+  }
+]

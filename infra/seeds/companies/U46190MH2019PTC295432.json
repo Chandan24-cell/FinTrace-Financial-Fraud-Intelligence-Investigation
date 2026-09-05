@@ -1,0 +1,47 @@
+{
+  "company": {
+    "cin": "U46190MH2019PTC295432",
+    "name": "EFG Trading Pvt Ltd",
+    "incorporation_date": "2019-07-04",
+    "nic_code": 46190,
+    "state": "MH",
+    "gstin": "27EFGTR6789I1Z6",
+    "registered_address": "Dadar West, Mumbai"
+  },
+  "directors": [
+    {
+      "din": "07788990",
+      "name": "Suresh Patil",
+      "designation": "director",
+      "appointment_date": "2019-07-04",
+      "is_disqualified": false,
+      "num_directorships": 11
+    }
+  ],
+  "financials": [
+    {
+      "cin": "U46190MH2019PTC295432",
+      "year": 2023,
+      "revenue": 18400000.0,
+      "cost_of_materials": 14800000.0,
+      "employee_cost": 480000.0,
+      "finance_costs": 320000.0,
+      "depreciation": 60000.0,
+      "other_expenses": 820000.0,
+      "pbt": 1920000.0,
+      "tax": 480000.0,
+      "pat": 1440000.0,
+      "total_assets": 8400000.0,
+      "current_assets": 8100000.0,
+      "cash_and_equivalents": 1200000.0,
+      "receivables": 4800000.0,
+      "short_term_borrowings": 2400000.0,
+      "auditor_name": "Patil Audit House",
+      "auditor_type": "sole_proprietor",
+      "notes_word_count": 480
+    }
+  ],
+  "charges": [],
+  "has_gst_upload": false,
+  "has_bank_upload": false
+}

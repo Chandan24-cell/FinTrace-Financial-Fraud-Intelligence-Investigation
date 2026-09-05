@@ -1,0 +1,35 @@
+{
+  "scc_stress": {
+    "node_count": 10000,
+    "edge_count": 19996,
+    "scc_count": 3809,
+    "nontrivial_scc_count": 102,
+    "largest_scc": 5291,
+    "elapsed_sec": 0.021043300002929755,
+    "budget_sec": 5.0,
+    "ok": true
+  },
+  "concurrency_stress": {
+    "concurrent": 10,
+    "statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "errors": [],
+    "p50_sec": 0.04883459999837214,
+    "p95_sec": 0.051879999999073334,
+    "p99_sec": 0.051879999999073334,
+    "total_elapsed_sec": 0.08296700000209967,
+    "timeout_budget_sec": 30.0,
+    "ok": true
+  },
+  "pass": true
+}

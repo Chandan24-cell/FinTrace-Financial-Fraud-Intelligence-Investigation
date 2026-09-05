@@ -1,0 +1,47 @@
+/* Sentinel-G responsive overrides — Stream 1.7 of the production-grade
+ * closure. Page-level layouts use inline React styles (good for token
+ * cohesion, bad for media queries). This sheet narrows the shell
+ * chrome at the standard tablet/phone breakpoint and turns the dense
+ * nav strip into a horizontal-scroll affordance so all 8 link tabs
+ * stay reachable on touch devices.
+ *
+ * `!important` is intentional and scoped to layout properties only —
+ * it's the only way to win against inline `style={...}` without
+ * threading className props through every page wrapper.
+ */
+
+/* ---- Tablet / phone (≤ 768 px) ---------------------------------- */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Sticky masthead: keep gold rule, shrink padding, scroll the link
+   * strip horizontally if it overflows. */
+  nav {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    flex-wrap: nowrap !important;
+  }
+  /* Don't let any nav child shrink — they should scroll, not crush. */
+  nav > * {
+    flex-shrink: 0;
+  }
+
+  /* Editorial main column: 16 px gutters instead of 32 px so SVGs,
+   * tables, and forms get more horizontal canvas. */
+  main {
+    padding: 24px 16px 56px !important;
+  }
+}
+
+/* ---- Compact phone (≤ 480 px) ----------------------------------- */
+@media (max-width: 480px) {
+  /* H1 / hero numerals scale down so headlines don't wrap into 4 lines. */
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.4rem) !important;
+  }
+}
