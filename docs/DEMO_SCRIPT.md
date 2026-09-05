@@ -7,6 +7,14 @@
 **Recording target:** 1080p screen capture.
 **Length:** 2:50-3:00. Hard cap at 3:00.
 
+## Pre-flight
+
+```bash
+python scripts/seed_neo4j.py --clean
+```
+
+Reseed a clean production Neo4j before recording so no stale demo data appears on screen.
+
 
 ```
 
@@ -15,7 +23,7 @@ Clear browser localStorage once so no stale JWT is visible.
 
 ---
 
-## 0:00-0:18 - Search: One Engine, One CIN
+## 0:00-0:18 - Company Search: One Engine, One CIN
 
 > "Sentinel-G detects financial fraud across SME loans, GST input-tax-credit
 > carousels, and bank-loan evergreening. This is the live app, not a slide deck.
@@ -50,7 +58,7 @@ the dashboard.
 
 ---
 
-## 0:48-1:18 - Provenance Graph and Export
+## 0:48-1:18 - Graph Explorer and Evidence Provenance
 
 > "This is the important part: explainability is graph-native. FraudSignal nodes
 > connect through TRIGGERED_BY edges to the exact financial statement, charge,
