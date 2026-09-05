@@ -21,7 +21,7 @@ import logging
 import uuid
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import StreamingResponse
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -37,6 +37,7 @@ from reportlab.platypus import (
 
 from backend.app.api.upload_store import get_upload_store
 from backend.app.api.validators import CIN_PATH
+from backend.app.auth.deps import require_roles
 from backend.app.ingest.benchmarks import BSEFixtureBenchmark
 from backend.app.ingest.composite import CompositeCompanySource
 from backend.app.ingest.mca_public import MCAPublicScraper
@@ -47,7 +48,13 @@ from backend.app.scorer import ScoringContext, score
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/report", tags=["report"])
+router = APIRouter(
+    prefix="/report",
+    tags=["report"],
+    dependencies=[Depends(require_roles(
+        "credit_officer", "investigator", "auditor", "admin"
+    ))],
+)
 
 # Phase-A free-source wiring — see analyse.py:42 for the rationale.
 _company_source = CompositeCompanySource(

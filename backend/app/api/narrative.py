@@ -25,8 +25,9 @@ from __future__ import annotations
 
 import logging
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
+from backend.app.auth.deps import require_roles
 from backend.app.api.analyse import score_cin_full
 from backend.app.api.validators import CIN_PATH
 from backend.app.config import get_settings
@@ -34,7 +35,13 @@ from backend.app.narrative import get_narrator, serialize_for_narrative
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/narrative", tags=["narrative"])
+router = APIRouter(
+    prefix="/narrative",
+    tags=["narrative"],
+    dependencies=[Depends(require_roles(
+        "credit_officer", "investigator", "auditor", "admin"
+    ))],
+)
 
 
 @router.get("/{cin}")
