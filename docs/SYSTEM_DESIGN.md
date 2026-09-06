@@ -1,7 +1,7 @@
-# Sentinel-G — System Design Document (SDD)
+# FinTrace — System Design Document (SDD)
 
-> The single technical reference for how Sentinel-G turns raw public records into a
-> court-defensible fraud finding. It documents **what is actually built**, and — for
+> The single technical reference for how FinTrace turns raw public records into a
+> traceable fraud finding. It documents **what is actually built**, and — for
 > every layer — **why that design was chosen over the alternatives**.
 >
 > Status: reflects the deployed system as of 2026-06-19. Where the original PRD v4.0
@@ -12,10 +12,10 @@
 
 ## 1. Document Purpose & Scope
 
-This document is the end-to-end technical reference for Sentinel-G: from the raw
+This document is the end-to-end technical reference for FinTrace: from the raw
 government data that enters the system, through the graph that stores it, the
 two-tier detection engine that scores it, the calibration layer that makes the
-scores honest, and the role-specific outputs that consumers act on. **Every section
+scores honest, and the user-facing outputs that consumers act on. **Every section
 states not just *what* a component does but *why* it was chosen** — the trade-off
 that was weighed and the alternative that was rejected.
 
@@ -25,18 +25,23 @@ meta-learner; calibration and conformal uncertainty; a behaviour×detector cover
 matrix; the output layer and evidence provenance; the persona→input→output journey;
 and an honest register of what is not yet live, with effort estimates.
 
+**Current deployment path.** Browser → Vercel frontend → Railway FastAPI backend →
+GonkaRouter for the claim-verification path. Local development adds Neo4j 5.20
+Community with GDS 2.6.9; Railway does not provide that local graph stack, so
+graph-dependent production features may use degraded fixture mode.
+
 **What this document is *not*.** It is not a setup or deployment guide
-(see [RUNNING.md](./RUNNING.md), [DEPLOY_AWS_LIGHTSAIL.md](./DEPLOY_AWS_LIGHTSAIL.md)).
+ (see [RUNNING.md](./RUNNING.md)).
 It is not a product requirements document (that is the frozen
-[Sentinel_G_Final.docx](../Sentinel_G_Final.docx), PRD v4.0). It is not API reference
+`Sentinel_G_Final.docx`, PRD v4.0). It is not API reference
 documentation (that is the live OpenAPI at `/docs`).
 
 **Intended reader.** Technical hackathon judges evaluating methodology; contributors
 who need to understand a layer before changing it; and forensic / financial-crime
-domain experts auditing whether the detection approach is sound and the evidence
-chain is defensible.
+domain experts reviewing whether the detection approach and evidence chain are
+traceable.
 
-**A note on honesty.** Sentinel-G was built against a frozen PRD that specified six ML
+**A note on honesty.** FinTrace was built against a frozen PRD that specified six ML
 detectors and the MAPIE conformal library. Two detectors (D1 CatBoost, D2 β-VAE) were
 removed during the build as unimplemented stubs, and MAPIE was replaced with a
 hand-rolled split-conformal implementation. This document describes the system **as it
@@ -48,10 +53,10 @@ labelled-data regime justifies it.
 
 ## 2. Data Sources
 
-Sentinel-G's central design principle is **every fraud signal must trace to a
-publicly-published government record.** A score a credit committee or a court cannot
-audit back to source is worthless. The live `/sources` endpoint
-([backend/app/api/sources.py](../backend/app/api/sources.py)) is the public,
+FinTrace's central design principle is that fraud signals should trace to the
+available fixture, uploaded, or public-record-derived data. A score that cannot
+be reviewed against its source is weak evidence. The live `/sources` endpoint
+(`backend/app/api/sources.py`) is the public,
 no-auth "judge-defense surface" that lists every source with its originating URL,
 licence, on-disk last-refreshed mtime, and record count read at request time.
 
@@ -62,7 +67,7 @@ feeds, its limitations, and **why it was chosen over the alternative.**
 - **What / publisher:** Ministry of Corporate Affairs company master data, republished
   as a CC-BY bulk dataset on data.gov.in.
 - **Access:** Bulk download (manual quarterly re-pull). Parsed by
-  [backend/app/ingest/data_gov_in.py](../backend/app/ingest/data_gov_in.py).
+  `backend/app/ingest/data_gov_in.py`.
 - **Fields/entities:** CIN, company name, NIC industry code, state, incorporation date,
   authorised/paid-up capital, registered address, status. **191,531 companies.**
 - **Feeds:** the `/search` corpus and **M0 master-data shell atlas** (address clusters,
@@ -78,36 +83,35 @@ feeds, its limitations, and **why it was chosen over the alternative.**
 - **What / publisher:** Court-confirmed corporate-fraud cases (SFIO investigation
   reports, CBI charge-sheets, NCLT admissions).
 - **Access:** Hand-curated JSON,
-  [data/labels/sfio_confirmed_frauds.json](../data/labels/sfio_confirmed_frauds.json).
+  `data/labels/sfio_confirmed_frauds.json`.
   **14 famous cases** (IL&FS, DHFL, Amtek, etc.).
 - **Feeds:** the **only** ground-truth label set — trains the F1a LightGBM meta-learner
   and fits F1b/F1c calibration.
 - **Limitations:** n=14 is thin. This single fact is the binding constraint on the
   entire ML tier (see §5.5) — it is enough to *calibrate* but not to train a
   high-variance supervised model.
-- **Why court records as labels:** a fraud label must be legally defensible. A model
-  trained on "cases that looked suspicious" learns the analyst's bias; a model
-  calibrated against *court-confirmed* fraud produces a probability a credit committee
-  can defend.
+- **Why published case records as labels:** labels should be tied to documented
+  outcomes rather than analyst suspicion. The curated cases provide reproducible
+  training and evaluation references; they do not make model outputs legal findings.
 
 ### 2.3 NCLT CP(IB) admitted proceedings
 - **What / publisher:** National Company Law Tribunal insolvency (CIRP) admissions and
   winding-up petitions.
-- **Access:** Curated seed [infra/seeds/nclt/proceedings.json](../infra/seeds/nclt/proceedings.json)
+- **Access:** Curated seed `infra/seeds/nclt/proceedings.json`
   with **real case numbers** (e.g. `C.P.(IB) 4258/MB/2019`); auto-refresh scraper
-  planned. Parsed by [backend/app/ingest/nclt.py](../backend/app/ingest/nclt.py).
+  planned. Parsed by `backend/app/ingest/nclt.py`.
 - **Feeds:** **M9** — an admitted CIRP forces `fraud_risk_score ≥ 75`.
 - **Limitations:** seed-backed for the demo; the live `nclt-admitted` scraper is planned,
   not running.
 - **Why an override floor, not just a feature:** insolvency admission is a binary legal
   fact, not a probabilistic signal. Letting it merely *nudge* a learned score would risk
-  a model burying it. A hard floor encodes the domain rule that a court-admitted
-  insolvency is, by definition, high risk.
+  a model burying it. A hard floor encodes the project's investigation rule for
+  admitted insolvency records.
 
 ### 2.4 RBI / CIBIL Wilful Defaulter list
 - **What / publisher:** RBI-mandated wilful-defaulter declarations, published via CIBIL.
-- **Access:** scraper ([backend/app/ingest/rbi_fetcher.py](../backend/app/ingest/rbi_fetcher.py),
-  [rbi_html_parser.py](../backend/app/ingest/rbi_html_parser.py)) + curated seed; weekly
+- **Access:** scraper (`backend/app/ingest/rbi_fetcher.py`,
+  `backend/app/ingest/rbi_html_parser.py`) + curated seed; weekly
   refresh via `.github/workflows/refresh-public-data.yml` planned.
 - **Feeds:** **M9** — a wilful-defaulter match forces `fraud_risk_score ≥ 75`.
 - **Limitations:** declarations name companies/directors but lag the underlying default.
@@ -117,10 +121,10 @@ feeds, its limitations, and **why it was chosen over the alternative.**
 ### 2.5 DGGI press-release archive (ITC carousel topologies)
 - **What / publisher:** Directorate General of GST Intelligence enforcement press
   releases (CBIC).
-- **Access:** scraper [backend/app/ingest/dggi_press.py](../backend/app/ingest/dggi_press.py);
+- **Access:** scraper `backend/app/ingest/dggi_press.py`;
   **weekly** via `.github/workflows/refresh-public-data.yml`. Five ring topologies
   reconstructed from real busts seeded under
-  [infra/seeds/itc_carousel/](../infra/seeds/itc_carousel/).
+  `infra/seeds/itc_carousel/`.
 - **Feeds:** **M4 patterns P8–P12** (ITC carousel detection).
 - **Limitations:** DGGI redacts company names during active investigation, so the seed
   files carry real `dggi_zone`, `total_fraud_cr`, `sector`, `case_year` but redacted
@@ -133,8 +137,8 @@ feeds, its limitations, and **why it was chosen over the alternative.**
 ### 2.6 CERSAI charges register
 - **What / publisher:** Central Registry of Securitisation Asset Reconstruction and
   Security Interest — registered charges (collateral) against borrowers.
-- **Access:** scraper [backend/app/ingest/cersai.py](../backend/app/ingest/cersai.py) +
-  seed [infra/seeds/cersai/charges.json](../infra/seeds/cersai/charges.json) (manual).
+- **Access:** scraper `backend/app/ingest/cersai.py` +
+  seed `infra/seeds/cersai/charges.json` (manual).
 - **Feeds:** **M2** (charges-vs-debt consistency) and **M4 P3/P14** (charge cycling,
   multi-pledge).
 - **Limitations:** charge data is registered but not always timely; manual refresh.
@@ -145,9 +149,9 @@ feeds, its limitations, and **why it was chosen over the alternative.**
 ### 2.7 BSE SME platform disclosures → industry benchmarks
 - **What / publisher:** BSE SME-platform listed-company disclosures, aggregated into NIC
   sector medians/quartiles.
-- **Access:** [backend/app/ingest/benchmarks.py](../backend/app/ingest/benchmarks.py) +
-  [benchmarks_extended.py](../backend/app/ingest/benchmarks_extended.py); seeds under
-  [infra/seeds/benchmarks/](../infra/seeds/benchmarks/).
+- **Access:** `backend/app/ingest/benchmarks.py` +
+  `backend/app/ingest/benchmarks_extended.py`; seeds under
+  `infra/seeds/benchmarks/`.
 - **Feeds:** **M5 peer deviation** (z-score of a company's ratios vs its NIC peer group).
 - **Limitations:** listed-SME benchmarks approximate the unlisted-SME population.
 - **Why:** absolute ratios are meaningless without a peer baseline — a 4% net margin is
@@ -155,8 +159,8 @@ feeds, its limitations, and **why it was chosen over the alternative.**
   SME peer distribution.
 
 ### 2.8 Composite resolver
-[backend/app/ingest/composite.py](../backend/app/ingest/composite.py) and
-[pipeline.py](../backend/app/ingest/pipeline.py) compose the above into a single
+`backend/app/ingest/composite.py` and
+`backend/app/ingest/pipeline.py` compose the above into a single
 `CompanyBundle`, falling through sources by availability (live API → bulk → seed). This
 is why a CIN with no financials still produces a bundle M0 can score — the resolver never
 hard-fails on a missing source, it degrades and records the gap in `data_confidence`.
@@ -168,7 +172,7 @@ hard-fails on a missing source, it degrades and records the gap in `data_confide
 Neo4j 5 Community + Graph Data Science (GDS) plugin is the **single data store** — no
 relational database, no Redis, no separate audit log. Audit records, fraud signals, and
 evidence chains all live as graph nodes. Constraints and indexes are applied by
-[backend/app/graph/schema.py](../backend/app/graph/schema.py).
+`backend/app/graph/schema.py`.
 
 ### 3.1 Core node labels
 | Label | Represents | Key properties |
@@ -217,9 +221,9 @@ evergreening edge), and the ITC/evergreening extension edges.
 
 ### 3.5 How new fraud types extend the schema (the extensibility argument, grounded)
 A new fraud type is added by (a) declaring its extension node labels + edges in
-[schema.py](../backend/app/graph/schema.py) `CONSTRAINTS`, (b) adding ingestion to
+`backend/app/graph/schema.py` `CONSTRAINTS`, (b) adding ingestion to
 `backend/app/ingest/`, and (c) adding Cypher patterns to
-[m04_graph_patterns.py](../backend/app/modules/m04_graph_patterns.py). The scorer,
+`backend/app/modules/m04_graph_patterns.py`. The scorer,
 provenance traversal, calibration, and output layers are **fraud-type-agnostic** — they
 operate on `FraudSignal` nodes regardless of which pattern emitted them. This is not a
 slide claim: ITC carousel and evergreening were both added this way on top of the core
@@ -231,9 +235,9 @@ SME schema, reusing the identical scoring/provenance/output path.
 
 Tier 1 is **deterministic**. These modules do not depend on training data: a
 disqualified director is *always* flagged, a circular ITC ring is *always* flagged. They
-produce 0–100 scores and `FraudSignal` nodes, and they double as the **feature inputs to
+produces 0–100 scores and `FraudSignal` nodes, and they double as the **feature inputs to
 the Tier-2 ML ensemble** (§5). The RiskScorer
-([backend/app/scorer.py](../backend/app/scorer.py)) fans out across them with
+(`backend/app/scorer.py`) fans out across them with
 `asyncio.gather` and aggregates via PRD §7.2 weights.
 
 For each module: behaviour targeted · how it works · origin/citation · what it uniquely
@@ -245,7 +249,7 @@ catches · its blind spot · the source that feeds it.
   `ADDRESS_CLUSTER` (N companies at one registered office), `MASS_INCORPORATION` (N
   companies registered the same day in the same state), `PAPER_SHELL` (paid-up < 10% of
   authorised capital AND > 2 years old). Implemented in
-  [m0_master_shell_atlas.py](../backend/app/modules/m0_master_shell_atlas.py).
+  `backend/app/modules/m0_master_shell_atlas.py`.
 - **Origin:** FATF / FIU shell-company typologies (co-location, mass incorporation,
   dormant paid-up capital).
 - **Uniquely catches:** shells among the 191k TN companies that have **zero**
@@ -263,7 +267,7 @@ catches · its blind spot · the source that feeds it.
 - **Targets:** earnings manipulation (fabricated P&L).
 - **How:** eight ratios (DSRI, GMI, AQI, SGI, DEPI, SGAI, LVGI, TATA); M-Score > −1.78 ⇒
   manipulation. Requires two consecutive years (else skips, weight redistributes).
-  [m01_beneish.py](../backend/app/modules/m01_beneish.py).
+  `backend/app/modules/m01_beneish.py`.
 - **Origin / citation:** **Beneish, M. (1999), "The Detection of Earnings Manipulation,"
   *Financial Analysts Journal*.** A peer-reviewed model with documented out-of-sample
   catches (famously flagged Enron pre-collapse).
@@ -279,7 +283,7 @@ catches · its blind spot · the source that feeds it.
 - **How:** seven checks, each citing exact numbers — e.g. *Revenue vs GST turnover*
   (|Δ|/rev > 5% ⇒ CRITICAL +40), implied interest rate, cash-conversion ratio,
   depreciation-vs-asset-growth, CWIP staleness, CERSAI-charges-vs-debt (CRITICAL +40),
-  bank-credits-vs-revenue. [m02_cross_statement.py](../backend/app/modules/m02_cross_statement.py).
+  bank-credits-vs-revenue. `backend/app/modules/m02_cross_statement.py`.
 - **Origin:** standard forensic-accounting reconciliation (cross-source triangulation).
 - **Uniquely catches:** fabrication that is internally consistent within one statement
   but contradicts an *independent* source (GST, CERSAI, bank).
@@ -293,7 +297,7 @@ catches · its blind spot · the source that feeds it.
 - **Targets:** fabricated numeric distributions.
 - **How:** chi-square (p<0.05), Kolmogorov–Smirnov, and Nigrini MAD (>0.012 suspicious,
   >0.020 HIGH); ≥50 numbers; disabled for fixed-price NIC sectors (46, 47, 19, 49, 55).
-  [m03_benford.py](../backend/app/modules/m03_benford.py).
+  `backend/app/modules/m03_benford.py`.
 - **Origin / citation:** **Nigrini, M. (2012), *Benford's Law: Applications for Forensic
   Accounting, Auditing and Fraud Detection*.**
 - **Uniquely catches:** hand-fabricated figures whose leading-digit distribution deviates
@@ -312,7 +316,7 @@ catches · its blind spot · the source that feeds it.
   Trader, Cancelled GSTIN, New-GSTIN-High-ITC, Multi-Hop ITC+Director); **P13–P17**
   evergreening (Round-Trip Repayment, Serial Charge Cycling, Shell Conduit, NPA Vintage
   Mismatch, Multi-Entity Exposure). Each match writes a `FraudSignal` with `TRIGGERED_BY`
-  edges. [m04_graph_patterns.py](../backend/app/modules/m04_graph_patterns.py).
+  edges. `backend/app/modules/m04_graph_patterns.py`.
 - **Origin:** GDS strongly-connected-components (Tarjan) and weakly-connected-components;
   classic AML circular-trading and layering typologies.
 - **Uniquely catches:** the topological fraud no tabular model can see — cycles, chains,
@@ -328,7 +332,7 @@ catches · its blind spot · the source that feeds it.
 ### M5 — Peer Deviation
 - **Targets:** ratios abnormal for the company's industry.
 - **How:** z-score per metric vs BSE SME NIC benchmarks (p25/median/p75); score grows
-  with count and magnitude of outliers. [m05_peer_deviation.py](../backend/app/modules/m05_peer_deviation.py).
+  with count and magnitude of outliers. `backend/app/modules/m05_peer_deviation.py`.
 - **Origin:** standard peer-relative anomaly analysis.
 - **Uniquely catches:** a company whose numbers are internally consistent but wildly
   off-sector.
@@ -339,7 +343,7 @@ catches · its blind spot · the source that feeds it.
 - **Targets:** suspicious *timing* — director exit pre-loan, auditor change, sole-prop
   auditor (CRITICAL), filing-delay-with-sudden-improvement, quarterly smoothing (CoV<0.03),
   round-trip borrowing, increasing filing delay, post-bad-year policy change.
-  [m06_temporal.py](../backend/app/modules/m06_temporal.py).
+  `backend/app/modules/m06_temporal.py`.
 - **Uniquely catches:** behavioural choreography around an event (a loan application) that
   any single-snapshot view misses.
 - **Blind spot:** needs a multi-year history.
@@ -349,7 +353,7 @@ catches · its blind spot · the source that feeds it.
 - **How:** spaCy keyword extraction on the audit-opinion paragraph (going-concern, adverse
   opinion → CRITICAL, emphasis-of-matter, vague related-party notes) + Neo4j auditor-density
   analysis (one DIN signing >50 SME filings in a district flags all their clients).
-  [m07_auditor_nlp.py](../backend/app/modules/m07_auditor_nlp.py).
+  `backend/app/modules/m07_auditor_nlp.py`.
 - **Origin:** audit-report linguistic analysis + auditor-network risk.
 - **Uniquely catches:** the auditor *telling you* there's a problem (going-concern), and
   rubber-stamp auditor rings.
@@ -359,7 +363,7 @@ catches · its blind spot · the source that feeds it.
 - **Targets:** forged/spliced filing PDFs.
 - **How:** PDF producer (MS Word/Google Docs on a statutory filing), creation-vs-mod date
   gap, cross-page font inconsistency, image-DPI inconsistency.
-  [m08_document_forensics.py](../backend/app/modules/m08_document_forensics.py).
+  `backend/app/modules/m08_document_forensics.py`.
 - **Uniquely catches:** documents assembled/edited rather than system-generated.
 - **Blind spot:** a cleanly re-printed forgery defeats metadata checks.
 
@@ -368,7 +372,7 @@ catches · its blind spot · the source that feeds it.
 - **How:** admitted CIRP → **force score ≥ 75**; winding-up petition → HIGH; wilful
   defaulter → **force score ≥ 75**; DRT case → HIGH. Override applied in the scorer with
   the matched `signal_id`s recorded for the audit trail.
-  [m09_nclt_defaulter.py](../backend/app/modules/m09_nclt_defaulter.py).
+  `backend/app/modules/m09_nclt_defaulter.py`.
 - **Uniquely catches:** the legal ground-truth a learned score must never bury.
 - **Why an override, not a feature:** see §2.3.
 - **Feeds from:** §2.3 NCLT, §2.4 RBI/CIBIL.
@@ -378,7 +382,7 @@ catches · its blind spot · the source that feeds it.
 - **How:** `SharedAttribute` nodes (address >5 cos, CA-DIN >50 cos/district, IFSC >10
   related cos) reveal multi-company collusion. Runs as a **cross-company batch**, not
   per-request — the scorer reads precomputed results from the analytics cache.
-  [m10_hypergraph_shell.py](../backend/app/modules/m10_hypergraph_shell.py).
+  `backend/app/modules/m10_hypergraph_shell.py`.
 - **Uniquely catches:** rings that share infrastructure without ever transacting directly.
 - **Blind spot:** needs the cross-company batch precompute; per-request scoring of a lone
   bundle finds nothing (by design).
@@ -388,7 +392,7 @@ catches · its blind spot · the source that feeds it.
 - **How:** Isolation Forest on a 20-dim financial-ratio vector (decision-function < −0.10
   ⇒ `NOVEL_PATTERN_FINANCIAL`) and Local Outlier Factor on the 7-dim graph-feature vector
   (`negative_outlier_factor_` < −1.50 ⇒ `NOVEL_PATTERN_GRAPH`), both fit against a
-  background of healthy peers. [m11_anomaly.py](../backend/app/modules/m11_anomaly.py).
+  background of healthy peers. `backend/app/modules/m11_anomaly.py`.
 - **Origin / citation:** **Liu, Ting & Zhou (2008), "Isolation Forest";** **Breunig et
   al. (2000), "LOF: Identifying Density-Based Local Outliers."**
 - **Uniquely catches:** the unknown-unknown — fraud whose shape no rule and no labelled
@@ -401,7 +405,7 @@ catches · its blind spot · the source that feeds it.
 ### Belief Propagation (cross-cutting, post-scoring)
 - **Targets:** risk that should propagate from a confirmed-bad company to its cluster.
 - **How:** loopy belief propagation on the bipartite Company↔`SharedAttribute` graph
-  ([ml/belief_propagation.py](../ml/belief_propagation.py)). A CRITICAL seed lifts a
+  (`ml/belief_propagation.py`). A CRITICAL seed lifts a
   fractional share of its risk to other cluster members; writes `CONNECTED_TO_CRITICAL`
   edges and returns a `propagation_band`/`propagation_score` on the report.
 - **Origin / citation:** **Pearl (1988), belief propagation** — here the loopy bipartite
@@ -433,7 +437,7 @@ it catches that the rules don't.
 - *Class:* temporal graph-structure anomaly.
 - *Architecture:* PyTorch-Geometric `TGNMemory` + graph-attention embedding, 2-layer,
   memory_dim=64, embedding_dim=64, edge-pruning at weight<0.05; inductive mean-aggregation
-  fallback for unseen entities. [ml/detectors/d3_tgn.py](../ml/detectors/d3_tgn.py).
+  fallback for unseen entities. `ml/detectors/d3_tgn.py`.
 - *Origin / citation:* **Rossi et al. (2020), "Temporal Graph Networks for Deep Learning
   on Dynamic Graphs."**
 - *Why TGN over a static GCN (the thing it replaced):* fraud rings *evolve* — directors
@@ -447,7 +451,7 @@ it catches that the rules don't.
 - *Class:* unsupervised graph-topology outlier.
 - *Architecture:* sklearn `LocalOutlierFactor`, n_neighbors=20, on the L0.5 7-feature
   matrix (PageRank, betweenness, clustering coeff, director count, counterparty age,
-  degree, ego-density), score normalised to [0,1]. [ml/detectors/d4_lof.py](../ml/detectors/d4_lof.py).
+  degree, ego-density), score normalised to [0,1]. `ml/detectors/d4_lof.py`.
 - *Origin / citation:* **Breunig et al. (2000), LOF.**
 - *Why:* density-based local outlier detection finds companies in *unusual graph
   neighbourhoods* even with clean books — the structural complement to financial anomaly.
@@ -460,7 +464,7 @@ it catches that the rules don't.
 - *Architecture:* per-company sequences of (amount, counterparty_type, gst_status,
   timestamp_delta), padded/truncated to 128; 2-layer Mamba (state_dim=64) on CUDA, with a
   **Temporal Convolutional Network fallback** for CPU inference (Mamba is Linux+CUDA only).
-  [ml/detectors/d5_mamba.py](../ml/detectors/d5_mamba.py).
+  `ml/detectors/d5_mamba.py`.
 - *Origin / citation:* **Gu & Dao (2023), "Mamba: Linear-Time Sequence Modeling with
   Selective State Spaces."**
 - *Why Mamba over an RNN/Transformer:* linear-time selective state space handles long
@@ -474,7 +478,7 @@ it catches that the rules don't.
 - *Architecture:* concat [20 financial + 7 graph] = 27-dim, each group normalised to
   [0,1]; encoder [27→64→32→16] + mirrored decoder, ReLU/BatchNorm/dropout=0.2;
   reconstruction error → [0,1] via 99th-percentile normalisation.
-  [ml/detectors/d6_combined_ae.py](../ml/detectors/d6_combined_ae.py).
+  `ml/detectors/d6_combined_ae.py`.
 - *Origin:* reconstruction-error anomaly detection.
 - *Why combined:* by reconstructing financial **and** graph features jointly, D6 catches
   anomalies in the *interaction* between a company's books and its network — a profile that
@@ -484,10 +488,10 @@ it catches that the rules don't.
 ### 5.2 The meta-learner stack (F1a → F1b → F1c)
 - **F1a — LightGBM OOF meta-learner.** K=5 stratified out-of-fold: each training sample's
   prediction comes from a model that never saw its label (leakage-free); a final model on
-  all data serves inference. [ml/meta/f1a_lightgbm_oof.py](../ml/meta/f1a_lightgbm_oof.py).
+  all data serves inference. `ml/meta/f1a_lightgbm_oof.py`.
   **Replaces the deprecated static formula** `S = 0.4·GNN + 0.2·VAE + …` entirely — the
   weights are *learned*, not hand-set.
-- **Feature vector** ([ml/features.py](../ml/features.py)): 10 modules × 3 features
+- **Feature vector** (`ml/features.py`): 10 modules × 3 features
   (score, max-severity ordinal, signal-count) + 11 bundle-level features + 4 detector
   scores (`d3..d6`). **M4 is deliberately excluded** from the L2 vector — it is async and
   needs a live Neo4j driver, which the offline OOF retrain lacks; including it as a
@@ -495,7 +499,7 @@ it catches that the rules don't.
   still reaches the user through `fraud_risk_score`.
 - **F1b — Isotonic calibration.** See §6.
 - **F1c — Split-conformal intervals.** See §6.
-- **Inference bridge:** [backend/app/ml_inference.py](../backend/app/ml_inference.py) loads
+- **Inference bridge:** `backend/app/ml_inference.py` loads
   the three artefacts lazily, guards a train/infer **feature-width mismatch** loudly (a
   silent null here is the worst-case bug — green dashboard, every `p_fraud_calibrated`
   null), and returns nulls cleanly when artefacts are absent (PRD §7.1 allows that).
@@ -553,7 +557,7 @@ count. See §10 for the effort to restore D1/D2/MAPIE if/when that constraint li
 
 ## 6. Calibration & Uncertainty Layer
 
-A raw model score is not a probability. A credit committee or a court needs a number where
+A raw model score is not a probability. A reviewer needs a number where
 **0.7 actually means a 70% fraud rate** — otherwise the score is indefensible. This layer
 turns F1a's raw output into a calibrated, interval-bounded probability.
 
@@ -561,7 +565,7 @@ turns F1a's raw output into a calibrated, interval-bounded probability.
 - **What:** `sklearn.isotonic.IsotonicRegression` fit on a **separate 15% hold-out** (not
   the OOF data — fitting on OOF would leak the K-fold target distribution into the
   calibrator). Validated by reliability diagram: P(fraud)=0.8 should correspond to ~80%
-  observed fraud rate. [ml/meta/f1b_isotonic.py](../ml/meta/f1b_isotonic.py).
+  observed fraud rate. `ml/meta/f1b_isotonic.py`.
 - **Why isotonic over Platt scaling:** Platt (sigmoid) calibration assumes the miscalibration
   has a specific sigmoidal shape. Isotonic regression assumes only **monotonicity** —
   higher raw score ⇒ higher-or-equal calibrated probability — and otherwise fits the
@@ -574,7 +578,7 @@ turns F1a's raw output into a calibrated, interval-bounded probability.
 - **What:** wraps the calibrated classifier and emits P(fraud) plus `[P_low, P_high]` at
   **α=0.10**, i.e. a **90% interval** with empirical coverage on the calibration set, using
   split-conformal residuals on the (calibrated-probability, label) pair with the standard
-  (n+1)/n finite-sample correction. [ml/meta/f1c_split_conformal.py](../ml/meta/f1c_split_conformal.py).
+  (n+1)/n finite-sample correction. `ml/meta/f1c_split_conformal.py`.
 - **What α=0.10 means operationally:** the interval is constructed so that, over repeated
   use, the true label falls inside `[P_low, P_high]` at least ~90% of the time. A *wide*
   interval is itself a signal — "the model is uncertain about this one; route to manual
@@ -650,54 +654,43 @@ model's prose; numbers come from `FraudSignal` nodes and their `TRIGGERED_BY` so
 ### 8.1 Output types
 | Output | Generated by | Primary consumer | Decision it supports | Technical literacy assumed |
 |---|---|---|---|---|
-| **Dual-output JSON** (`fraud_risk_score`, `risk_band`, `p_fraud_calibrated`, `p_fraud_interval`, `data_confidence`, `ensemble_disagreement_flag`, `evidence_chain`, `module_breakdown`, override fields, propagation band) | [scorer.py](../backend/app/scorer.py) → `/analyse/{cin}` | All (API/dashboard) | Approve / review / reject; triage queue ordering | Low (dashboard renders it) |
-| **Analysis dashboard** | [Dashboard.tsx](../frontend/src/pages/Dashboard.tsx) | Loan Officer | Lend / decline / escalate | Low |
-| **Graph Explorer** (d3-force) | [GraphExplorer.tsx](../frontend/src/pages/GraphExplorer.tsx) | Investigator | Trace the ring; identify the controller | Medium |
-| **Evidence provenance chain** | `/analyse/{cin}/provenance` ([api/analyse.py](../backend/app/api/analyse.py)), persisted by [graph/writes.py](../backend/app/graph/writes.py) | Forensic Auditor | Build the legal narrative | High |
-| **ITC Carousel / Evergreening views** | [ITCCarousel.tsx](../frontend/src/pages/ITCCarousel.tsx), [Evergreening.tsx](../frontend/src/pages/Evergreening.tsx) | Investigator | Confirm ring topology | Medium |
-| **Shell Atlas** | [ShellAtlas.tsx](../frontend/src/pages/ShellAtlas.tsx) ← M0 / `/shells` | Investigator / Admin | Browse master-data shell clusters | Medium |
-| **Forensic PDF** | [api/report.py](../backend/app/api/report.py) (reportlab) | Forensic Auditor / committee | File / archive a defensible record | Low–Medium |
-| **Narrative prose** | [narrative.py](../backend/app/narrative.py) (Mistral, template fallback) | Loan Officer | Quick human-readable summary | Low |
-| **`/sources` lineage** | [api/sources.py](../backend/app/api/sources.py) | Judge / Auditor | Audit data provenance | Low |
+| **Dual-output JSON** (`fraud_risk_score`, `risk_band`, `p_fraud_calibrated`, `p_fraud_interval`, `data_confidence`, `ensemble_disagreement_flag`, `evidence_chain`, `module_breakdown`, override fields, propagation band) | `backend/app/scorer.py` → `/analyse/{cin}` | Application users | Review and triage | Low (dashboard renders it) |
+| **Analysis dashboard** | `frontend/src/pages/Dashboard.tsx` | Investigation workflow | Review a company | Low |
+| **Graph Explorer** (d3-force) | `frontend/src/pages/GraphExplorer.tsx` | Investigation workflow | Trace related entities | Medium |
+| **Evidence provenance chain** | `/analyse/{cin}/provenance` (`backend/app/api/analyse.py`), persisted by `backend/app/graph/writes.py` | Investigation workflow | Review source relationships | High |
+| **ITC Carousel / Evergreening views** | `frontend/src/pages/ITCCarousel.tsx`, `frontend/src/pages/Evergreening.tsx` | Investigation workflow | Inspect fraud topology | Medium |
+| **Shell Atlas** | `frontend/src/pages/ShellAtlas.tsx` ← M0 / `/shells` | Investigation workflow | Browse master-data shell clusters | Medium |
+| **Report PDF** | `backend/app/api/report.py` (reportlab) | Investigation workflow | Retain a traceable artifact | Low–Medium |
+| **Gonka claim verification** | `backend/app/api/gonka.py` → `/gonka/verify` | Application users | Review supplied claim text | Low |
+| **`/sources` lineage** | `backend/app/api/sources.py` | Application users | Review configured data sources | Low |
 
-### 8.2 What each persona *sees* (literacy-matched)
-- **Loan Officer** sees a band (CRITICAL/HIGH/…), the calibrated probability with its
-  interval, the DataConfidence %, and a plain-language narrative — enough to decide without
-  reading Cypher.
-- **DGGI Investigator** sees the Graph Explorer and ITC/Evergreening views — the ring
-  topology, the missing trader, the director overlap — the structure, not just the score.
-- **Forensic Auditor** sees the full provenance chain and the PDF: every `FraudSignal` with
-  its exact triggering data point, suitable for a filing.
+### 8.2 What the application presents
+- The dashboard presents the risk band, calibrated probability when artifacts are
+  available, interval, data confidence, and evidence summary.
+- Graph, ITC, and evergreening views present topology and related-entity context.
+- The provenance view and PDF preserve the signal values and source relationships
+  as a traceable investigation artifact.
 
-### 8.3 Evidence provenance — why it traces to nodes and edges (legal defensibility)
+### 8.3 Evidence provenance — why it traces to nodes and edges
 Every finding is a `FraudSignal` node whose `evidence_string` cites **specific numbers**
 (never "revenue appears inflated"; always *"Revenue per P&L (₹12.4 cr) exceeds GST taxable
 turnover (₹8.2 cr) by 51.2% — above 5% tolerance"*) and whose `TRIGGERED_BY` edges point to
 the exact `FinancialStatement`/`TRANSACTS_WITH`/`GSTEntity`/`Charge` that caused it. The
-scorer persists these to Neo4j so `/provenance` traverses the live graph rather than
-re-scoring. **Why this instead of SHAP:** a SHAP value explains a model's *internal*
-weighting; it cannot be handed to a court as evidence of fraud. A typed graph path from a
-flag to a government data row *is* the evidence. The reportlab PDF carries a UUID + UTC
-timestamp + disclaimer and is JWT-gated — an auditable artefact, not a screenshot.
+scorer persists these to Neo4j so `/provenance` traverses the graph rather than
+re-scoring when the graph is available. **Why this instead of SHAP:** a SHAP value
+explains a model's *internal* weighting; a typed graph path is easier to review
+against the underlying data. The reportlab PDF carries a UUID + UTC timestamp +
+disclaimer and provides a traceable investigation artifact, not a screenshot.
 
 ---
 
-## 9. Persona × Input × Output Matrix
+## 9. Application journey
 
-Roles are enforced server-side ([backend/app/auth/models.py](../backend/app/auth/models.py),
-`UserRole = credit_officer | investigator | auditor | admin`; admin is not
-self-registrable). One glance per role:
-
-| Persona (role) | Inputs | Sees | Decision made | Exports |
-|---|---|---|---|---|
-| **NBFC Loan Officer** (`credit_officer`) | CIN search; optional GST + bank-statement upload | Dashboard: band, calibrated P(fraud)+interval, DataConfidence %, narrative, evidence summary | Lend / decline / escalate to investigation | PDF report |
-| **DGGI Investigator** (`investigator`) | CIN / GSTIN; ITC ring exploration | Graph Explorer, ITC Carousel & Evergreening views, full evidence chain | Confirm a ring; identify controller; open a case | PDF + graph export |
-| **Forensic Auditor** (`auditor`) | CIN; post-incident records | Full provenance chain, module breakdown, override audit trail (which `signal_id` forced the floor) | Build legal narrative; quantify exposure | Forensic PDF (UUID + timestamp + disclaimer) |
-| **Admin** (`admin`, seeded only) | All of the above + data/source management | Shell Atlas, `/sources` health, all views | Operate the platform; manage refresh | All |
-
-The journey is uniform: **input a CIN → bundle resolved across sources (§2.8) → scored by
-the engine (§4–§5) → calibrated (§6) → rendered to the role's literacy (§8).** The same
-dual-output payload backs every persona view; only the *presentation* differs.
+The current journey is role-neutral: **open the dashboard → input a CIN → bundle
+resolved across available sources (§2.8) → scored by the engine (§4–§5) →
+calibrated (§6) → rendered in the dashboard, graph, provenance, and report
+views (§8).** Upload overlays can enrich the bundle before analysis. The same
+dual-output payload backs every view.
 
 ---
 
@@ -722,9 +715,9 @@ volume (14 SFIO cases)**, which limits supervised capacity — not detector coun
 |---|---|---|
 | MCA21 V3 live API | Paid (~₹5–20k/mo), out of budget | data.gov.in CC-BY TN bulk (191k cos) + composite fall-through |
 | GSTN live ITC feed | Restricted to licensed GSPs (₹25 lakh + MoU) | DGGI press-release archive — real bust topologies |
-| MCA Public Portal live scrape | Playwright/Chromium too heavy for the 4 GB Lightsail box | local-dev only ([INGEST_MCA_PUBLIC.md](./INGEST_MCA_PUBLIC.md)) |
+| MCA Public Portal live scrape | Playwright/Chromium is not part of the hosted runtime | local-dev only ([INGEST_MCA_PUBLIC.md](./INGEST_MCA_PUBLIC.md)) |
 | Live NCLT / RBI scrapers | Built but not scheduled in prod | curated real-case seeds; weekly CI refresh planned |
-| Mistral narrative | Optional free-tier key | deterministic template fallback (cites only structured numbers; never hallucinates) |
+| GonkaRouter claim verification | Requires `GONKA_API_KEY` | unavailable response when unconfigured; analyzes only supplied claim text |
 
 ### 10.3 Modelling / scope limitations
 - **Tier-1 weights M10/M11 are reserved** in the scorer but fire only via the cross-company
@@ -738,21 +731,23 @@ volume (14 SFIO cases)**, which limits supervised capacity — not detector coun
 - **`ensemble_disagreement_flag=True` on all demo CINs** at seed scale (LOCAL_TEST_REPORT
   F5) — plausibly expected at this fixture size; flagged, not yet root-caused.
 
-### 10.4 Known open issues (from [LOCAL_TEST_REPORT.md](./LOCAL_TEST_REPORT.md))
-Tracked findings include auth-gating on `/analyse` (F4), duplicate-email registration
-(F3), and the login email prefill (F1). See that report for status and fix order.
+### 10.4 Known open issues
+The repository still contains legacy authentication modules for source compatibility,
+but the current deployed documentation does not treat that workflow as active access
+control. The deployment path and graph availability should be checked through the
+health endpoints and the service configuration.
 
 ---
 
 ## Appendix — Source map (file → responsibility)
-- Orchestration: [backend/app/scorer.py](../backend/app/scorer.py)
-- ML inference bridge: [backend/app/ml_inference.py](../backend/app/ml_inference.py)
-- Feature builder: [ml/features.py](../ml/features.py)
-- Meta stack: [ml/meta/](../ml/meta/) (f1a_lightgbm_oof, f1b_isotonic, f1c_split_conformal)
-- Detectors: [ml/detectors/](../ml/detectors/) (d3_tgn, d4_lof, d5_mamba, d6_combined_ae)
-- Rule modules: [backend/app/modules/](../backend/app/modules/) (m0 … m11)
-- Belief propagation: [ml/belief_propagation.py](../ml/belief_propagation.py)
-- Graph schema: [backend/app/graph/schema.py](../backend/app/graph/schema.py)
-- Ingestion: [backend/app/ingest/](../backend/app/ingest/)
-- Provenance / persistence: [backend/app/graph/writes.py](../backend/app/graph/writes.py)
-- Frozen requirements: [Sentinel_G_Final.docx](../Sentinel_G_Final.docx) (PRD v4.0)
+- Orchestration: `backend/app/scorer.py`
+- ML inference bridge: `backend/app/ml_inference.py`
+- Feature builder: `ml/features.py`
+- Meta stack: `ml/meta/` (f1a_lightgbm_oof, f1b_isotonic, f1c_split_conformal)
+- Detectors: `ml/detectors/` (d3_tgn, d4_lof, d5_mamba, d6_combined_ae)
+- Rule modules: `backend/app/modules/` (m0 … m11)
+- Belief propagation: `ml/belief_propagation.py`
+- Graph schema: `backend/app/graph/schema.py`
+- Ingestion: `backend/app/ingest/`
+- Provenance / persistence: `backend/app/graph/writes.py`
+- Frozen requirements: `Sentinel_G_Final.docx` (PRD v4.0)

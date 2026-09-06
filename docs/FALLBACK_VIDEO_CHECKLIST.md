@@ -11,17 +11,17 @@
       side-window both visible).
 - [ ] Format: **H.264 MP4**, AAC audio, ≤ 50 MB total (fits Devfolio
       attachment limits + embeds in most slide decks).
-- [ ] Filename: `sentinel-g-fallback-v1.mp4` (bump the version if you
+- [ ] Filename: `fintrace-fallback-v1.mp4` (bump the version if you
       re-record).
 
 ## 2. Pre-recording state
 
-- [ ] Production stack is live (Day 28 deploy completed):
-      `curl https://sentinel-g.duckdns.org/health` returns `{"status":"ok"}`.
+- [ ] The deployed dashboard is already open, or the local Vite dashboard is
+      running at `http://localhost:5173`.
 - [ ] Vercel frontend loads on first paint without console errors.
-- [ ] Neo4j is seeded (`scripts/seed_neo4j.py --clean` ran successfully
-      against the Railway URI).
-- [ ] You're logged in at `/login` so the demo doesn't waste 15s on auth.
+- [ ] Local Neo4j/GDS is seeded if recording locally; hosted recording uses
+      the available production fixture mode.
+- [ ] The application is already open at the dashboard so the demo doesn't waste time on setup.
 
 ## 3. Content checklist — every PRD §14 phase covered
 
@@ -29,7 +29,7 @@ Cross-reference each line in `docs/DEMO_SCRIPT.md`. You should see, on
 camera, in order:
 
 - [ ] **0:00–0:20** Company Search — paste IL&FS CIN, hit Enter.
-- [ ] **0:20–0:50** Analysis Dashboard — score 75 CRITICAL, DC 92, 18
+- [ ] **0:20–0:50** Analysis Dashboard — score and CRITICAL band, data confidence,
       evidence signals, calibrated P(fraud) + conformal interval visible.
 - [ ] **0:50–1:15** Graph Explorer — director chain expand, red flagged
       edges visible.
@@ -37,7 +37,7 @@ camera, in order:
       expanded showing specific rupee numbers.
 - [ ] **1:40–2:00** ITC Carousel — three carousel cards CRITICAL, ring
       graph visible.
-- [ ] **2:00–2:20** Evergreening — DHFL, patterns 13/14/15 all lit.
+- [ ] **2:00–2:20** Evergreening — DHFL fixture, repayment patterns visible.
 - [ ] **2:20–3:00** Report Export — PDF downloads, UUID + timestamp
       visible in download dialog.
 
@@ -48,7 +48,7 @@ laptop in case the judges open the link mid-presentation.
 
 - [ ] **YouTube unlisted** (recommended) — URL embeds in Devfolio and
       plays without login.
-      - [ ] Title: `Sentinel-G — 3-Minute Demo (HackHazards '26 Fallback)`
+      - [ ] Title: `FinTrace — 3-Minute Demo (VeriLens Fallback)`
       - [ ] Visibility: **Unlisted** (NOT Private).
       - [ ] Captions: at least auto-generated.
 - [ ] **Google Drive public link** — set "Anyone with the link → Viewer".
@@ -71,8 +71,8 @@ and Day 30 + judging falls inside that window.
 The point of "confirmed playable" — actually open the link from a clean
 environment and watch the whole thing.
 
-- [ ] Open the hosting URL in an **incognito window** (no Google
-      account signed in). Video starts playing without prompts.
+- [ ] Open the hosting URL in a clean browser window. Video starts playing
+      without account prompts.
 - [ ] Audio is audible at default volume.
 - [ ] Open the URL on a **second device** (phone, tablet, or another
       laptop). Plays without sign-in or app install.

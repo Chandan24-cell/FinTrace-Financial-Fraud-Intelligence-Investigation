@@ -27,7 +27,8 @@ When `MCAPublicScraper` has no fetcher injected, it raises
 `MCAPublicFetcherNotConfiguredError` and the composite cleanly falls
 through to FixtureSource — same convention as `MCA21KeyMissingError`.
 
-For production runs, inject `MCAPublicPlaywrightFetcher`:
+For a local or explicitly configured operator run, inject
+`MCAPublicPlaywrightFetcher`:
 
 ```python
 from backend.app.ingest.composite import CompositeCompanySource
@@ -94,7 +95,7 @@ M6 (temporal), M7 (auditor-NLP) all consume that upload overlay.
 Layout drift on mca.gov.in is the most likely failure mode. The
 production-fetcher selectors are pinned at the top of each scrape
 branch in
-[`backend/app/ingest/mca_public_playwright.py`](../backend/app/ingest/mca_public_playwright.py):
+`backend/app/ingest/mca_public_playwright.py`:
 
 | Branch | Selector to update |
 |---|---|
@@ -123,7 +124,7 @@ reminder, not paying a captcha vendor.
 ## CI safety
 
 Tests for `MCAPublicScraper` in
-[`backend/tests/test_mca_public_scraper.py`](../backend/tests/test_mca_public_scraper.py)
+`backend/tests/test_mca_public_scraper.py`
 inject a canned async fetcher — they NEVER load Playwright. So:
 
 - `python -m pytest` passes without the `playwright` Python package
@@ -134,13 +135,14 @@ inject a canned async fetcher — they NEVER load Playwright. So:
   works without the package.
 
 You only need `pip install playwright && playwright install chromium`
-on the machine that actually runs live scrapes (typically your
-workstation or the Oracle VM, never CI).
+on the machine that actually runs live scrapes (typically your workstation,
+never CI). The hosted Railway deployment does not provide this local browser
+scraping environment; fixture fallback remains available.
 
 ## Files in this slice
 
-- [`backend/app/ingest/mca_public.py`](../backend/app/ingest/mca_public.py) — orchestrator + parsers.
-- [`backend/app/ingest/mca_public_playwright.py`](../backend/app/ingest/mca_public_playwright.py) — production Playwright fetcher.
-- [`backend/app/ingest/composite.py`](../backend/app/ingest/composite.py) — wires this in as the 2nd-tier primary.
-- [`backend/tests/test_mca_public_scraper.py`](../backend/tests/test_mca_public_scraper.py) — 9 unit cases.
+- `backend/app/ingest/mca_public.py` — orchestrator + parsers.
+- `backend/app/ingest/mca_public_playwright.py` — production Playwright fetcher.
+- `backend/app/ingest/composite.py` — wires this in as the 2nd-tier primary.
+- `backend/tests/test_mca_public_scraper.py` — 9 unit cases.
 - This runbook.

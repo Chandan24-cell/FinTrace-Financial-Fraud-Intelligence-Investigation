@@ -1,0 +1,38 @@
+site_name: VeriLens FinTrace
+site_description: Financial Fraud Intelligence & Investigation Platform
+site_author: Chandan Kumar Sah
+docs_dir: .
+site_dir: ../site
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: deep-purple
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+nav:
+  - Home: WALKTHROUGH.md
+  - Architecture:
+      - System Design: SYSTEM_DESIGN.md
+  - Data Sources:
+      - Data.gov.in: INGEST_DATA_GOV_IN.md
+      - MCA Public Data: INGEST_MCA_PUBLIC.md
+      - RBI Wilful Defaulters: INGEST_RBI_WILFUL.md
+  - Running & Deployment:
+      - Running Locally: RUNNING.md
+  - Guides:
+      - Demo Script: DEMO_SCRIPT.md
+      - Fallback Video Checklist: FALLBACK_VIDEO_CHECKLIST.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - tables
+  - attr_list
+  - md_in_html

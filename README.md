@@ -3,11 +3,11 @@
 **One graph engine. Three structurally different fraud types.**
 SME loans · GST ITC carousels · bank loan evergreening.
 
-[![Live Frontend](https://img.shields.io/badge/demo-fintrace.vercel.app-brightgreen)](https://fintrace.vercel.app)
-[![API Backend](https://img.shields.io/badge/api-AWS%20Lightsail-orange)](https://13.126.114.27.sslip.io)
+[![Live Frontend](https://img.shields.io/badge/frontend-VeriLens-brightgreen)](https://fin-trace-financial-fraud-intellige.vercel.app/dashboard)
+[![API Backend](https://img.shields.io/badge/backend-Railway-blue)](https://fintrace-financial-fraud-intelligence-investigat-production.up.railway.app/docs)
 [![Neo4j](https://img.shields.io/badge/database-Neo4j%205%20%2B%20GDS-blue)](https://neo4j.com)
 [![License](https://img.shields.io/badge/data-CC--BY%20Gov.%20Sources-lightgrey)]()
-[![Demo Video](https://img.shields.io/badge/demo-video-red)](https://drive.google.com/file/d/12C7MhIuYQwfiinnUDyxyDMF5UUT5MX8W/view?usp=drivesdk)
+[![GitHub](https://img.shields.io/badge/repo-Chandan24--cell-green)](https://github.com/Chandan24-cell/FinTrace-Financial-Fraud-Intelligence-Investigation)
 
 ---
 
@@ -22,11 +22,11 @@ SME loans · GST ITC carousels · bank loan evergreening.
 - [Sponsored Track — Neo4j](#sponsored-track)
 - [Key Features](#key-features)
 - [Deliverables](#deliverables)
-- [Data Lineage](#data-lineage--every-signal-traces-back-to-a-public-record-source)
+- [Data Lineage](#data-lineage--available-sources-and-evidence)
 - [What's Honestly Not Live](#whats-honestly-not-live-in-this-deployment)
 - [Honest Framing of the DGGI ITC Ring Fixtures](#honest-framing-of-the-dggi-itc-ring-fixtures)
 - [How to Run the Project](#how-to-run-the-project)
-- [Deploy](#deploy)
+- [Production path](#production-path)
 - [Future Scope](#future-scope)
 - [Resources / Credits](#resources--credits)
 - [Final Words](#final-words)
@@ -41,7 +41,7 @@ Indian banks reported **₹33,148 crore** in loan-related bank fraud in FY25 —
 
 Listed companies have SEBI oversight; SMEs file once a year, often late, often rubber-stamped. Existing credit teams cannot cross-reference MCA21, CERSAI, GSTN, and the director-company ownership graph simultaneously.
 
-**FinTrace does.** It produces a calibrated fraud risk score with a conformal prediction interval, a DataConfidence percentage, and — most importantly — a **typed evidence provenance chain** rooted in the graph that holds up in a legal filing.
+**FinTrace does.** It produces a calibrated fraud risk score with a conformal prediction interval, a DataConfidence percentage, and a **typed evidence provenance chain** rooted in the graph as a traceable investigation artifact.
 
 **Themes Selected:** Trust, Identity & Security · Work, Finance & Digital Economy · Public Systems, Governance and Civic Tech
 
@@ -53,9 +53,9 @@ Listed companies have SEBI oversight; SMEs file once a year, often late, often r
 
 | Persona | Pain Point | What FinTrace Gives Them |
 |---|---|---|
-| **NBFC Credit Officer** | Reviews 50 SME applications/month manually. Misses fabricated P&Ls. | Calibrated fraud risk score + DataConfidence % + full graph evidence chain. Minutes, not days. |
-| **DGGI GST Investigator** | Identifies circular trading networks via spreadsheet cross-referencing. | GDS SCC finds ITC carousel rings across thousands of GSTINs in milliseconds. |
-| **Corporate Forensic Auditor** | Commissioned post-fraud. Works from incomplete records. | Multi-signal forensic report with typed evidence provenance chain — directly usable in legal filings. |
+| **Credit review team** | Reviews SME applications manually and can miss fabricated P&Ls. | Calibrated fraud risk score + DataConfidence % + graph evidence chain. |
+| **GST investigation team** | Identifies circular trading networks via spreadsheet cross-referencing. | GDS SCC highlights ITC carousel topology in the available graph data. |
+| **Forensic review team** | Works from incomplete records after a suspected incident. | Multi-signal investigation report with typed evidence provenance. |
 
 <div align="right"><a href="#table-of-contents">⬆ Back to top</a></div>
 
@@ -74,7 +74,7 @@ Listed companies have SEBI oversight; SMEs file once a year, often late, often r
 **Two-tier intelligence.** 12 deterministic rule modules (M0–M11) feed a 4-detector ML ensemble. The rules catch what they were designed for, the ML learns the optimal combination, and the anomaly detectors catch what neither knows about.
 > The PRD specified 6 detectors; D1/D2 were dropped as redundant — see `docs/SYSTEM_DESIGN.md §5.5` for the sufficiency analysis.
 
-**Graph-native explainability.** No SHAP, no LLM-generated numbers. Every fraud flag is a `FraudSignal` node with `TRIGGERED_BY` edges to the exact data point that triggered it. Court-defensible by construction.
+**Graph-native explainability.** No SHAP, no LLM-generated numbers. Every fraud flag is a `FraudSignal` node with `TRIGGERED_BY` edges to the exact data point that triggered it. Designed for transparent investigation with traceable graph evidence.
 
 **Calibration first.** Isotonic regression on a separate hold-out. Split-conformal prediction gives prediction intervals at α = 0.10 (a hand-rolled implementation; MAPIE was deferred due to API instability — same 90% coverage guarantee). We report uncertainty, not just a number.
 
@@ -86,7 +86,7 @@ Listed companies have SEBI oversight; SMEs file once a year, often late, often r
 
 **Frontend:** React 18 + Vite, TailwindCSS, d3-force, recharts, @tanstack/react-query
 
-**Backend:** FastAPI + uvicorn (async), Pydantic v2, python-jose JWT
+**Backend:** FastAPI + uvicorn (async), Pydantic v2
 
 **Database:** Neo4j 5 Community + Graph Data Science (GDS) plugin — single data store
 
@@ -94,11 +94,11 @@ Listed companies have SEBI oversight; SMEs file once a year, often late, often r
 
 **NLP / Docs:** spaCy, pdfplumber, camelot, pytesseract, reportlab
 
-**LLM (narrative only):** Mistral (Mistral API)
+**AI reasoning:** GonkaRouter claim verification receives the supplied claim text and returns a structured verdict, rationale, confidence, evidence, and caveats. It does not independently retrieve external evidence.
 
-**APIs:** MCA21, CERSAI, BSE SME, NCLT, RBI wilful defaulter, data.gov.in MCA bulk (CC-BY)
+**Data integrations:** MCA21/CERSAI where configured, BSE SME, NCLT/RBI fixtures and scrapers, and data.gov.in MCA bulk (CC-BY)
 
-**Hosting:** AWS Lightsail (FastAPI + Neo4j co-located, Caddy + Let's Encrypt) · Vercel (frontend)
+**Hosting:** Vercel (frontend) · Railway (FastAPI backend) · GonkaRouter (AI reasoning)
 
 **Additional:** AI/ML · Cyber Security (financial fraud forensics) · Cloud
 
@@ -114,7 +114,7 @@ Listed companies have SEBI oversight; SMEs file once a year, often late, often r
 - GDS **WCC** powers entity resolution
 - Belief propagation Cypher writes `CONNECTED_TO_CRITICAL` edges
 
-FinTrace uses Neo4j 5 Community + GDS plugin on Railway Docker. Graph evidence provenance is the only explainability mechanism shown to credit officers, investigators, and forensic auditors.
+Local development uses Neo4j 5.20 Community + GDS 2.6.9. The Railway production environment does not provide that local graph stack, so graph-dependent features may use degraded fixture mode. Graph evidence provenance is the primary explainability mechanism in the application.
 
 <div align="right"><a href="#table-of-contents">⬆ Back to top</a></div>
 
@@ -136,20 +136,21 @@ FinTrace uses Neo4j 5 Community + GDS plugin on Railway Docker. Graph evidence p
 | Item | Link / Location |
 |---|---|
 | GitHub Repository | [FinTrace-Financial-Fraud-Intelligence-Investigation](https://github.com/Chandan24-cell/FinTrace-Financial-Fraud-Intelligence-Investigation) |
-| Live Frontend | https://fintrace.vercel.app |
-| API Backend | https://13.126.114.27.sslip.io (AWS Lightsail, Mumbai) |
-| Demo Logins | Four personas — Loan Officer, Investigator, Auditor, Admin (credentials in `docs/WALKTHROUGH.md`) |
-| Demo Video | [Watch on Google Drive](https://drive.google.com/file/d/12C7MhIuYQwfiinnUDyxyDMF5UUT5MX8W/view?usp=drivesdk) |
+| Live Frontend | https://fin-trace-financial-fraud-intellige.vercel.app/dashboard |
+| API Backend | https://fintrace-financial-fraud-intelligence-investigat-production.up.railway.app |
+| API Docs | https://fintrace-financial-fraud-intelligence-investigat-production.up.railway.app/docs |
+| Demo Data | Curated local fraud fixtures are available for repeatable demonstrations and QA |
 | System Design | `docs/SYSTEM_DESIGN.md` — full technical reference (data sources, graph schema, rule modules, ML ensemble + sufficiency analysis, calibration, coverage matrix, personas, honest gaps) |
-| PRD | `FinTrace_Final.docx` |
+| Project Owner | Chandan Kumar Sah |
+| Product | VeriLens |
 
 <div align="right"><a href="#table-of-contents">⬆ Back to top</a></div>
 
 ---
 
-## Data Lineage — Every Signal Traces Back to a Public-Record Source
+## Data Lineage — Available Sources and Evidence
 
-Every fraud signal FinTrace fires is backed by a publicly-published government data source. The live [`/sources`](https://fintrace.vercel.app/sources) page on the deployed app (no login required) shows the full inventory with last-refreshed timestamps and record counts read from disk at request time. Summary below:
+Fraud signals are grounded in the available fixture, uploaded, and public-record-derived data. The `/sources` endpoint shows the configured source inventory, refresh metadata, and record counts when available. Summary below:
 
 | Source | Type | Records | Drives | Refresh |
 |---|---|---|---|---|
@@ -174,8 +175,8 @@ Every fraud signal FinTrace fires is backed by a publicly-published government d
 |---|---|---|
 | MCA21 V3 live API | Paid subscription (~₹5–20k/mo) — out of hackathon budget | data.gov.in bulk covers TN; composite source falls through |
 | GSTN live ITC feed | Restricted to licensed GSPs (₹25 lakh capital + MoU with GSTN) | Use DGGI press release archive — real bust topologies with amounts, zones, sectors |
-| MCA Public Portal live scrape | Playwright + Chromium too heavy for 4 GB Lightsail (+250 MB image bloat) | Local-dev only — see `docs/INGEST_MCA_PUBLIC.md` |
-| Mistral narrative | Optional; needs free Mistral API key | Deterministic template fallback cites only structured-evidence numbers (never hallucinates); UI surfaces "Live LLM unavailable" notice |
+| MCA Public Portal live scrape | Playwright + Chromium is not part of the hosted runtime | Local/operator use only — see `docs/INGEST_MCA_PUBLIC.md` |
+| GonkaRouter claim verification | Requires `GONKA_API_KEY` on the backend | The endpoint reports unavailable when the provider is not configured; it analyzes only supplied claim text |
 
 <div align="right"><a href="#table-of-contents">⬆ Back to top</a></div>
 
@@ -230,13 +231,17 @@ Verify `RETURN gds.version()` works at [http://localhost:7474](http://localhost:
 
 ---
 
-## Deploy
+## Production path
 
 | Component | Target | How |
 |---|---|---|
-| FastAPI backend + Neo4j 5 + GDS | AWS Lightsail (4 GB, $20/mo) | `bash infra/aws/lightsail_bootstrap.sh` (see `infra/aws/`) |
-| GHCR image build | GitHub Actions | Auto-fires on `backend/**`, `ml/**`, `pyproject.toml` changes |
-| Frontend | Vercel | Auto-deploy on push to `main` (rewrites `/api/*` to the Lightsail backend) |
+| Frontend | Vercel | Browser-facing application |
+| FastAPI backend | Railway | API and analysis service |
+| AI reasoning | GonkaRouter | Claim text verification when configured |
+| Graph development stack | Local Docker | Neo4j 5.20 Community + GDS 2.6.9; not supplied by Railway |
+
+Production graph-dependent features may operate in degraded fixture mode when the
+local Neo4j/GDS development environment is unavailable.
 
 <div align="right"><a href="#table-of-contents">⬆ Back to top</a></div>
 

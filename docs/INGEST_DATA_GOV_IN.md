@@ -99,13 +99,13 @@ warning level). The validator in `RawCompany` does the final check.
 Most likely failure mode is a header rename. Symptom: every row gets
 dropped at the "incomplete master" warning. The parser's column-alias
 map at the top of
-[`backend/app/ingest/data_gov_in.py`](../backend/app/ingest/data_gov_in.py)
+`backend/app/ingest/data_gov_in.py`
 (`_COL_ALIASES`) needs the new header token added — the lookup is
 case-insensitive and ignores non-alphanumerics, so most renames slot
 in with a single entry.
 
 Tests at
-[`backend/tests/test_data_gov_in.py`](../backend/tests/test_data_gov_in.py)
+`backend/tests/test_data_gov_in.py`
 pin two distinct header styles (snake_case and "Title Case With Spaces")
 so the resilience doesn't silently regress.
 
@@ -117,7 +117,7 @@ that into git (`data/raw/` is in `.gitignore`).
 
 ## Files in this slice
 
-- [`backend/app/ingest/data_gov_in.py`](../backend/app/ingest/data_gov_in.py) — `DataGovInBulkSource`.
-- [`backend/app/ingest/composite.py`](../backend/app/ingest/composite.py) — `list_available_cins()` consults bulk source.
-- [`backend/tests/test_data_gov_in.py`](../backend/tests/test_data_gov_in.py) — 10 unit cases.
+- `backend/app/ingest/data_gov_in.py` — `DataGovInBulkSource`.
+- `backend/app/ingest/composite.py` — `list_available_cins()` consults bulk source.
+- `backend/tests/test_data_gov_in.py` — 10 unit cases.
 - This runbook.

@@ -1,4 +1,4 @@
-# Sentinel-G - Demo Video Script
+# FinTrace — Demo Video Script
 
 > Live working demo. Every on-screen value is returned by the deployed system or
 > the local seeded stack. The three fraud surfaces are real app flows: SME loan
@@ -13,19 +13,20 @@
 python scripts/seed_neo4j.py --clean
 ```
 
-Reseed a clean production Neo4j before recording so no stale demo data appears on screen.
+For a local recording, reseed the local Neo4j/GDS stack so no stale demo data
+appears on screen. For the hosted recording, open the deployed dashboard and
+use the available fixture-backed data.
 
 
 ```
 
-Log in as `rajan@demo.in` / `Sentinel@1` (investigator - unlocks PDF export).
-Clear browser localStorage once so no stale JWT is visible.
+
 
 ---
 
 ## 0:00-0:18 - Company Search: One Engine, One CIN
 
-> "Sentinel-G detects financial fraud across SME loans, GST input-tax-credit
+> "FinTrace detects financial fraud across SME loans, GST input-tax-credit
 > carousels, and bank-loan evergreening. This is the live app, not a slide deck.
 > We start with IL&FS, a public-record fraud case with Rs 91,000 crore exposure.
 > CIN: U45201MH2005PTC155294."
@@ -53,17 +54,17 @@ the dashboard.
 - Company metadata row: industry, state, incorporation year.
 - Source badge: `SFIO - NCLT - RBI` public-record line.
 - Severity filter chips; click `CRITICAL`, then restore all.
-- Mistral narrative card if loaded; fallback notice is acceptable if the key is
-  absent during rehearsal.
+- Gonka verification is available from its dedicated view when `GONKA_API_KEY`
+  is configured; it analyzes supplied claim text and does not retrieve outside
+  evidence.
 
 ---
 
 ## 0:48-1:18 - Graph Explorer and Evidence Provenance
 
 > "This is the important part: explainability is graph-native. FraudSignal nodes
-> connect through TRIGGERED_BY edges to the exact financial statement, charge,
-> court, or registry row that caused the flag. This is why the same output works
-> for a credit officer, an investigator, and a forensic auditor."
+> connect through TRIGGERED_BY edges to the source records represented in the
+> graph. This makes the output useful for structured investigation and review."
 
 **On-screen:** `/graph/U45201MH2005PTC155294`.
 
@@ -80,8 +81,8 @@ that risk came from."
 ## 1:18-1:48 - GST ITC Carousel
 
 > "Now switch fraud type. This is the DGGI Mumbai ITC carousel surface. The page
-> reads the real ring fixture, draws the seven-node CLAIMS_ITC_FROM cycle, and
-> runs live analysis for every CIN in the ring. Cancelled or missing-trader GST
+> reads the seeded ring fixture, draws the CLAIMS_ITC_FROM cycle, and
+> runs analysis for every CIN in the ring. Cancelled or missing-trader GST
 > entities are highlighted, and the edge labels show invoice value moving around
 > the loop."
 
@@ -102,7 +103,7 @@ that risk came from."
 
 > "Third fraud type: bank-loan evergreening. This DHFL screen is no longer a
 > placeholder. It reads the seeded loan-flow graph, shows the FUNDED_REPAYMENT_OF
-> chain, and then scores the canonical DHFL CIN live. Short-cycle repayments,
+> chain, and then scores the canonical DHFL CIN from the available graph data. Short-cycle repayments,
 > high overlap, and shell routing become graph-pattern evidence."
 
 **On-screen:** `/evergreening`.
@@ -111,7 +112,7 @@ that risk came from."
 - Badge: `SFIO / RBI public-record pattern - graph fixture active`.
 - Topology metrics: companies, round trips, repaid value.
 - The DHFL center node and two shell-company loan flows.
-- Live score panel: fraud risk, court-record override, info quality, signals.
+- Score panel: fraud risk, source override, info quality, signals.
 - Expand a `Source records` detail under graph-pattern evidence.
 - Click **Open provenance graph** if time allows.
 
@@ -119,10 +120,9 @@ that risk came from."
 
 ## 2:18-2:50 - Report Export
 
-> "Finally, the same evidence chain becomes a downloadable forensic dossier.
-> The PDF is auth-gated, stamped with a report ID and UTC timestamp, and includes
-> the score, confidence, interval, evidence chain, source disclaimer, and role
-> audit trail. This is the artifact a bank or auditor can attach to a case file."
+> "Finally, the same evidence chain becomes a downloadable investigation artifact.
+> The PDF is stamped with a report ID and UTC timestamp, and includes
+> the score, confidence, interval, evidence chain, source disclaimer, and audit trail. It can be retained with the case documentation."
 
 **On-screen:** `/reports`.
 
@@ -138,7 +138,7 @@ chain excerpt.
 
 ## 2:50-3:00 - Close
 
-> "Sentinel-G is one graph engine across three fraud classes: SME loan fraud,
+> "FinTrace is one graph engine across three fraud classes: SME loan fraud,
 > GST ITC carousel fraud, and bank-loan evergreening. The model gives a risk
 > score; the graph gives the evidence trail."
 
@@ -152,9 +152,9 @@ chain excerpt.
 |---|---|---|
 | IL&FS dashboard | `U45201MH2005PTC155294` | CRITICAL, public-record source badge, full evidence chain |
 | IL&FS provenance | `/graph/U45201MH2005PTC155294` | FraudSignal nodes with TRIGGERED_BY records and JSON export |
-| ITC carousel | `/itc` / `DGGI-MZU-2024-Q1` | 7 GST entities, 14 seeded invoice edges, live per-CIN cards |
-| DHFL evergreening | `L65910MH1984PLC032662` | CRITICAL, FUNDED_REPAYMENT_OF topology, source records |
-| Report export | `/reports` | Auth-gated PDF with UUID, UTC timestamp, evidence excerpt |
+| ITC carousel | `/itc` / `DGGI-MZU-2024-Q1` | Seeded GST entities, invoice edges, per-CIN cards |
+| DHFL evergreening | `L65910MH1984PLC032662` | CRITICAL fixture, FUNDED_REPAYMENT_OF topology, source records |
+| Report export | `/reports` | PDF with UUID, UTC timestamp, evidence excerpt |
 
 ---
 

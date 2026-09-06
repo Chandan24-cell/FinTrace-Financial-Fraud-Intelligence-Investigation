@@ -52,7 +52,7 @@ scraper = RBIWilfulScraper(
 )
 ```
 
-## Production wiring
+## Optional operator wiring
 
 ```python
 import httpx
@@ -69,7 +69,9 @@ records = await scraper.fetch_all()
 ```
 
 When `fetch_html` is not injected, `fetch_all()` raises
-`NotImplementedError` — the operator path falls back to the fixture.
+`NotImplementedError` — the application path falls back to the fixture. The
+hosted Railway deployment should be treated as fixture-backed unless an
+operator has explicitly configured an external fetcher.
 
 ## Quarterly refresh cadence
 
@@ -104,8 +106,8 @@ rather than positional indexing. The header heuristics fall back gracefully:
 
 If a column name changes to something exotic (e.g. "Sanctioning
 Authority" in place of "Bank Name"), update the heuristic list in
-[`backend/app/ingest/rbi_html_parser.py`](../backend/app/ingest/rbi_html_parser.py).
-Tests at [`backend/tests/test_rbi_wilful_scraper.py`](../backend/tests/test_rbi_wilful_scraper.py)
+`backend/app/ingest/rbi_html_parser.py`.
+Tests at `backend/tests/test_rbi_wilful_scraper.py`
 include a column-reshuffle case that pins the resilience.
 
 ## What's NOT in scope
@@ -119,7 +121,7 @@ include a column-reshuffle case that pins the resilience.
 ## CI safety
 
 Tests at
-[`backend/tests/test_rbi_wilful_scraper.py`](../backend/tests/test_rbi_wilful_scraper.py)
+`backend/tests/test_rbi_wilful_scraper.py`
 inject a canned-HTML coroutine — they NEVER hit rbi.org.in. So:
 
 - `python -m pytest` passes without network access on CI.
@@ -129,7 +131,7 @@ inject a canned-HTML coroutine — they NEVER hit rbi.org.in. So:
 
 ## Files in this slice
 
-- [`backend/app/ingest/wilful_defaulter.py`](../backend/app/ingest/wilful_defaulter.py) — `RawWilfulDefaulter`, fixture source, real scraper.
-- [`backend/app/ingest/rbi_html_parser.py`](../backend/app/ingest/rbi_html_parser.py) — stdlib HTML table parser.
-- [`backend/tests/test_rbi_wilful_scraper.py`](../backend/tests/test_rbi_wilful_scraper.py) — 9 unit cases.
+- `backend/app/ingest/wilful_defaulter.py` — `RawWilfulDefaulter`, fixture source, real scraper.
+- `backend/app/ingest/rbi_html_parser.py` — stdlib HTML table parser.
+- `backend/tests/test_rbi_wilful_scraper.py` — 9 unit cases.
 - This runbook.
