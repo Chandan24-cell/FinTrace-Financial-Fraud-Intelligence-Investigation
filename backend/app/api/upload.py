@@ -20,12 +20,11 @@ import tempfile
 from datetime import date
 from pathlib import Path
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from backend.app.api.upload_store import get_upload_store
 from backend.app.api.validators import CIN_PATH
-from backend.app.auth.deps import require_roles
 from backend.app.ingest.data_confidence import compute_data_confidence
 from backend.app.ingest.gst import RawGSTEntity, pan_from_gstin
 from backend.app.ingest.schemas import CompanyBundle, RawFinancialStatement
@@ -37,9 +36,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter(
     prefix="/upload",
     tags=["upload"],
-    dependencies=[Depends(require_roles(
-        "credit_officer", "investigator", "admin"
-    ))],
 )
 
 _fixture_source = FixtureSource()

@@ -3,7 +3,7 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://13.126.114.27.sslip.io/$1" },
+    { "source": "/api/(.*)", "destination": "https://fintrace-financial-fraud-intelligence-investigat-production.up.railway.app/$1" },
     { "source": "/((?!assets/).*)", "destination": "/index.html" }
   ]
 }
