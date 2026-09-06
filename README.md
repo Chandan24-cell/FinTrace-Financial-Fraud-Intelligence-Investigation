@@ -285,16 +285,4 @@ Items below are correctly deferred (PRD §15). **Not missing** — out of 30-day
 
 ---
 
-## Final Words
 
-If time runs out in Week 4, cut the Upload Portal and Benchmark screen.
-
-**Never cut:**
-1. The IL&FS demo
-2. The Graph Explorer with evidence provenance
-3. The ITC carousel view
-4. The DHFL evergreening view
-
-Those four things are FinTrace. Everything else is polish.
-
-<div align="right"><a href="#table-of-contents">⬆ Back to top</a></div>
