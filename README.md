@@ -2,7 +2,13 @@
 
 **One graph engine. Three structurally different fraud types.**
 SME loans · GST ITC carousels · bank loan evergreening.
+# Fin-Trace: Financial Fraud Intelligence Platform
 
+![Vercel Deployment](https://img.shields.io/badge/Deployment-Live-brightgreen)
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+
+**Live Application**: [https://fin-trace-financial-fraud-intellige.vercel.app/dashboard](https://fin-trace-financial-fraud-intellige.vercel.app/dashboard)
 [![Live Frontend](https://img.shields.io/badge/demo-fintrace.vercel.app-brightgreen)](https://fintrace.vercel.app)
 [![API Backend](https://img.shields.io/badge/api-AWS%20Lightsail-orange)](https://13.126.114.27.sslip.io)
 [![Neo4j](https://img.shields.io/badge/database-Neo4j%205%20%2B%20GDS-blue)](https://neo4j.com)
