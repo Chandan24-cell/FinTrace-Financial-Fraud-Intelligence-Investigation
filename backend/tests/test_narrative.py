@@ -20,7 +20,6 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from backend.app.api.narrative import router as narrative_router
-from backend.app.auth.deps import get_current_user
 from backend.app.modules.base import FraudSignal, Severity
 from backend.app.narrative import (
     NarrativeInput,
@@ -164,30 +163,18 @@ def test_template_fallback_cites_top_evidence_string():
 
 
 # ---------------------------------------------------------------------------
-# 3) Route — auth gate + cache + 200 response.
+# 3) Route — public demo contract + cache + 200 response.
 # ---------------------------------------------------------------------------
 
-def _build_app_with_user(role: str = "admin") -> FastAPI:
+def _build_public_app() -> FastAPI:
     app = FastAPI()
     app.include_router(narrative_router)
-    app.dependency_overrides[get_current_user] = lambda: {
-        "user_id": "test", "email": "t@example.com", "role": role,
-        "is_active": True, "created_at": datetime(2026, 1, 1, tzinfo=timezone.utc),
-    }
     return app
 
 
-def test_anonymous_narrative_call_is_rejected():
-    app = FastAPI()
-    app.include_router(narrative_router)
+def test_narrative_endpoint_is_public_for_valid_cin():
+    app = _build_public_app()
     with TestClient(app) as c:
-        r = c.get("/narrative/U45201MH2005PTC155294")
-    assert r.status_code == 401
-
-
-def test_authenticated_narrative_returns_200_with_summary():
-    get_narrator().reset_for_tests()
-    with TestClient(_build_app_with_user()) as c:
         r = c.get("/narrative/U45201MH2005PTC155294")
     assert r.status_code == 200, r.text
     body = r.json()
@@ -202,7 +189,7 @@ def test_authenticated_narrative_returns_200_with_summary():
 
 def test_narrative_caches_repeat_calls():
     get_narrator().reset_for_tests()
-    with TestClient(_build_app_with_user()) as c:
+    with TestClient(_build_public_app()) as c:
         a = c.get("/narrative/U45201MH2005PTC155294").json()
         b = c.get("/narrative/U45201MH2005PTC155294").json()
     assert a["summary"] == b["summary"]
@@ -214,7 +201,7 @@ def test_narrative_caches_repeat_calls():
 
 def test_narrative_different_cins_produce_different_hashes():
     get_narrator().reset_for_tests()
-    with TestClient(_build_app_with_user()) as c:
+    with TestClient(_build_public_app()) as c:
         ilfs = c.get("/narrative/U45201MH2005PTC155294").json()
         xyz = c.get("/narrative/U14101MH2019PTC298765").json()
     assert ilfs["evidence_hash"] != xyz["evidence_hash"]

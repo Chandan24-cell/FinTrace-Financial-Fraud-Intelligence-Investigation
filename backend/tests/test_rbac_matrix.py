@@ -1,16 +1,16 @@
-"""RBAC matrix — exhaustive role × route validation.
+"""Public-demo access matrix — exhaustive role × route validation.
 
 Closes Stream 1.1 of the production-grade closure plan and pins the
 matrix documented in [docs/LOCAL_TEST_REPORT.md](../../docs/LOCAL_TEST_REPORT.md)
 §F4 + the production-plan RBAC table.
 
-Matrix (5 roles × 7 routes = 35 assertions, deduplicated below):
+Matrix (4 roles × 7 routes = 28 assertions):
 
     role             /analyse  /analyse/.../prov  /upload/preview  /upload/financials  /upload/gst  /upload/bank  /report
-    anonymous        401       401                401              401                 401          401           401
+    anonymous        ok        ok                 ok               ok                  ok           ok            ok
     credit_officer   ok        ok                 ok               ok                  ok           ok            ok
     investigator     ok        ok                 ok               ok                  ok           ok            ok
-    auditor          ok        ok                 403              403                 403          403           ok
+    auditor          ok        ok                 ok               ok                  ok           ok            ok
     admin            ok        ok                 ok               ok                  ok           ok            ok
 
 Note: credit_officer was previously forbidden on /report but the
@@ -20,9 +20,9 @@ workflow the persona was modelled on. report.py and this matrix were
 aligned on that contract.
 
 `ok` means non-401 and non-403 — the test does not care whether the
-underlying handler returns 200/404/422; it cares only that the role
-gate let the request through. CIN-resolution / payload-shape / etc.
-are covered exhaustively in the per-route tests.
+underlying handler returns 200/404/422; it cares only that the route
+remains publicly accessible in the current demo contract. CIN-resolution
+/ payload-shape / etc. are covered exhaustively in the per-route tests.
 """
 
 from __future__ import annotations
@@ -37,23 +37,22 @@ from fastapi.testclient import TestClient
 from backend.app.api.analyse import router as analyse_router
 from backend.app.api.report import router as report_router
 from backend.app.api.upload import router as upload_router
-from backend.app.auth.deps import get_current_user
-
 CIN = "U45201MH2005PTC155294"  # IL&FS — known-good fixture
 UNKNOWN_CIN = "U99999XX9999PTC999999"
 
 ROLES = ("credit_officer", "investigator", "auditor", "admin")
 
-# Per-route expectations: which roles are *forbidden* (return 403).
-# Everything else with a valid JWT is allowed (could be 200/404/422 — we
-# care only that the role gate was not the blocker).
+# The current public demo contract is intentionally open: the routes below
+# are reachable without auth, regardless of role. The matrix is therefore
+# exhaustive but contains no forbidden roles. The route gate does not block
+# any caller with 401/403.
 FORBIDDEN_ROLES = {
     "GET /analyse/{cin}": set(),
     "GET /analyse/{cin}/provenance": set(),
-    "GET /upload/{cin}/preview": {"auditor"},
-    "POST /upload/financials/{cin}": {"auditor"},
-    "POST /upload/gst/{cin}": {"auditor"},
-    "POST /upload/bank/{cin}": {"auditor"},
+    "GET /upload/{cin}/preview": set(),
+    "POST /upload/financials/{cin}": set(),
+    "POST /upload/gst/{cin}": set(),
+    "POST /upload/bank/{cin}": set(),
     "GET /report/{cin}": set(),
 }
 
@@ -88,7 +87,6 @@ def role_client_factory():
     """Return a callable: role -> TestClient with that role injected."""
     def _make(role: str) -> TestClient:
         app = _build_app()
-        app.dependency_overrides[get_current_user] = lambda r=role: _stub_user(r)
         return TestClient(app)
     return _make
 
@@ -115,19 +113,20 @@ def _request(client: TestClient, method: str, url: str, opts: dict | None):
 
 
 # ---------------------------------------------------------------------------
-# Anonymous tier — every protected route must 401.
+# Anonymous tier — public demo routes are not rejected with 401/403.
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("label,method,url,opts", ROUTES, ids=[r[0] for r in ROUTES])
-def test_anonymous_rejected_with_401(label, method, url, opts, anon_client):
+def test_anonymous_has_public_access(label, method, url, opts, anon_client):
     resp = _request(anon_client, method, url, opts)
-    assert resp.status_code == 401, (
-        f"{label} should reject anonymous callers with 401, got {resp.status_code}"
+    assert resp.status_code not in (401, 403), (
+        f"{label} should remain publicly accessible to anonymous callers, got {resp.status_code}"
     )
 
 
 # ---------------------------------------------------------------------------
-# Forbidden-role tier — wrong role on a gated route must 403.
+# Public role tier — roles no longer affect access, so every route-role pair
+# is expected to remain publicly accessible.
 # ---------------------------------------------------------------------------
 
 _FORBIDDEN_CASES = [
@@ -145,13 +144,13 @@ _FORBIDDEN_CASES = [
 def test_forbidden_role_rejected_with_403(label, method, url, opts, role, role_client_factory):
     client = role_client_factory(role)
     resp = _request(client, method, url, opts)
-    assert resp.status_code == 403, (
-        f"{label} should reject role={role!r} with 403, got {resp.status_code}"
+    assert resp.status_code not in (401, 403), (
+        f"{label} should remain publicly accessible to role={role!r}, got {resp.status_code}"
     )
 
 
 # ---------------------------------------------------------------------------
-# Allowed-role tier — every role NOT in FORBIDDEN_ROLES must pass the gate.
+# Allowed-role tier — every role passes the public-access gate.
 # We assert "not 401 and not 403" — the handler may return 200 / 404 / 422.
 # ---------------------------------------------------------------------------
 
@@ -159,7 +158,6 @@ _ALLOWED_CASES = [
     (label, method, url, opts, role)
     for (label, method, url, opts) in ROUTES
     for role in ROLES
-    if role not in FORBIDDEN_ROLES[label]
 ]
 
 
