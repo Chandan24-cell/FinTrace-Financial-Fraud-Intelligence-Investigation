@@ -1,6 +1,6 @@
 """Sentinel-G FastAPI entrypoint. PRD §10 Day 1 — Done when /health returns 200 and gds.version() works."""
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -98,7 +98,13 @@ def create_app() -> FastAPI:
     @app.get("/health/neo4j", tags=["meta"])
     async def neo4j_health() -> dict[str, object]:
         """Verifies the Neo4j driver is up and GDS plugin is loaded (PRD §10 Day 1 acceptance)."""
-        driver = get_driver()
+        try:
+            driver = get_driver()
+        except RuntimeError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Neo4j is unavailable",
+            ) from exc
         async with driver.session(database=settings.neo4j_database) as session:
             result = await session.run("RETURN 1 AS ok")
             ok_record = await result.single()

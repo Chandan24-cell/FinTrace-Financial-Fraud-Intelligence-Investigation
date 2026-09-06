@@ -16,12 +16,14 @@ import logging
 from typing import Annotated
 
 from fastapi import APIRouter, Query
+from neo4j.exceptions import Neo4jError
 from neo4j import AsyncDriver
 from pydantic import BaseModel, Field
 from typing import Literal
 
 from backend.app.config import get_settings
 from backend.app.deps import get_driver
+from backend.app.ingest.sources import FixtureSource
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +91,35 @@ WHERE $state IS NULL OR c.state = $state
 RETURN count(c) AS total
 """
 
+_fixture_source = FixtureSource()
+
+
+async def _list_fixture_companies(
+    state: str | None,
+    limit: int,
+    offset: int,
+) -> CompaniesPage:
+    """Serve the supported seed corpus when production Neo4j is unavailable."""
+    summaries: list[CompanySummary] = []
+    for cin in await _fixture_source.list_available_cins():
+        bundle = await _fixture_source.fetch_bundle(cin)
+        if bundle is None or (state is not None and bundle.company.state != state):
+            continue
+        summaries.append(CompanySummary(
+            cin=bundle.company.cin,
+            name=bundle.company.name,
+            state=bundle.company.state,
+            incorporation_year=bundle.company.incorporation_date.year,
+            data_quality=_classify(len(bundle.financials), len(bundle.directors)),
+            n_financials=len(bundle.financials),
+            n_directors=len(bundle.directors),
+        ))
+    summaries.sort(key=lambda item: (item.incorporation_year or 0, item.cin), reverse=True)
+    return CompaniesPage(
+        total=len(summaries),
+        items=summaries[offset:offset + limit],
+    )
+
 
 @router.get("", response_model=CompaniesPage)
 async def list_companies(
@@ -97,35 +128,44 @@ async def list_companies(
     offset: Annotated[int, Query(ge=0)] = 0,
 ) -> CompaniesPage:
     """Paginated directory of companies known to Neo4j."""
-    driver: AsyncDriver = get_driver()
-    settings = get_settings()
-    async with driver.session(database=settings.neo4j_database) as session:
-        count_res = await session.run(_COUNT_CYPHER, state=state)
-        count_row = await count_res.single()
-        total = int(count_row["total"]) if count_row else 0
+    try:
+        driver: AsyncDriver = get_driver()
+    except RuntimeError:
+        logger.warning("Neo4j unavailable; serving the configured fixture company directory")
+        return await _list_fixture_companies(state, limit, offset)
 
-        list_res = await session.run(
-            _LIST_CYPHER, state=state, offset=offset, limit=limit,
-        )
-        items: list[CompanySummary] = []
-        async for row in list_res:
-            inc = row["incorporation_date"]
-            year: int | None
-            if inc is None:
-                year = None
-            elif hasattr(inc, "year"):  # neo4j.time.Date
-                year = int(inc.year)
-            else:
-                year = None
-            n_fs = int(row.get("n_financials") or 0)
-            n_dir = int(row.get("n_directors") or 0)
-            items.append(CompanySummary(
-                cin=row["cin"],
-                name=row.get("name"),
-                state=row.get("state"),
-                incorporation_year=year,
-                data_quality=_classify(n_fs, n_dir),
-                n_financials=n_fs,
-                n_directors=n_dir,
-            ))
+    settings = get_settings()
+    try:
+        async with driver.session(database=settings.neo4j_database) as session:
+            count_res = await session.run(_COUNT_CYPHER, state=state)
+            count_row = await count_res.single()
+            total = int(count_row["total"]) if count_row else 0
+
+            list_res = await session.run(
+                _LIST_CYPHER, state=state, offset=offset, limit=limit,
+            )
+            items: list[CompanySummary] = []
+            async for row in list_res:
+                inc = row["incorporation_date"]
+                year: int | None
+                if inc is None:
+                    year = None
+                elif hasattr(inc, "year"):  # neo4j.time.Date
+                    year = int(inc.year)
+                else:
+                    year = None
+                n_fs = int(row.get("n_financials") or 0)
+                n_dir = int(row.get("n_directors") or 0)
+                items.append(CompanySummary(
+                    cin=row["cin"],
+                    name=row.get("name"),
+                    state=row.get("state"),
+                    incorporation_year=year,
+                    data_quality=_classify(n_fs, n_dir),
+                    n_financials=n_fs,
+                    n_directors=n_dir,
+                ))
+    except Neo4jError as exc:
+        logger.warning("Neo4j company directory query failed (%s); serving fixtures", type(exc).__name__)
+        return await _list_fixture_companies(state, limit, offset)
     return CompaniesPage(total=total, items=items)
